@@ -9,7 +9,13 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center">
-              <GraduationCap className="h-8 w-8 text-yellow-400 mr-2" />
+            <Link href="/" className="flex items-center space-x-3">
+              <img
+                src="/cpu-logo.png"
+                alt="CPU Logo"
+                className="h-12 w-12 mr-3"
+              />
+              </Link>
               <span className="text-white font-bold text-xl">Kenan Ben G. Polgo</span>
             </div>
             <div className="hidden md:block">
@@ -54,11 +60,13 @@ export default function AboutPage() {
           <div className="lg:col-span-1">
             <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-yellow-400/20 sticky top-24">
               <div className="text-center mb-6">
+              <div className="mb-8">
                 <img
-                  src="/placeholder.svg?height=200&width=200"
+                  src="/me.JPG" 
                   alt="Kenan Ben G. Polgo"
-                  className="w-32 h-32 rounded-full mx-auto border-4 border-yellow-400 shadow-lg mb-4"
+                  className="w-48 h-48 rounded-full mx-auto border-4 border-yellow-400 shadow-2xl"
                 />
+              </div>
                 <h2 className="text-2xl font-bold text-white">Kenan Ben G. Polgo</h2>
                 <p className="text-yellow-400 font-semibold">Computer Science Student</p>
                 <p className="text-red-200 text-sm mt-2">Central Philippine University</p>

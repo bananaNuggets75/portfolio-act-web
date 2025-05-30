@@ -9,7 +9,13 @@ export default function ContactPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center">
-              <GraduationCap className="h-8 w-8 text-yellow-400 mr-2" />
+            <Link href="/" className="flex items-center space-x-3">
+              <img
+                src="/cpu-logo.png"
+                alt="CPU Logo"
+                className="h-12 w-12 mr-3"
+              />
+              </Link>
               <span className="text-white font-bold text-xl">Kenan Ben G. Polgo</span>
             </div>
             <div className="hidden md:block">
