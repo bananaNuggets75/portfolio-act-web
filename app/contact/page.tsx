@@ -3,9 +3,9 @@ import { Github, Mail, Phone, GraduationCap, MapPin, Calendar, MessageSquare, Se
 
 export default function ContactPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-red-900 via-red-800 to-red-900">
-      {/* Navigation */}
-      <nav className="bg-red-900/90 backdrop-blur-sm border-b border-yellow-400/20 sticky top-0 z-50">
+    <div className="min-h-screen bg-gradient-to-br from-blue-900 via-blue-800 to-navy-900">
+    {/* Navigation */}
+    <nav className="bg-navy-900/90 backdrop-blur-sm border-b border-yellow-400/20 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center">

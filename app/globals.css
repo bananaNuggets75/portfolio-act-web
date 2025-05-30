@@ -14,15 +14,16 @@
 }
 
 ::-webkit-scrollbar-track {
-  @apply bg-red-900;
+  background: #312e81; /* navy-900 */
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-yellow-400 rounded-full;
+  background: #facc15; /* yellow-400 */
+  border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  @apply bg-yellow-500;
+  background: #eab308; /* yellow-500 */
 }
 
 /* Smooth scrolling */
@@ -51,7 +52,7 @@ button:focus,
 a:focus,
 input:focus,
 textarea:focus {
-  outline: 2px solid theme("colors.yellow.400");
+  outline: 2px solid #facc15; /* yellow-400 */
   outline-offset: 2px;
 }
 
