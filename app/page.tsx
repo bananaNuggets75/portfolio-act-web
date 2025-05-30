@@ -112,7 +112,7 @@ export default function HomePage() {
                 <span className="text-yellow-400">75%</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-red-100">Java</span>
+                <span className="text-red-100">TypeScript</span>
                 <span className="text-yellow-400">70%</span>
               </div>
             </div>

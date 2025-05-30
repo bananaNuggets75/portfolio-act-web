@@ -97,7 +97,7 @@ export default function AboutPage() {
                 </p>
                 <p>
                   Currently in my third year of studies, I've been focusing on web development, software engineering,
-                  and data structures. I believe in the power of technology to solve real-world problems and am
+                  and theoretical algorithms. I believe in the power of technology to solve real-world problems and am
                   constantly learning new skills to stay current with industry trends.
                 </p>
                 <p>
@@ -118,18 +118,18 @@ export default function AboutPage() {
                 <div className="border-l-4 border-yellow-400 pl-6">
                   <h4 className="text-xl font-semibold text-white">Bachelor of Science in Computer Science</h4>
                   <p className="text-yellow-400 font-medium">Central Philippine University</p>
-                  <p className="text-red-200">2022 - Present (Expected 2026)</p>
+                  <p className="text-red-200">2021 - Present (Expected 2026)</p>
                   <p className="text-red-100 mt-2">
                     Relevant Coursework: Data Structures & Algorithms, Web Development, Database Systems, Software
                     Engineering, Object-Oriented Programming, Computer Networks
                   </p>
                 </div>
                 <div className="border-l-4 border-yellow-400 pl-6">
-                  <h4 className="text-xl font-semibold text-white">Senior High School - STEM Track</h4>
-                  <p className="text-yellow-400 font-medium">CPU Senior High School</p>
-                  <p className="text-red-200">2020 - 2022</p>
+                  <h4 className="text-xl font-semibold text-white">Senior High School - TVL Track</h4>
+                  <p className="text-yellow-400 font-medium">CNCHS Senior High School</p>
+                  <p className="text-red-200">2019 - 2021</p>
                   <p className="text-red-100 mt-2">
-                    Graduated with Honors. Strong foundation in Mathematics, Physics, and Computer Programming.
+                    Graduated with Honors. Strong foundation in Mathematics, Problem Solving, and Computer Programming.
                   </p>
                 </div>
               </div>
@@ -148,9 +148,9 @@ export default function AboutPage() {
                     {[
                       { name: "JavaScript", level: 85 },
                       { name: "Python", level: 80 },
-                      { name: "Java", level: 75 },
-                      { name: "C++", level: 70 },
-                      { name: "PHP", level: 65 },
+                      { name: "TypeScript", level: 75 },
+                      { name: "C#", level: 70 },
+                      { name: "SQL", level: 65 },
                     ].map((skill) => (
                       <div key={skill.name}>
                         <div className="flex justify-between text-red-100 mb-1">
@@ -205,20 +205,20 @@ export default function AboutPage() {
                 <div className="space-y-4">
                   <div className="border-l-2 border-yellow-400 pl-4">
                     <h4 className="text-lg font-semibold text-white">Dean's List</h4>
-                    <p className="text-yellow-400">Academic Year 2023-2024</p>
+                    <p className="text-yellow-400">Academic Year 2022-2023, 2023-2024</p>
                     <p className="text-red-200 text-sm">Maintained high academic standing</p>
                   </div>
                   <div className="border-l-2 border-yellow-400 pl-4">
-                    <h4 className="text-lg font-semibold text-white">Programming Competition</h4>
-                    <p className="text-yellow-400">Regional Finalist</p>
-                    <p className="text-red-200 text-sm">Competed in algorithmic programming</p>
+                    <h4 className="text-lg font-semibold text-white">DevCon</h4>
+                    <p className="text-yellow-400">Runner up</p>
+                    <p className="text-red-200 text-sm">Game Development</p>
                   </div>
                 </div>
                 <div className="space-y-4">
                   <div className="border-l-2 border-yellow-400 pl-4">
-                    <h4 className="text-lg font-semibold text-white">CS Society Member</h4>
+                    <h4 className="text-lg font-semibold text-white">Google Developer Student Club </h4>
                     <p className="text-yellow-400">Active Participant</p>
-                    <p className="text-red-200 text-sm">Organizing tech events and workshops</p>
+                    <p className="text-red-200 text-sm">Hackathons and any Tech events</p>
                   </div>
                   <div className="border-l-2 border-yellow-400 pl-4">
                     <h4 className="text-lg font-semibold text-white">Open Source Contributor</h4>
