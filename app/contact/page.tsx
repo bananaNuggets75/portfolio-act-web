@@ -72,7 +72,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h3 className="text-lg font-semibold text-white">Email</h3>
-                    <p className="text-red-200">kenan.polgo@cpu.edu.ph</p>
+                    <p className="text-red-200">kenanben.polgo-21@cpu.edu.ph</p>
                     <a
                       href="mailto:kenan.polgo@cpu.edu.ph"
                       className="text-yellow-400 hover:text-yellow-300 transition-colors text-sm"
@@ -89,7 +89,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h3 className="text-lg font-semibold text-white">Phone</h3>
-                    <p className="text-red-200">+63 912 345 6789</p>
+                    <p className="text-red-200">+63 917 185 8427</p>
                     <p className="text-yellow-400 text-sm">Available for calls and messages</p>
                   </div>
                 </div>
@@ -101,9 +101,9 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h3 className="text-lg font-semibold text-white">GitHub</h3>
-                    <p className="text-red-200">github.com/kenanbpolgo</p>
+                    <p className="text-red-200">github.com/bananaNuggets75</p>
                     <a
-                      href="https://github.com/kenanbpolgo"
+                      href="https://github.com/bananaNuggets75"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-yellow-400 hover:text-yellow-300 transition-colors text-sm"
