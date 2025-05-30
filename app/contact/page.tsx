@@ -4,18 +4,18 @@ import { Github, Mail, Phone, GraduationCap, MapPin, Calendar, MessageSquare, Se
 export default function ContactPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-900 via-blue-800 to-navy-900">
-    {/* Navigation */}
-    <nav className="bg-navy-900/90 backdrop-blur-sm border-b border-yellow-400/20 sticky top-0 z-50">
+      {/* Navigation */}
+      <nav className="bg-navy-900/90 backdrop-blur-sm border-b border-yellow-400/20 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center">
-            <Link href="/" className="flex items-center space-x-3">
-              <img
-                src="/cpu-logo.png"
-                alt="CPU Logo"
-                className="h-12 w-12 mr-3"
-              />
-              </Link>
+              <Link href="/" className="flex items-center space-x-3">
+                <img
+                  src="/cpu-logo.png"
+                  alt="CPU Logo"
+                  className="h-12 w-12 mr-3"
+                />
+                </Link>
               <span className="text-white font-bold text-xl">Kenan Ben G. Polgo</span>
             </div>
             <div className="hidden md:block">
@@ -50,7 +50,7 @@ export default function ContactPage() {
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
             Contact <span className="text-yellow-400">Me</span>
           </h1>
-          <p className="text-xl text-red-100 max-w-3xl mx-auto">
+          <p className="text-xl text-blue-100 max-w-3xl mx-auto">
             Let's connect! I'm always open to discussing new opportunities, collaborations, or just having a chat about
             technology.
           </p>
@@ -64,7 +64,7 @@ export default function ContactPage() {
                 <MessageSquare className="h-6 w-6 text-yellow-400 mr-3" />
                 Get In Touch
               </h2>
-              <p className="text-red-100 mb-8 leading-relaxed">
+              <p className="text-blue-100 mb-8 leading-relaxed">
                 I'm currently a Computer Science student at Central Philippine University, always eager to learn and
                 collaborate. Whether you have a project idea, want to discuss technology, or just want to connect, feel
                 free to reach out!
@@ -74,13 +74,13 @@ export default function ContactPage() {
                 {/* Email */}
                 <div className="flex items-start space-x-4">
                   <div className="bg-yellow-400 p-3 rounded-lg">
-                    <Mail className="h-6 w-6 text-red-900" />
+                    <Mail className="h-6 w-6 text-navy-900" />
                   </div>
                   <div>
                     <h3 className="text-lg font-semibold text-white">Email</h3>
-                    <p className="text-red-200">kenanben.polgo-21@cpu.edu.ph</p>
+                    <p className="text-blue-200">kenanben.polgo-21@cpu.edu.ph</p>
                     <a
-                      href="mailto:kenan.polgo@cpu.edu.ph"
+                      href="mailto:kenanben.polgo-21@cpu.edu.ph"
                       className="text-yellow-400 hover:text-yellow-300 transition-colors text-sm"
                     >
                       Send me an email →
@@ -91,11 +91,11 @@ export default function ContactPage() {
                 {/* Phone */}
                 <div className="flex items-start space-x-4">
                   <div className="bg-yellow-400 p-3 rounded-lg">
-                    <Phone className="h-6 w-6 text-red-900" />
+                    <Phone className="h-6 w-6 text-navy-900" />
                   </div>
                   <div>
                     <h3 className="text-lg font-semibold text-white">Phone</h3>
-                    <p className="text-red-200">+63 917 185 8427</p>
+                    <p className="text-blue-200">+63 917 185 8427</p>
                     <p className="text-yellow-400 text-sm">Available for calls and messages</p>
                   </div>
                 </div>
@@ -103,13 +103,13 @@ export default function ContactPage() {
                 {/* GitHub */}
                 <div className="flex items-start space-x-4">
                   <div className="bg-yellow-400 p-3 rounded-lg">
-                    <Github className="h-6 w-6 text-red-900" />
+                    <Github className="h-6 w-6 text-navy-900" />
                   </div>
                   <div>
                     <h3 className="text-lg font-semibold text-white">GitHub</h3>
-                    <p className="text-red-200">github.com/bananaNuggets75</p>
+                    <p className="text-blue-200">github.com/bananaNuggets75</p>
                     <a
-                      href="https://github.com/bananaNuggets75"
+                      href="https://github.com/bananaNuggets75?tab=repositories"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-yellow-400 hover:text-yellow-300 transition-colors text-sm"
@@ -122,11 +122,11 @@ export default function ContactPage() {
                 {/* Location */}
                 <div className="flex items-start space-x-4">
                   <div className="bg-yellow-400 p-3 rounded-lg">
-                    <MapPin className="h-6 w-6 text-red-900" />
+                    <MapPin className="h-6 w-6 text-navy-900" />
                   </div>
                   <div>
                     <h3 className="text-lg font-semibold text-white">Location</h3>
-                    <p className="text-red-200">Iloilo City, Philippines</p>
+                    <p className="text-blue-200">Iloilo City, Philippines</p>
                     <p className="text-yellow-400 text-sm">Central Philippine University</p>
                   </div>
                 </div>
@@ -134,11 +134,11 @@ export default function ContactPage() {
                 {/* Availability */}
                 <div className="flex items-start space-x-4">
                   <div className="bg-yellow-400 p-3 rounded-lg">
-                    <Calendar className="h-6 w-6 text-red-900" />
+                    <Calendar className="h-6 w-6 text-navy-900" />
                   </div>
                   <div>
                     <h3 className="text-lg font-semibold text-white">Availability</h3>
-                    <p className="text-red-200">Monday - Friday: 9:00 AM - 6:00 PM</p>
+                    <p className="text-blue-200">Monday - Friday: 9:00 AM - 6:00 PM</p>
                     <p className="text-yellow-400 text-sm">Response within 24 hours</p>
                   </div>
                 </div>
@@ -150,24 +150,24 @@ export default function ContactPage() {
               <h3 className="text-xl font-bold text-white mb-6">Connect With Me</h3>
               <div className="flex flex-wrap gap-4">
                 <a
-                  href="https://github.com/kenanbpolgo"
+                  href="https://github.com/bananaNuggets75"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center bg-yellow-400 hover:bg-yellow-500 text-red-900 font-semibold py-3 px-6 rounded-lg transition-colors"
+                  className="flex items-center bg-yellow-400 hover:bg-yellow-500 text-navy-900 font-semibold py-3 px-6 rounded-lg transition-colors"
                 >
                   <Github className="h-5 w-5 mr-2" />
                   GitHub
                 </a>
                 <a
-                  href="mailto:kenan.polgo@cpu.edu.ph"
-                  className="flex items-center border-2 border-yellow-400 text-yellow-400 hover:bg-yellow-400 hover:text-red-900 font-semibold py-3 px-6 rounded-lg transition-colors"
+                  href="mailto:kenanben.polgo-21@cpu.edu.ph"
+                  className="flex items-center border-2 border-yellow-400 text-yellow-400 hover:bg-yellow-400 hover:text-navy-900 font-semibold py-3 px-6 rounded-lg transition-colors"
                 >
                   <Mail className="h-5 w-5 mr-2" />
                   Email
                 </a>
                 <a
-                  href="tel:+639123456789"
-                  className="flex items-center border-2 border-yellow-400 text-yellow-400 hover:bg-yellow-400 hover:text-red-900 font-semibold py-3 px-6 rounded-lg transition-colors"
+                  href="tel:+639171858427"
+                  className="flex items-center border-2 border-yellow-400 text-yellow-400 hover:bg-yellow-400 hover:text-navy-900 font-semibold py-3 px-6 rounded-lg transition-colors"
                 >
                   <Phone className="h-5 w-5 mr-2" />
                   Call
@@ -184,60 +184,60 @@ export default function ContactPage() {
             </h2>
             <form className="space-y-6">
               <div>
-                <label htmlFor="name" className="block text-sm font-medium text-red-100 mb-2">
+                <label htmlFor="name" className="block text-sm font-medium text-blue-100 mb-2">
                   Your Name
                 </label>
                 <input
                   type="text"
                   id="name"
                   name="name"
-                  className="w-full px-4 py-3 bg-red-800/50 border border-red-600 rounded-lg text-white placeholder-red-300 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent"
+                  className="w-full px-4 py-3 bg-navy-800/50 border border-navy-600 rounded-lg text-white placeholder-blue-300 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent"
                   placeholder="Enter your full name"
                 />
               </div>
 
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-red-100 mb-2">
+                <label htmlFor="email" className="block text-sm font-medium text-blue-100 mb-2">
                   Email Address
                 </label>
                 <input
                   type="email"
                   id="email"
                   name="email"
-                  className="w-full px-4 py-3 bg-red-800/50 border border-red-600 rounded-lg text-white placeholder-red-300 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent"
+                  className="w-full px-4 py-3 bg-navy-800/50 border border-navy-600 rounded-lg text-white placeholder-blue-300 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent"
                   placeholder="your.email@example.com"
                 />
               </div>
 
               <div>
-                <label htmlFor="subject" className="block text-sm font-medium text-red-100 mb-2">
+                <label htmlFor="subject" className="block text-sm font-medium text-blue-100 mb-2">
                   Subject
                 </label>
                 <input
                   type="text"
                   id="subject"
                   name="subject"
-                  className="w-full px-4 py-3 bg-red-800/50 border border-red-600 rounded-lg text-white placeholder-red-300 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent"
+                  className="w-full px-4 py-3 bg-navy-800/50 border border-navy-600 rounded-lg text-white placeholder-blue-300 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent"
                   placeholder="What's this about?"
                 />
               </div>
 
               <div>
-                <label htmlFor="message" className="block text-sm font-medium text-red-100 mb-2">
+                <label htmlFor="message" className="block text-sm font-medium text-blue-100 mb-2">
                   Message
                 </label>
                 <textarea
                   id="message"
                   name="message"
                   rows={6}
-                  className="w-full px-4 py-3 bg-red-800/50 border border-red-600 rounded-lg text-white placeholder-red-300 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent resize-none"
+                  className="w-full px-4 py-3 bg-navy-800/50 border border-navy-600 rounded-lg text-white placeholder-blue-300 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent resize-none"
                   placeholder="Tell me about your project, question, or just say hello!"
                 ></textarea>
               </div>
 
               <button
                 type="submit"
-                className="w-full bg-yellow-400 hover:bg-yellow-500 text-red-900 font-bold py-3 px-6 rounded-lg transition-colors flex items-center justify-center"
+                className="w-full bg-yellow-400 hover:bg-yellow-500 text-navy-900 font-bold py-3 px-6 rounded-lg transition-colors flex items-center justify-center"
               >
                 <Send className="h-5 w-5 mr-2" />
                 Send Message
@@ -256,22 +256,22 @@ export default function ContactPage() {
         {/* Additional Info */}
         <div className="mt-16 bg-white/10 backdrop-blur-sm rounded-xl p-8 border border-yellow-400/20 text-center">
           <h3 className="text-2xl font-bold text-white mb-4">Let's Build Something Amazing Together</h3>
-          <p className="text-red-100 mb-6 max-w-3xl mx-auto">
+          <p className="text-blue-100 mb-6 max-w-3xl mx-auto">
             I'm passionate about technology and always excited to work on new projects. Whether it's web development,
             mobile apps, or exploring emerging technologies, I'm ready to contribute and learn.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/about"
-              className="bg-yellow-400 hover:bg-yellow-500 text-red-900 font-bold py-3 px-8 rounded-lg transition-colors"
+              className="bg-yellow-400 hover:bg-yellow-500 text-navy-900 font-bold py-3 px-8 rounded-lg transition-colors"
             >
               Learn More About Me
             </Link>
             <a
-              href="https://github.com/kenanbpolgo"
+              href="https://github.com/bananaNuggets75"
               target="_blank"
               rel="noopener noreferrer"
-              className="border-2 border-yellow-400 text-yellow-400 hover:bg-yellow-400 hover:text-red-900 font-bold py-3 px-8 rounded-lg transition-colors"
+              className="border-2 border-yellow-400 text-yellow-400 hover:bg-yellow-400 hover:text-navy-900 font-bold py-3 px-8 rounded-lg transition-colors"
             >
               View My Projects
             </a>
@@ -280,11 +280,11 @@ export default function ContactPage() {
       </div>
 
       {/* Footer */}
-      <footer className="bg-red-950 border-t border-yellow-400/20">
+      <footer className="bg-navy-950 border-t border-yellow-400/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="text-center">
-            <p className="text-red-200">© 2024 Kenan Ben G. Polgo. All rights reserved.</p>
-            <p className="text-red-300 text-sm mt-2">Central Philippine University - Computer Science Student</p>
+            <p className="text-blue-200">© 2024 Kenan Ben G. Polgo. All rights reserved.</p>
+            <p className="text-blue-300 text-sm mt-2">Central Philippine University - Computer Science Student</p>
           </div>
         </div>
       </footer>

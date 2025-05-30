@@ -9,13 +9,13 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center">
-            <Link href="/" className="flex items-center space-x-3">
-              <img
-                src="/cpu-logo.png"
-                alt="CPU Logo"
-                className="h-12 w-12 mr-3"
-              />
-              </Link>
+              <Link href="/" className="flex items-center space-x-3">
+                <img
+                  src="/cpu-logo.png"
+                  alt="CPU Logo"
+                  className="h-12 w-12 mr-3"
+                />
+                </Link>
               <span className="text-white font-bold text-xl">Kenan Ben G. Polgo</span>
             </div>
             <div className="hidden md:block">
@@ -50,7 +50,7 @@ export default function AboutPage() {
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
             About <span className="text-yellow-400">Me</span>
           </h1>
-          <p className="text-xl text-red-100 max-w-3xl mx-auto">
+          <p className="text-xl text-blue-100 max-w-3xl mx-auto">
             Passionate Computer Science student dedicated to learning and creating innovative solutions
           </p>
         </div>
@@ -60,28 +60,28 @@ export default function AboutPage() {
           <div className="lg:col-span-1">
             <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-yellow-400/20 sticky top-24">
               <div className="text-center mb-6">
-              <div className="mb-8">
-                <img
-                  src="/me.JPG" 
-                  alt="Kenan Ben G. Polgo"
-                  className="w-48 h-48 rounded-full mx-auto border-4 border-yellow-400 shadow-2xl"
-                />
-              </div>
+                <div className="mb-8">
+                  <img
+                    src="/me.JPG" 
+                    alt="Kenan Ben G. Polgo"
+                    className="w-48 h-48 rounded-full mx-auto border-4 border-yellow-400 shadow-2xl"
+                  />
+                </div>
                 <h2 className="text-2xl font-bold text-white">Kenan Ben G. Polgo</h2>
                 <p className="text-yellow-400 font-semibold">Computer Science Student</p>
-                <p className="text-red-200 text-sm mt-2">Central Philippine University</p>
+                <p className="text-blue-200 text-sm mt-2">Central Philippine University</p>
               </div>
 
               <div className="space-y-4">
-                <div className="flex items-center text-red-100">
+                <div className="flex items-center text-blue-100">
                   <GraduationCap className="h-5 w-5 text-yellow-400 mr-3" />
                   <span>BS Computer Science</span>
                 </div>
-                <div className="flex items-center text-red-100">
+                <div className="flex items-center text-blue-100">
                   <BookOpen className="h-5 w-5 text-yellow-400 mr-3" />
                   <span>3rd Year Student</span>
                 </div>
-                <div className="flex items-center text-red-100">
+                <div className="flex items-center text-blue-100">
                   <Target className="h-5 w-5 text-yellow-400 mr-3" />
                   <span>Software Developer</span>
                 </div>
@@ -97,7 +97,7 @@ export default function AboutPage() {
                 <User className="h-6 w-6 text-yellow-400 mr-3" />
                 My Story
               </h3>
-              <div className="space-y-4 text-red-100 leading-relaxed">
+              <div className="space-y-4 text-blue-100 leading-relaxed">
                 <p>
                   Hello! I'm Kenan Ben G. Polgo, a dedicated Computer Science student at Central Philippine University.
                   My journey in technology began with a curiosity about how software works and has evolved into a
@@ -126,8 +126,8 @@ export default function AboutPage() {
                 <div className="border-l-4 border-yellow-400 pl-6">
                   <h4 className="text-xl font-semibold text-white">Bachelor of Science in Computer Science</h4>
                   <p className="text-yellow-400 font-medium">Central Philippine University</p>
-                  <p className="text-red-200">2021 - Present (Expected 2026)</p>
-                  <p className="text-red-100 mt-2">
+                  <p className="text-blue-200">2021 - Present (Expected 2026)</p>
+                  <p className="text-blue-100 mt-2">
                     Relevant Coursework: Data Structures & Algorithms, Web Development, Database Systems, Software
                     Engineering, Object-Oriented Programming, Computer Networks
                   </p>
@@ -135,8 +135,8 @@ export default function AboutPage() {
                 <div className="border-l-4 border-yellow-400 pl-6">
                   <h4 className="text-xl font-semibold text-white">Senior High School - TVL Track</h4>
                   <p className="text-yellow-400 font-medium">CNCHS Senior High School</p>
-                  <p className="text-red-200">2019 - 2021</p>
-                  <p className="text-red-100 mt-2">
+                  <p className="text-blue-200">2019 - 2021</p>
+                  <p className="text-blue-100 mt-2">
                     Graduated with Honors. Strong foundation in Mathematics, Problem Solving, and Computer Programming.
                   </p>
                 </div>
@@ -161,11 +161,11 @@ export default function AboutPage() {
                       { name: "SQL", level: 65 },
                     ].map((skill) => (
                       <div key={skill.name}>
-                        <div className="flex justify-between text-red-100 mb-1">
+                        <div className="flex justify-between text-blue-100 mb-1">
                           <span>{skill.name}</span>
                           <span>{skill.level}%</span>
                         </div>
-                        <div className="w-full bg-red-800 rounded-full h-2">
+                        <div className="w-full bg-navy-800 rounded-full h-2">
                           <div
                             className="bg-yellow-400 h-2 rounded-full transition-all duration-300"
                             style={{ width: `${skill.level}%` }}
@@ -186,11 +186,11 @@ export default function AboutPage() {
                       { name: "Tailwind CSS", level: 90 },
                     ].map((skill) => (
                       <div key={skill.name}>
-                        <div className="flex justify-between text-red-100 mb-1">
+                        <div className="flex justify-between text-blue-100 mb-1">
                           <span>{skill.name}</span>
                           <span>{skill.level}%</span>
                         </div>
-                        <div className="w-full bg-red-800 rounded-full h-2">
+                        <div className="w-full bg-navy-800 rounded-full h-2">
                           <div
                             className="bg-yellow-400 h-2 rounded-full transition-all duration-300"
                             style={{ width: `${skill.level}%` }}
@@ -214,24 +214,24 @@ export default function AboutPage() {
                   <div className="border-l-2 border-yellow-400 pl-4">
                     <h4 className="text-lg font-semibold text-white">Dean's List</h4>
                     <p className="text-yellow-400">Academic Year 2022-2023, 2023-2024</p>
-                    <p className="text-red-200 text-sm">Maintained high academic standing</p>
+                    <p className="text-blue-200 text-sm">Maintained high academic standing</p>
                   </div>
                   <div className="border-l-2 border-yellow-400 pl-4">
                     <h4 className="text-lg font-semibold text-white">DevCon</h4>
-                    <p className="text-yellow-400">Runner up</p>
-                    <p className="text-red-200 text-sm">Game Development</p>
+                    <p className="text-yellow-400">Runner Up</p>
+                    <p className="text-blue-200 text-sm">Game Development</p>
                   </div>
                 </div>
                 <div className="space-y-4">
                   <div className="border-l-2 border-yellow-400 pl-4">
                     <h4 className="text-lg font-semibold text-white">Google Developer Student Club </h4>
                     <p className="text-yellow-400">Active Participant</p>
-                    <p className="text-red-200 text-sm">Hackathons and any Tech events</p>
+                    <p className="text-blue-200 text-sm">Hackathons and any Tech events</p>
                   </div>
                   <div className="border-l-2 border-yellow-400 pl-4">
                     <h4 className="text-lg font-semibold text-white">Open Source Contributor</h4>
                     <p className="text-yellow-400">GitHub Projects</p>
-                    <p className="text-red-200 text-sm">Contributing to community projects</p>
+                    <p className="text-blue-200 text-sm">Contributing to community projects</p>
                   </div>
                 </div>
               </div>
@@ -241,11 +241,11 @@ export default function AboutPage() {
       </div>
 
       {/* Footer */}
-      <footer className="bg-red-950 border-t border-yellow-400/20">
+      <footer className="bg-navy-950 border-t border-yellow-400/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="text-center">
-            <p className="text-red-200">© 2024 Kenan Ben G. Polgo. All rights reserved.</p>
-            <p className="text-red-300 text-sm mt-2">Central Philippine University - Computer Science Student</p>
+            <p className="text-blue-200">© 2024 Kenan Ben G. Polgo. All rights reserved.</p>
+            <p className="text-blue-300 text-sm mt-2">Central Philippine University - Computer Science Student</p>
           </div>
         </div>
       </footer>
