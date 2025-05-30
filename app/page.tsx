@@ -126,16 +126,16 @@ export default function HomePage() {
             </div>
             <div className="space-y-3">
               <div className="border-l-2 border-yellow-400 pl-3">
-                <h4 className="text-red-100 font-semibold">E-Commerce Website</h4>
-                <p className="text-red-200 text-sm">Full-stack web application</p>
+                <h4 className="text-red-100 font-semibold">CPU-SHS Research Archive</h4>
+                <p className="text-red-200 text-sm">Full-stack web system</p>
               </div>
               <div className="border-l-2 border-yellow-400 pl-3">
-                <h4 className="text-red-100 font-semibold">Mobile App UI</h4>
-                <p className="text-red-200 text-sm">React Native application</p>
+                <h4 className="text-red-100 font-semibold">CPU-SHS Thesis</h4>
+                <p className="text-red-200 text-sm">React Native application "NextJS"</p>
               </div>
               <div className="border-l-2 border-yellow-400 pl-3">
-                <h4 className="text-red-100 font-semibold">Data Analysis Tool</h4>
-                <p className="text-red-200 text-sm">Python-based analytics</p>
+                <h4 className="text-red-100 font-semibold">Traffic Management System</h4>
+                <p className="text-red-200 text-sm">React-Typescript</p>
               </div>
             </div>
           </div>
@@ -151,7 +151,7 @@ export default function HomePage() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
-              href="https://github.com/kenanbpolgo"
+              href="https://github.com/bananaNuggets75"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center justify-center bg-yellow-400 hover:bg-yellow-500 text-red-900 font-bold py-3 px-6 rounded-lg transition-colors"
@@ -160,7 +160,7 @@ export default function HomePage() {
               GitHub Profile
             </a>
             <a
-              href="mailto:kenan.polgo@cpu.edu.ph"
+              href="mailto:kenanben.polgo-21@cpu.edu.ph"
               className="flex items-center justify-center border-2 border-yellow-400 text-yellow-400 hover:bg-yellow-400 hover:text-red-900 font-bold py-3 px-6 rounded-lg transition-colors"
             >
               <Mail className="h-5 w-5 mr-2" />
