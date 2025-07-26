@@ -531,6 +531,65 @@ export default function HomePage() {
               </div>
             </div>
 
+            {/* Contact Form */}
+            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-8 border border-yellow-400/20">
+              <h3 className="text-2xl font-bold text-white mb-6 flex items-center">
+                <Send className="h-6 w-6 text-yellow-400 mr-3" />
+                Send a Message
+              </h3>
+              <form className="space-y-6">
+                <div>
+                  <label htmlFor="name" className="block text-sm font-medium text-blue-100 mb-2">
+                    Your Name
+                  </label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    className="w-full px-4 py-3 bg-navy-800/50 border border-navy-600 rounded-lg text-white placeholder-blue-300 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent"
+                    placeholder="Enter your full name"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="email" className="block text-sm font-medium text-blue-100 mb-2">
+                    Email Address
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    className="w-full px-4 py-3 bg-navy-800/50 border border-navy-600 rounded-lg text-white placeholder-blue-300 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent"
+                    placeholder="your.email@example.com"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="message" className="block text-sm font-medium text-blue-100 mb-2">
+                    Message
+                  </label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    rows={4}
+                    className="w-full px-4 py-3 bg-navy-800/50 border border-navy-600 rounded-lg text-white placeholder-blue-300 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent resize-none"
+                    placeholder="Tell me about your project or just say hello!"
+                  ></textarea>
+                </div>
+
+                <button
+                  type="submit"
+                  className="w-full bg-yellow-400 hover:bg-yellow-500 text-navy-900 font-bold py-3 px-6 rounded-lg transition-colors flex items-center justify-center"
+                >
+                  <Send className="h-5 w-5 mr-2" />
+                  Send Message
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+
     </div>
   )
 }
