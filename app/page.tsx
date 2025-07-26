@@ -449,4 +449,58 @@ export default function HomePage() {
               about technology.
             </p>
           </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            {/* Contact Information */}
+            <div className="space-y-8">
+              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-8 border border-yellow-400/20">
+                <h3 className="text-2xl font-bold text-white mb-6 flex items-center">
+                  <MessageSquare className="h-6 w-6 text-yellow-400 mr-3" />
+                  Get In Touch
+                </h3>
+                <div className="space-y-6">
+                  <div className="flex items-start space-x-4">
+                    <div className="bg-yellow-400 p-3 rounded-lg">
+                      <Mail className="h-6 w-6 text-navy-900" />
+                    </div>
+                    <div>
+                      <h4 className="text-lg font-semibold text-white">Email</h4>
+                      <p className="text-blue-200">kenanben.polgo-21@cpu.edu.ph</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start space-x-4">
+                    <div className="bg-yellow-400 p-3 rounded-lg">
+                      <Phone className="h-6 w-6 text-navy-900" />
+                    </div>
+                    <div>
+                      <h4 className="text-lg font-semibold text-white">Phone</h4>
+                      <p className="text-blue-200">+63 917 185 8427</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start space-x-4">
+                    <div className="bg-yellow-400 p-3 rounded-lg">
+                      <Github className="h-6 w-6 text-navy-900" />
+                    </div>
+                    <div>
+                      <h4 className="text-lg font-semibold text-white">GitHub</h4>
+                      <p className="text-blue-200">github.com/bananaNuggets75</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start space-x-4">
+                    <div className="bg-yellow-400 p-3 rounded-lg">
+                      <MapPin className="h-6 w-6 text-navy-900" />
+                    </div>
+                    <div>
+                      <h4 className="text-lg font-semibold text-white">Location</h4>
+                      <p className="text-blue-200">Iloilo City, Philippines</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+    </div>
+  )
 }
