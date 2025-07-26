@@ -297,5 +297,77 @@ export default function HomePage() {
               </div>
             )}
 
-
+            {/* Certificates Tab */}
+            {activePortfolioTab === "certificates" && (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                {[
+                  {
+                    title: "Dean's List",
+                    issuer: "Central Philippine University",
+                    date: "Academic Year 2023-2024",
+                    description: "Maintained high academic standing with GPA above 3.5",
+                    image: "/placeholder.svg?height=150&width=200&text=Dean's+List",
+                  },
+                  {
+                    title: "DevCon Runner Up",
+                    issuer: "Regional Programming Competition",
+                    date: "2024",
+                    description: "Game Development competition - Second place finish",
+                    image: "/placeholder.svg?height=150&width=200&text=DevCon+Award",
+                  },
+                  {
+                    title: "Google Developer Student Club",
+                    issuer: "Google Developers",
+                    date: "2023 - Present",
+                    description: "Active participant in hackathons and tech events",
+                    image: "/placeholder.svg?height=150&width=200&text=GDSC+Member",
+                  },
+                  {
+                    title: "JavaScript Fundamentals",
+                    issuer: "FreeCodeCamp",
+                    date: "2023",
+                    description: "Completed comprehensive JavaScript programming course",
+                    image: "/placeholder.svg?height=150&width=200&text=JS+Certificate",
+                  },
+                  {
+                    title: "React Development",
+                    issuer: "Coursera",
+                    date: "2023",
+                    description: "Advanced React.js development certification",
+                    image: "/placeholder.svg?height=150&width=200&text=React+Cert",
+                  },
+                  {
+                    title: "Database Design",
+                    issuer: "Oracle Academy",
+                    date: "2024",
+                    description: "Database design and SQL optimization certification",
+                    image: "/placeholder.svg?height=150&width=200&text=Database+Cert",
+                  },
+                ].map((cert, index) => (
+                  <div
+                    key={index}
+                    className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-yellow-400/20 hover:border-yellow-400/40 transition-all group"
+                  >
+                    <div className="flex items-start space-x-4">
+                      <div className="flex-shrink-0">
+                        <img
+                          src={cert.image || "/placeholder.svg"}
+                          alt={cert.title}
+                          className="w-20 h-20 rounded-lg object-cover border-2 border-yellow-400/30"
+                        />
+                      </div>
+                      <div className="flex-1">
+                        <div className="flex items-center mb-2">
+                          <Award className="h-6 w-6 text-yellow-400 mr-2" />
+                          <h3 className="text-xl font-bold text-white">{cert.title}</h3>
+                        </div>
+                        <p className="text-yellow-400 font-medium mb-1">{cert.issuer}</p>
+                        <p className="text-blue-200 text-sm mb-2">{cert.date}</p>
+                        <p className="text-blue-100 text-sm">{cert.description}</p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
 }
