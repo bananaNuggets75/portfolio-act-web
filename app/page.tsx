@@ -204,5 +204,98 @@ export default function HomePage() {
             </p>
           </div>
 
-          
+          {/* Portfolio Content */}
+          <div className="min-h-[600px]">
+            {/* Projects Tab */}
+            {activePortfolioTab === "projects" && (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {[
+                  {
+                    title: "CPU-SHS Research Archive",
+                    description: "Full-stack web system for managing research papers and academic documents",
+                    tech: ["React", "Node.js", "MongoDB"],
+                    image: "/placeholder.svg?height=200&width=300&text=Research+Archive",
+                    link: "#",
+                  },
+                  {
+                    title: "CPU-SHS Thesis Platform",
+                    description: "React Native application built with NextJS for thesis management",
+                    tech: ["Next.js", "React Native", "TypeScript"],
+                    image: "/placeholder.svg?height=200&width=300&text=Thesis+Platform",
+                    link: "#",
+                  },
+                  {
+                    title: "Traffic Management System",
+                    description: "React-TypeScript application for traffic flow optimization",
+                    tech: ["React", "TypeScript", "Chart.js"],
+                    image: "/placeholder.svg?height=200&width=300&text=Traffic+System",
+                    link: "#",
+                  },
+                  {
+                    title: "E-Commerce Platform",
+                    description: "Full-stack e-commerce solution with payment integration",
+                    tech: ["Next.js", "Stripe", "PostgreSQL"],
+                    image: "/placeholder.svg?height=200&width=300&text=E-Commerce",
+                    link: "#",
+                  },
+                  {
+                    title: "Task Management App",
+                    description: "Collaborative task management tool with real-time updates",
+                    tech: ["React", "Socket.io", "Express"],
+                    image: "/placeholder.svg?height=200&width=300&text=Task+Manager",
+                    link: "#",
+                  },
+                  {
+                    title: "Weather Dashboard",
+                    description: "Real-time weather monitoring dashboard with data visualization",
+                    tech: ["Vue.js", "D3.js", "Weather API"],
+                    image: "/placeholder.svg?height=200&width=300&text=Weather+App",
+                    link: "#",
+                  },
+                ].map((project, index) => (
+                  <div
+                    key={index}
+                    className="bg-white/10 backdrop-blur-sm rounded-xl overflow-hidden border border-yellow-400/20 hover:border-yellow-400/40 transition-all group"
+                  >
+                    <div className="relative overflow-hidden">
+                      <img
+                        src={project.image || "/placeholder.svg"}
+                        alt={project.title}
+                        className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                      />
+                      <div className="absolute inset-0 bg-navy-900/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <div className="flex space-x-4">
+                          <a
+                            href={project.link}
+                            className="bg-yellow-400 text-navy-900 px-4 py-2 rounded-lg font-medium hover:bg-yellow-500 transition-colors flex items-center"
+                          >
+                            <ExternalLink className="h-4 w-4 mr-2" />
+                            Live Demo
+                          </a>
+                          <button className="bg-white/20 text-white px-4 py-2 rounded-lg font-medium hover:bg-white/30 transition-colors">
+                            Details
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="p-6">
+                      <h3 className="text-xl font-bold text-white mb-3">{project.title}</h3>
+                      <p className="text-blue-100 mb-4 text-sm">{project.description}</p>
+                      <div className="flex flex-wrap gap-2">
+                        {project.tech.map((tech, techIndex) => (
+                          <span
+                            key={techIndex}
+                            className="bg-yellow-400/20 text-yellow-400 px-3 py-1 rounded-full text-xs"
+                          >
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+
+
 }
