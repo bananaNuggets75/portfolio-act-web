@@ -58,7 +58,7 @@ export default function HomePage() {
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center">
               <GraduationCap className="h-8 w-8 text-yellow-400 mr-2" />
-              <span className="text-white font-bold text-xl">Kenan Ben G. Polgo</span>
+              <span className="text-white font-bold text-xl">keibee</span>
             </div>
             <div className="hidden md:block">
               <div className="ml-10 flex items-baseline space-x-4">
@@ -87,7 +87,7 @@ export default function HomePage() {
           <div className="text-center">
             <div className="mb-8">
               <img
-                src="/placeholder.svg?height=200&width=200"
+                src="/profile.png?height=200&width=200"
                 alt="Kenan Ben G. Polgo"
                 className="w-48 h-48 rounded-full mx-auto border-4 border-yellow-400 shadow-2xl"
               />
@@ -137,7 +137,7 @@ export default function HomePage() {
               <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-yellow-400/20">
                 <div className="text-center mb-6">
                   <img
-                    src="/placeholder.svg?height=150&width=150"
+                    src="/profile.png?height=150&width=150"
                     alt="Kenan Ben G. Polgo"
                     className="w-32 h-32 rounded-full mx-auto border-4 border-yellow-400 shadow-lg mb-4"
                   />
@@ -162,7 +162,7 @@ export default function HomePage() {
                     into a passion for creating innovative solutions that can make a difference.
                   </p>
                   <p>
-                    Currently in my third year of studies, I've been focusing on web development, software engineering,
+                    Final year of my studies, I've been focusing on web development especially backend development, software engineering,
                     and data structures. I believe in the power of technology to solve real-world problems and am
                     constantly learning new skills to stay current with industry trends.
                   </p>
@@ -215,7 +215,7 @@ export default function HomePage() {
                     description: "Full-stack web system for managing research papers and academic documents",
                     tech: ["React", "Node.js", "MongoDB"],
                     image: "/placeholder.svg?height=200&width=300&text=Research+Archive",
-                    link: "#",
+                    link: "https://cpu-research-archive.vercel.app/",
                   },
                   {
                     title: "CPU-SHS Thesis Platform",
@@ -229,14 +229,14 @@ export default function HomePage() {
                     description: "React-TypeScript application for traffic flow optimization",
                     tech: ["React", "TypeScript", "Chart.js"],
                     image: "/placeholder.svg?height=200&width=300&text=Traffic+System",
-                    link: "#",
+                    link: "https://traffic-management-system-cyan.vercel.app/",
                   },
                   {
                     title: "E-Commerce Platform",
                     description: "Full-stack e-commerce solution with payment integration",
                     tech: ["Next.js", "Stripe", "PostgreSQL"],
                     image: "/placeholder.svg?height=200&width=300&text=E-Commerce",
-                    link: "#",
+                    link: "https://online-ordering-system-ochre.vercel.app/",
                   },
                   {
                     title: "Task Management App",
