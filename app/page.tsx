@@ -590,6 +590,15 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Footer */}
+      <footer className="bg-navy-950 border-t border-yellow-400/20 py-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <p className="text-blue-200">© 2024 Kenan Ben G. Polgo. All rights reserved.</p>
+            <p className="text-blue-300 text-sm mt-2">Central Philippine University - Computer Science Student</p>
+          </div>
+        </div>
+      </footer>
     </div>
   )
 }
