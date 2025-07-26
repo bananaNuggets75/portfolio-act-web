@@ -1,11 +1,34 @@
 "use client"
 
-import { useState, useEffect } from "react";
-import { Github, Mail, Code, User, Award, GraduationCap, Phone, MapPin, MessageSquare, Instagram, Send, ExternalLink, Settings } from "lucide-react";
+import type React from "react"
+
+import { useState, useEffect } from "react"
+import {
+  Github,
+  Mail,
+  Code,
+  GraduationCap,
+  User,
+  Award,
+  Instagram,
+  Phone,
+  MapPin,
+  MessageSquare,
+  Send,
+  ExternalLink,
+  Settings,
+} from "lucide-react"
+import { useInView } from "@/hooks/use-in-view" 
 
 export default function HomePage() {
   const [activeSection, setActiveSection] = useState("home")
   const [activePortfolioTab, setActivePortfolioTab] = useState("projects")
+
+  // Refs for sections to observe visibility
+  const [homeRef, homeInView] = useInView({ threshold: 0.3 })
+  const [aboutRef, aboutInView] = useInView({ threshold: 0.3 })
+  const [portfolioRef, portfolioInView] = useInView({ threshold: 0.3 })
+  const [contactRef, contactInView] = useInView({ threshold: 0.3 })
 
   useEffect(() => {
     const handleScroll = () => {
@@ -51,7 +74,7 @@ export default function HomePage() {
   ]
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-navy-900 via-navy-800 to-navy-950">
+    <div className="min-h-screen bg-gradient-to-br from-navy-900 via-navy-800 to-navy-950 parallax-bg">
       {/* Fixed Navigation */}
       <nav className="bg-navy-950/90 backdrop-blur-sm border-b border-yellow-400/20 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -80,10 +103,10 @@ export default function HomePage() {
           </div>
         </div>
       </nav>
-      
+
       {/* Home Section */}
-      <section id="home" className="min-h-screen flex items-center">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+      <section id="home" ref={homeRef} className="min-h-screen flex items-center">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 animate-on-scroll" data-in-view={homeInView}>
           <div className="text-center">
             <div className="mb-8">
               <img
@@ -120,9 +143,9 @@ export default function HomePage() {
       </section>
 
       {/* About Section */}
-      <section id="about" className="min-h-screen py-20">
+      <section id="about" ref={aboutRef} className="min-h-screen py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
+          <div className="text-center mb-16 animate-on-scroll" data-in-view={aboutInView}>
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
               About <span className="text-yellow-400">Me</span>
             </h2>
@@ -133,7 +156,11 @@ export default function HomePage() {
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Profile Card */}
-            <div className="lg:col-span-1">
+            <div
+              className="lg:col-span-1 animate-on-scroll"
+              data-in-view={aboutInView}
+              style={{ "--animation-delay": "0.1s" } as React.CSSProperties}
+            >
               <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-yellow-400/20">
                 <div className="text-center mb-6">
                   <img
@@ -150,7 +177,11 @@ export default function HomePage() {
 
             {/* Bio & Education */}
             <div className="lg:col-span-2 space-y-8">
-              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-8 border border-yellow-400/20">
+              <div
+                className="bg-white/10 backdrop-blur-sm rounded-xl p-8 border border-yellow-400/20 animate-on-scroll"
+                data-in-view={aboutInView}
+                style={{ "--animation-delay": "0.2s" } as React.CSSProperties}
+              >
                 <h3 className="text-2xl font-bold text-white mb-6 flex items-center">
                   <User className="h-6 w-6 text-yellow-400 mr-3" />
                   My Story
@@ -162,14 +193,18 @@ export default function HomePage() {
                     into a passion for creating innovative solutions that can make a difference.
                   </p>
                   <p>
-                    Final year of my studies, I've been focusing on web development especially backend development, software engineering,
+                    Currently in my third year of studies, I've been focusing on web development, software engineering,
                     and data structures. I believe in the power of technology to solve real-world problems and am
                     constantly learning new skills to stay current with industry trends.
                   </p>
                 </div>
               </div>
 
-              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-8 border border-yellow-400/20">
+              <div
+                className="bg-white/10 backdrop-blur-sm rounded-xl p-8 border border-yellow-400/20 animate-on-scroll"
+                data-in-view={aboutInView}
+                style={{ "--animation-delay": "0.3s" } as React.CSSProperties}
+              >
                 <h3 className="text-2xl font-bold text-white mb-6 flex items-center">
                   <GraduationCap className="h-6 w-6 text-yellow-400 mr-3" />
                   Education
@@ -192,9 +227,9 @@ export default function HomePage() {
       </section>
 
       {/* Portfolio Section */}
-      <section id="portfolio" className="min-h-screen py-20">
+      <section id="portfolio" ref={portfolioRef} className="min-h-screen py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
+          <div className="text-center mb-16 animate-on-scroll" data-in-view={portfolioInView}>
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
               Portfolio <span className="text-yellow-400">Showcase</span>
             </h2>
@@ -202,6 +237,35 @@ export default function HomePage() {
               Explore my journey through projects, certifications, and technical expertise. Each section represents a
               milestone in my continuous learning path.
             </p>
+          </div>
+
+          {/* Portfolio Navigation Tabs */}
+          <div
+            className="flex justify-center mb-12 animate-on-scroll"
+            data-in-view={portfolioInView}
+            style={{ "--animation-delay": "0.1s" } as React.CSSProperties}
+          >
+            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-2 border border-yellow-400/20">
+              <div className="flex space-x-2">
+                {portfolioTabs.map((tab) => {
+                  const IconComponent = tab.icon
+                  return (
+                    <button
+                      key={tab.id}
+                      onClick={() => setActivePortfolioTab(tab.id)}
+                      className={`flex items-center px-6 py-3 rounded-lg font-medium transition-all ${
+                        activePortfolioTab === tab.id
+                          ? "bg-yellow-400 text-navy-900"
+                          : "text-blue-100 hover:text-yellow-400 hover:bg-white/10"
+                      }`}
+                    >
+                      <IconComponent className="h-5 w-5 mr-2" />
+                      {tab.label}
+                    </button>
+                  )
+                })}
+              </div>
+            </div>
           </div>
 
           {/* Portfolio Content */}
@@ -255,7 +319,9 @@ export default function HomePage() {
                 ].map((project, index) => (
                   <div
                     key={index}
-                    className="bg-white/10 backdrop-blur-sm rounded-xl overflow-hidden border border-yellow-400/20 hover:border-yellow-400/40 transition-all group"
+                    className="bg-white/10 backdrop-blur-sm rounded-xl overflow-hidden border border-yellow-400/20 hover:border-yellow-400/40 transition-all group animate-on-scroll"
+                    data-in-view={portfolioInView}
+                    style={{ "--animation-delay": `${0.2 + index * 0.1}s` } as React.CSSProperties}
                   >
                     <div className="relative overflow-hidden">
                       <img
@@ -346,7 +412,9 @@ export default function HomePage() {
                 ].map((cert, index) => (
                   <div
                     key={index}
-                    className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-yellow-400/20 hover:border-yellow-400/40 transition-all group"
+                    className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-yellow-400/20 hover:border-yellow-400/40 transition-all group animate-on-scroll"
+                    data-in-view={portfolioInView}
+                    style={{ "--animation-delay": `${0.2 + index * 0.1}s` } as React.CSSProperties}
                   >
                     <div className="flex items-start space-x-4">
                       <div className="flex-shrink-0">
@@ -374,7 +442,11 @@ export default function HomePage() {
             {/* Tech Stack Tab */}
             {activePortfolioTab === "techstack" && (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div className="bg-white/10 backdrop-blur-sm rounded-xl p-8 border border-yellow-400/20">
+                <div
+                  className="bg-white/10 backdrop-blur-sm rounded-xl p-8 border border-yellow-400/20 animate-on-scroll"
+                  data-in-view={portfolioInView}
+                  style={{ "--animation-delay": "0.2s" } as React.CSSProperties}
+                >
                   <h3 className="text-2xl font-bold text-white mb-6 flex items-center">
                     <Code className="h-6 w-6 text-yellow-400 mr-3" />
                     Programming Languages
@@ -386,8 +458,13 @@ export default function HomePage() {
                       { name: "TypeScript", level: 75 },
                       { name: "C#", level: 70 },
                       { name: "SQL", level: 65 },
-                    ].map((skill) => (
-                      <div key={skill.name}>
+                    ].map((skill, index) => (
+                      <div
+                        key={skill.name}
+                        className="animate-on-scroll"
+                        data-in-view={portfolioInView}
+                        style={{ "--animation-delay": `${0.3 + index * 0.05}s` } as React.CSSProperties}
+                      >
                         <div className="flex justify-between text-blue-100 mb-2">
                           <span>{skill.name}</span>
                           <span>{skill.level}%</span>
@@ -403,7 +480,11 @@ export default function HomePage() {
                   </div>
                 </div>
 
-                <div className="bg-white/10 backdrop-blur-sm rounded-xl p-8 border border-yellow-400/20">
+                <div
+                  className="bg-white/10 backdrop-blur-sm rounded-xl p-8 border border-yellow-400/20 animate-on-scroll"
+                  data-in-view={portfolioInView}
+                  style={{ "--animation-delay": "0.2s" } as React.CSSProperties}
+                >
                   <h3 className="text-2xl font-bold text-white mb-6 flex items-center">
                     <Settings className="h-6 w-6 text-yellow-400 mr-3" />
                     Frameworks & Tools
@@ -415,8 +496,13 @@ export default function HomePage() {
                       { name: "MySQL/PostgreSQL", level: 70 },
                       { name: "Git/GitHub", level: 85 },
                       { name: "Tailwind CSS", level: 90 },
-                    ].map((skill) => (
-                      <div key={skill.name}>
+                    ].map((skill, index) => (
+                      <div
+                        key={skill.name}
+                        className="animate-on-scroll"
+                        data-in-view={portfolioInView}
+                        style={{ "--animation-delay": `${0.3 + index * 0.05}s` } as React.CSSProperties}
+                      >
                         <div className="flex justify-between text-blue-100 mb-2">
                           <span>{skill.name}</span>
                           <span>{skill.level}%</span>
@@ -438,9 +524,9 @@ export default function HomePage() {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="min-h-screen py-20">
+      <section id="contact" ref={contactRef} className="min-h-screen py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
+          <div className="text-center mb-16 animate-on-scroll" data-in-view={contactInView}>
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
               Contact <span className="text-yellow-400">Me</span>
             </h2>
@@ -452,7 +538,11 @@ export default function HomePage() {
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             {/* Contact Information */}
-            <div className="space-y-8">
+            <div
+              className="space-y-8 animate-on-scroll"
+              data-in-view={contactInView}
+              style={{ "--animation-delay": "0.1s" } as React.CSSProperties}
+            >
               <div className="bg-white/10 backdrop-blur-sm rounded-xl p-8 border border-yellow-400/20">
                 <h3 className="text-2xl font-bold text-white mb-6 flex items-center">
                   <MessageSquare className="h-6 w-6 text-yellow-400 mr-3" />
@@ -532,7 +622,11 @@ export default function HomePage() {
             </div>
 
             {/* Contact Form */}
-            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-8 border border-yellow-400/20">
+            <div
+              className="bg-white/10 backdrop-blur-sm rounded-xl p-8 border border-yellow-400/20 animate-on-scroll"
+              data-in-view={contactInView}
+              style={{ "--animation-delay": "0.2s" } as React.CSSProperties}
+            >
               <h3 className="text-2xl font-bold text-white mb-6 flex items-center">
                 <Send className="h-6 w-6 text-yellow-400 mr-3" />
                 Send a Message
