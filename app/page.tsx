@@ -436,4 +436,17 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* Contact Section */}
+      <section id="contact" className="min-h-screen py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+              Contact <span className="text-yellow-400">Me</span>
+            </h2>
+            <p className="text-xl text-blue-100 max-w-3xl mx-auto">
+              Let's connect! I'm always open to discussing new opportunities, collaborations, or just having a chat
+              about technology.
+            </p>
+          </div>
 }
