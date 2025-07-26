@@ -80,5 +80,42 @@ export default function HomePage() {
           </div>
         </div>
       </nav>
-      )
+      
+      {/* Home Section */}
+      <section id="home" className="min-h-screen flex items-center">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+          <div className="text-center">
+            <div className="mb-8">
+              <img
+                src="/placeholder.svg?height=200&width=200"
+                alt="Kenan Ben G. Polgo"
+                className="w-48 h-48 rounded-full mx-auto border-4 border-yellow-400 shadow-2xl"
+              />
+            </div>
+            <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
+              Kenan Ben G. <span className="text-yellow-400">Polgo</span>
+            </h1>
+            <p className="text-xl md:text-2xl text-blue-100 mb-8 max-w-3xl mx-auto">
+              Computer Science Student at Central Philippine University
+            </p>
+            <p className="text-lg text-blue-200 mb-12 max-w-2xl mx-auto">
+              Passionate about software development, web technologies, and creating innovative solutions
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <button
+                onClick={() => scrollToSection("about")}
+                className="bg-yellow-400 hover:bg-yellow-500 text-navy-900 font-bold py-3 px-8 rounded-lg transition-colors shadow-lg"
+              >
+                Learn More About Me
+              </button>
+              <button
+                onClick={() => scrollToSection("contact")}
+                className="border-2 border-yellow-400 text-yellow-400 hover:bg-yellow-400 hover:text-navy-900 font-bold py-3 px-8 rounded-lg transition-colors"
+              >
+                Get In Touch
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
 }
