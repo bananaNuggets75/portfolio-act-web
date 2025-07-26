@@ -43,22 +43,18 @@ html {
   }
 }
 
-.animate-fadeInUp {
-  animation: fadeInUp 0.6s ease-out;
+/* Apply animation only when data-in-view="true" */
+.animate-on-scroll[data-in-view="true"] {
+  animation: fadeInUp 0.6s ease-out forwards; /* Added forwards to keep the end state */
+  animation-delay: var(--animation-delay, 0s); /* Added animation-delay */
 }
 
-/* Focus styles for accessibility */
-button:focus,
-a:focus,
-input:focus,
-textarea:focus {
-  outline: 2px solid #facc15; /* yellow-400 */
-  outline-offset: 2px;
+/* Initial state before animation */
+.animate-on-scroll {
+  opacity: 0;
 }
 
-/* Print styles */
-@media print {
-  .no-print {
-    display: none !important;
-  }
+/* Parallax effect for the background */
+.parallax-bg {
+  background-attachment: fixed;
 }
