@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react";
-import { Github, Mail, Code, User, Award, GraduationCap, Phone, MapPin, MessageSquare, Send, ExternalLink, Settings } from "lucide-react";
+import { Github, Mail, Code, User, Award, GraduationCap, Phone, MapPin, MessageSquare, Instagram, Send, ExternalLink, Settings } from "lucide-react";
 
 export default function HomePage() {
   const [activeSection, setActiveSection] = useState("home")
@@ -500,6 +500,36 @@ export default function HomePage() {
                   </div>
                 </div>
               </div>
+
+              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-8 border border-yellow-400/20">
+                <h3 className="text-xl font-bold text-white mb-6">Connect With Me</h3>
+                <div className="flex flex-wrap gap-4">
+                  <a
+                    href="https://github.com/bananaNuggets75"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center bg-yellow-400 hover:bg-yellow-500 text-navy-900 font-semibold py-3 px-6 rounded-lg transition-colors"
+                  >
+                    <Github className="h-5 w-5 mr-2" />
+                    GitHub
+                  </a>
+                  <a
+                    href="mailto:kenanben.polgo-21@cpu.edu.ph"
+                    className="flex items-center border-2 border-yellow-400 text-yellow-400 hover:bg-yellow-400 hover:text-navy-900 font-semibold py-3 px-6 rounded-lg transition-colors"
+                  >
+                    <Mail className="h-5 w-5 mr-2" />
+                    Email
+                  </a>
+                  <a
+                    href="https://www.instagram.com/keenaniganss/"
+                    className="flex items-center bg-yellow-400 hover:bg-yellow-500 text-navy-900 font-semibold py-3 px-6 rounded-lg transition-colors"
+                  >
+                    <Instagram className="h-5 w-5 mr-2" />
+                    Instagram
+                  </a>
+                </div>
+              </div>
+            </div>
 
     </div>
   )
