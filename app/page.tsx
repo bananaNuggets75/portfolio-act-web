@@ -203,4 +203,6 @@ export default function HomePage() {
               milestone in my continuous learning path.
             </p>
           </div>
+
+          
 }
