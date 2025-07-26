@@ -370,4 +370,70 @@ export default function HomePage() {
                 ))}
               </div>
             )}
+
+            {/* Tech Stack Tab */}
+            {activePortfolioTab === "techstack" && (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="bg-white/10 backdrop-blur-sm rounded-xl p-8 border border-yellow-400/20">
+                  <h3 className="text-2xl font-bold text-white mb-6 flex items-center">
+                    <Code className="h-6 w-6 text-yellow-400 mr-3" />
+                    Programming Languages
+                  </h3>
+                  <div className="space-y-4">
+                    {[
+                      { name: "JavaScript", level: 85 },
+                      { name: "Python", level: 80 },
+                      { name: "TypeScript", level: 75 },
+                      { name: "C#", level: 70 },
+                      { name: "SQL", level: 65 },
+                    ].map((skill) => (
+                      <div key={skill.name}>
+                        <div className="flex justify-between text-blue-100 mb-2">
+                          <span>{skill.name}</span>
+                          <span>{skill.level}%</span>
+                        </div>
+                        <div className="w-full bg-navy-800 rounded-full h-3">
+                          <div
+                            className="bg-yellow-400 h-3 rounded-full transition-all duration-300"
+                            style={{ width: `${skill.level}%` }}
+                          ></div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="bg-white/10 backdrop-blur-sm rounded-xl p-8 border border-yellow-400/20">
+                  <h3 className="text-2xl font-bold text-white mb-6 flex items-center">
+                    <Settings className="h-6 w-6 text-yellow-400 mr-3" />
+                    Frameworks & Tools
+                  </h3>
+                  <div className="space-y-4">
+                    {[
+                      { name: "React/Next.js", level: 80 },
+                      { name: "Node.js", level: 75 },
+                      { name: "MySQL/PostgreSQL", level: 70 },
+                      { name: "Git/GitHub", level: 85 },
+                      { name: "Tailwind CSS", level: 90 },
+                    ].map((skill) => (
+                      <div key={skill.name}>
+                        <div className="flex justify-between text-blue-100 mb-2">
+                          <span>{skill.name}</span>
+                          <span>{skill.level}%</span>
+                        </div>
+                        <div className="w-full bg-navy-800 rounded-full h-3">
+                          <div
+                            className="bg-yellow-400 h-3 rounded-full transition-all duration-300"
+                            style={{ width: `${skill.level}%` }}
+                          ></div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      </section>
 }
