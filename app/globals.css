@@ -597,9 +597,16 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 4rem;
   border: 4px solid rgba(139, 92, 246, 0.3);
+  overflow: hidden; /* Important: hides image overflow for circle shape */
 }
+
+.profile-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensures the image fills the circle */
+}
+
 
 .profile-name {
   font-size: 24px;

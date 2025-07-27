@@ -112,8 +112,8 @@ const Portfolio: React.FC = () => {
   // Typing animation texts
   const typingTexts = [
     "Full-Stack Developer",
-    "React Specialist", 
-    "UI/UX Enthusiast",
+    "Blockchain", 
+    "Machine Learning",
     "Problem Solver"
   ];
   const typedText = useTypingAnimation(typingTexts, 150);
@@ -127,7 +127,7 @@ const Portfolio: React.FC = () => {
       fullDescription: 'A comprehensive research archive system built for Central Philippine University Senior High School. This platform allows students and faculty to upload, manage, and search through academic research papers with advanced filtering and categorization features.',
       tech: ['React', 'Node.js', 'MongoDB', 'Express', 'JWT'],
       link: 'https://cpu-research-archive.vercel.app/',
-      github: 'https://github.com/yourusername/cpu-research-archive',
+      github: 'https://github.com/bananaNuggets75/cpu-research-archive',
       icon: '📚',
       image: '/api/placeholder/600/400',
       features: [
@@ -150,7 +150,7 @@ const Portfolio: React.FC = () => {
       fullDescription: 'A modern thesis management platform that streamlines the entire thesis process from proposal to defense. Built with Next.js for optimal performance and user experience.',
       tech: ['Next.js', 'React Native', 'TypeScript', 'Prisma', 'PostgreSQL'],
       link: '#',
-      github: 'https://github.com/yourusername/thesis-platform',
+      github: 'https://github.com/bananaNuggets75/thesis-platform',
       icon: '📝',
       image: '/api/placeholder/600/400',
       features: [
@@ -173,7 +173,7 @@ const Portfolio: React.FC = () => {
       fullDescription: 'An intelligent traffic management system that uses real-time data analysis to optimize traffic flow in urban areas. Features interactive dashboards and predictive analytics.',
       tech: ['React', 'TypeScript', 'Chart.js', 'Python', 'TensorFlow'],
       link: 'https://traffic-management-system-cyan.vercel.app/',
-      github: 'https://github.com/yourusername/traffic-system',
+      github: 'https://github.com/bananaNuggets75/traffic-management-system',
       icon: '🚦',
       image: '/api/placeholder/600/400',
       features: [
@@ -196,7 +196,7 @@ const Portfolio: React.FC = () => {
       fullDescription: 'A complete e-commerce platform with modern design, secure payment processing, and comprehensive admin features. Built for scalability and performance.',
       tech: ['Next.js', 'Stripe', 'PostgreSQL', 'Redis', 'AWS'],
       link: 'https://online-ordering-system-ochre.vercel.app/',
-      github: 'https://github.com/yourusername/ecommerce-platform',
+      github: 'https://github.com/bananaNuggets75/ecommerce-platform',
       icon: '🛍️',
       image: '/api/placeholder/600/400',
       features: [
@@ -219,7 +219,7 @@ const Portfolio: React.FC = () => {
       fullDescription: 'A comprehensive task management application that enables teams to collaborate effectively with real-time updates, file sharing, and progress tracking.',
       tech: ['React', 'Socket.io', 'Express', 'MongoDB', 'JWT'],
       link: '#',
-      github: 'https://github.com/yourusername/task-manager',
+      github: 'https://github.com/bananaNuggets75/task-manager',
       icon: '✅',
       image: '/api/placeholder/600/400',
       features: [
@@ -242,7 +242,7 @@ const Portfolio: React.FC = () => {
       fullDescription: 'An advanced weather monitoring system with beautiful data visualizations, forecasting capabilities, and location-based weather tracking.',
       tech: ['Vue.js', 'D3.js', 'Weather API', 'Node.js', 'MongoDB'],
       link: '#',
-      github: 'https://github.com/yourusername/weather-dashboard',
+      github: 'https://github.com/bananaNuggets75/weather-dashboard',
       icon: '🌤️',
       image: '/api/placeholder/600/400',
       features: [
@@ -516,7 +516,14 @@ const Portfolio: React.FC = () => {
         <div className={`about-grid ${aboutInView ? 'animate-slideInLeft' : ''}`}>
           <div className="profile-section">
             <div className="profile-card">
-              <div className="profile-avatar">👨‍💻</div>
+              {/* Replace emoji with image */}
+              <div className="profile-avatar">
+                <img 
+                  src="/IMG_8516.JPG" 
+                  alt="Profile" 
+                  className="profile-image"
+                />
+              </div>
               <h2 className="profile-name">Kenan Ben G. Polgo</h2>
               <p className="profile-role">Full-Stack Developer</p>
               <p className="profile-university">Central Philippine University</p>
@@ -728,7 +735,7 @@ const Portfolio: React.FC = () => {
                 <div className="contact-icon">📱</div>
                 <div className="contact-details">
                   <h4>Phone</h4>
-                  <p>+63 123 456 7890</p>
+                  <p>+63 917 185 8427</p>
                 </div>
               </div>
               <div className="contact-item">
@@ -739,14 +746,14 @@ const Portfolio: React.FC = () => {
                 </div>
               </div>
               <div className="social-links">
-                <a href="#" className="social-link">
+                <a href="https://www.linkedin.com/in/kenan-ben-polgo/" className="social-link">
                   <span>💼</span> LinkedIn
                 </a>
-                <a href="#" className="social-link">
+                <a href="https://github.com/bananaNuggets75" className="social-link">
                   <span>💻</span> GitHub
                 </a>
-                <a href="#" className="social-link">
-                  <span>🐦</span> Twitter
+                <a href="https://www.instagram.com/keenaniganss/" className="social-link">
+                  <span>lol</span> Instagram
                 </a>
               </div>
             </div>
