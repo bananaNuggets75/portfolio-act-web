@@ -815,6 +815,49 @@
   opacity: 1;
 }
 
+.project-links-updated {
+  display: flex;
+  gap: 10px;
+}
+
+.project-link-demo {
+  padding: 8px 16px;
+  background: var(--accent-color);
+  color: white;
+  text-decoration: none;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 12px;
+  transition: all 0.3s ease;
+}
+
+.project-link-demo:hover {
+  background: var(--accent-light);
+  transform: scale(1.05);
+}
+
+.project-link-details {
+  padding: 8px 16px;
+  background: transparent;
+  color: var(--accent-color);
+  text-decoration: none;
+  border: 1px solid var(--accent-color);
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 12px;
+  transition: all 0.3s ease;
+}
+
+.project-link-details:hover {
+  background: var(--accent-color);
+  color: white;
+  transform: scale(1.05);
+}
+
+.tech-categories {
+  display: none;
+}
+
 .project-info {
   padding: 30px;
 }
