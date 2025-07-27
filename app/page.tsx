@@ -145,8 +145,8 @@ const Portfolio: React.FC = () => {
     },
     {
       id: '2',
-      title: 'CPU-SHS Thesis Platform',
-      description: 'React Native application built with NextJS for thesis management',
+      title: 'E-Voting-BlockChain',
+      description: 'Django application for secure voting using blockchain',
       fullDescription: 'A modern thesis management platform that streamlines the entire thesis process from proposal to defense. Built with Next.js for optimal performance and user experience.',
       tech: ['Next.js', 'React Native', 'TypeScript', 'Prisma', 'PostgreSQL'],
       link: '#',
@@ -220,7 +220,7 @@ const Portfolio: React.FC = () => {
       tech: ['React', 'Socket.io', 'Express', 'MongoDB', 'JWT'],
       link: '#',
       github: 'https://github.com/bananaNuggets75/task-manager',
-      icon: '✅',
+      icon: '',
       image: '/api/placeholder/600/400',
       features: [
         'Real-time collaboration',
@@ -237,8 +237,8 @@ const Portfolio: React.FC = () => {
     },
     {
       id: '6',
-      title: 'Weather Dashboard',
-      description: 'Real-time weather monitoring dashboard with data visualization',
+      title: 'QuickShop',
+      description: 'A B2B Wholesale E-Commerce Platform',
       fullDescription: 'An advanced weather monitoring system with beautiful data visualizations, forecasting capabilities, and location-based weather tracking.',
       tech: ['Vue.js', 'D3.js', 'Weather API', 'Node.js', 'MongoDB'],
       link: '#',
@@ -325,49 +325,27 @@ const Portfolio: React.FC = () => {
     }
   ];
 
-  const skillCategories: SkillCategory[] = [
-    {
-      title: 'Frontend Technologies',
-      icon: '🎨',
-      techs: [
-        { name: 'HTML5', icon: '/api/placeholder/60/60', level: 90, color: '#E34F26' },
-        { name: 'CSS3', icon: '/api/placeholder/60/60', level: 85, color: '#1572B6' },
-        { name: 'JavaScript', icon: '/api/placeholder/60/60', level: 85, color: '#F7DF1E' },
-        { name: 'TypeScript', icon: '/api/placeholder/60/60', level: 80, color: '#3178C6' },
-        { name: 'React', icon: '/api/placeholder/60/60', level: 90, color: '#61DAFB' },
-        { name: 'Next.js', icon: '/api/placeholder/60/60', level: 85, color: '#000000' },
-        { name: 'Vue.js', icon: '/api/placeholder/60/60', level: 75, color: '#4FC08D' },
-        { name: 'Tailwind CSS', icon: '/api/placeholder/60/60', level: 90, color: '#06B6D4' }
-      ]
-    },
-    {
-      title: 'Backend & Database',
-      icon: '⚙️',
-      techs: [
-        { name: 'Node.js', icon: '/api/placeholder/60/60', level: 80, color: '#339933' },
-        { name: 'Express.js', icon: '/api/placeholder/60/60', level: 85, color: '#000000' },
-        { name: 'Python', icon: '/api/placeholder/60/60', level: 75, color: '#3776AB' },
-        { name: 'MongoDB', icon: '/api/placeholder/60/60', level: 80, color: '#47A248' },
-        { name: 'PostgreSQL', icon: '/api/placeholder/60/60', level: 75, color: '#336791' },
-        { name: 'MySQL', icon: '/api/placeholder/60/60', level: 70, color: '#4479A1' },
-        { name: 'Firebase', icon: '/api/placeholder/60/60', level: 85, color: '#FFCA28' },
-        { name: 'Redis', icon: '/api/placeholder/60/60', level: 70, color: '#DC382D' }
-      ]
-    },
-    {
-      title: 'Tools & Platforms',
-      icon: '🛠️',
-      techs: [
-        { name: 'Git', icon: '/api/placeholder/60/60', level: 90, color: '#F05032' },
-        { name: 'GitHub', icon: '/api/placeholder/60/60', level: 90, color: '#181717' },
-        { name: 'VS Code', icon: '/api/placeholder/60/60', level: 95, color: '#007ACC' },
-        { name: 'Docker', icon: '/api/placeholder/60/60', level: 70, color: '#2496ED' },
-        { name: 'AWS', icon: '/api/placeholder/60/60', level: 65, color: '#232F3E' },
-        { name: 'Vercel', icon: '/api/placeholder/60/60', level: 85, color: '#000000' },
-        { name: 'Figma', icon: '/api/placeholder/60/60', level: 80, color: '#F24E1E' },
-        { name: 'Postman', icon: '/api/placeholder/60/60', level: 85, color: '#FF6C37' }
-      ]
-    }
+  const techStack = [
+    { name: 'HTML5', icon: '/api/placeholder/60/60' },
+    { name: 'CSS3', icon: '/api/placeholder/60/60' },
+    { name: 'JavaScript', icon: '/api/placeholder/60/60' },
+    { name: 'TypeScript', icon: '/api/placeholder/60/60' },
+    { name: 'React', icon: '/api/placeholder/60/60' },
+    { name: 'Next.js', icon: '/api/placeholder/60/60' },
+    { name: 'Vue.js', icon: '/api/placeholder/60/60' },
+    { name: 'Tailwind CSS', icon: '/api/placeholder/60/60' },
+    { name: 'Node.js', icon: '/api/placeholder/60/60' },
+    { name: 'Express.js', icon: '/api/placeholder/60/60' },
+    { name: 'Python', icon: '/api/placeholder/60/60' },
+    { name: 'MongoDB', icon: '/api/placeholder/60/60' },
+    { name: 'PostgreSQL', icon: '/api/placeholder/60/60' },
+    { name: 'Firebase', icon: '/api/placeholder/60/60' },
+    { name: 'Git', icon: '/api/placeholder/60/60' },
+    { name: 'GitHub', icon: '/api/placeholder/60/60' },
+    { name: 'VS Code', icon: '/api/placeholder/60/60' },
+    { name: 'Docker', icon: '/api/placeholder/60/60' },
+    { name: 'AWS', icon: '/api/placeholder/60/60' },
+    { name: 'Vercel', icon: '/api/placeholder/60/60' }
   ];
 
   // Scroll handler
@@ -565,10 +543,9 @@ const Portfolio: React.FC = () => {
           </div>
         </div>
       </section>
-
       {/* Portfolio Section */}
       <section id="portfolio" className="section" ref={portfolioRef}>
-        <div className="portfolio-container">
+        <div className="portfolio-container"> </div>
           <div className="section-title">
             My <span className="section-title-accent">Portfolio</span>
           </div>
@@ -606,8 +583,22 @@ const Portfolio: React.FC = () => {
                   <div className="project-image">
                     <img src={project.image} alt={project.title} />
                     <div className="project-overlay">
-                      <div className="project-links">
-                        <span className="project-link">View Details</span>
+                      <div className="project-links-updated">
+                        <a 
+                          href={project.link} 
+                          className="project-link-demo"
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          Demo
+                        </a>
+                        <span 
+                          className="project-link-details"
+                          onClick={() => setSelectedProject(project)}
+                        >
+                          Details
+                        </span>
                       </div>
                     </div>
                   </div>
@@ -658,62 +649,21 @@ const Portfolio: React.FC = () => {
             </div>
           </div>
 
-          {/* Tech Stack Tab */}
+          {/* Tech Stack Tab - Simplified */}
           <div className={`tab-content ${activeTab === 'skills' ? 'active' : ''}`}>
-            <div className="tech-categories">
-              {skillCategories.map((category, index) => (
+            <div className="tech-stack-simple">
+              {techStack.map((tech, index) => (
                 <div 
                   key={index} 
-                  className={`tech-category ${portfolioInView ? 'animate-slideInUp' : ''}`}
-                  style={{animationDelay: `${index * 0.2}s`}}
+                  className={`tech-item-simple ${portfolioInView ? 'animate-slideInUp' : ''}`}
+                  style={{animationDelay: `${index * 0.05}s`}}
                 >
-                  <div className="tech-header">
-                    <div className="tech-icon">{category.icon}</div>
-                    <h3 className="tech-title">{category.title}</h3>
-                  </div>
-                  <div className="tech-grid">
-                    {category.techs.map((tech, techIndex) => (
-                      <div 
-                        key={techIndex} 
-                        className="tech-item"
-                        style={{animationDelay: `${(index * 0.2) + (techIndex * 0.1)}s`}}
-                      >
-                        <div className="tech-icon-container">
-                          <img src={tech.icon} alt={tech.name} className="tech-logo" />
-                          <div className="tech-level-ring">
-                            <svg className="tech-progress-ring" width="60" height="60">
-                              <circle
-                                cx="30"
-                                cy="30"
-                                r="25"
-                                stroke="rgba(139, 92, 246, 0.2)"
-                                strokeWidth="4"
-                                fill="transparent"
-                              />
-                              <circle
-                                cx="30"
-                                cy="30"
-                                r="25"
-                                stroke={tech.color}
-                                strokeWidth="4"
-                                fill="transparent"
-                                strokeDasharray={`${2 * Math.PI * 25}`}
-                                strokeDashoffset={`${2 * Math.PI * 25 * (1 - tech.level / 100)}`}
-                                className="progress-circle"
-                              />
-                            </svg>
-                          </div>
-                        </div>
-                        <h4 className="tech-name">{tech.name}</h4>
-                        <div className="tech-level">{tech.level}%</div>
-                      </div>
-                    ))}
-                  </div>
+                  <img src={tech.icon} alt={tech.name} className="tech-logo-simple" />
+                  <h4 className="tech-name-simple">{tech.name}</h4>
                 </div>
               ))}
             </div>
           </div>
-        </div>
       </section>
 
       {/* Contact Section */}
@@ -887,6 +837,7 @@ const Portfolio: React.FC = () => {
         </div>
       )}
     </div>
+    
   );
 };
 
