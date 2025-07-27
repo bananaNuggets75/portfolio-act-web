@@ -62,28 +62,24 @@
   background: radial-gradient(circle, rgba(139, 92, 246, 0.1) 0%, rgba(139, 92, 246, 0.05) 70%, transparent 100%);
   border: 1px solid rgba(139, 92, 246, 0.1);
   border-radius: 50%;
-  animation: floatBubble 40s infinite linear;
+  animation: floatBubble 60s infinite linear; /* Consistent slow speed */
   opacity: 0.6;
 }
 
 .bubble:nth-child(2n) {
   width: 60px;
   height: 60px;
-  animation-duration: 50s;
+  animation-duration: 65s; /* Slightly varied but still slow */
 }
 
 .bubble:nth-child(3n) {
   width: 30px;
   height: 30px;
-  animation-duration: 30s;
-}
-
-.bubble:nth-child(4n) {
-  background: radial-gradient(circle, rgba(124, 58, 237, 0.1) 0%, rgba(124, 58, 237, 0.05) 70%, transparent 100%);
-  border-color: rgba(124, 58, 237, 0.1);
+  animation-duration: 55s; /* Slightly varied but still slow */
 }
 
 /* Animations */
+/* 1. Bubble animation - make it consistent slow motion */
 @keyframes floatBubble {
   0% {
     transform: translateY(100vh) translateX(-10px) scale(0);
@@ -819,27 +815,6 @@
   opacity: 1;
 }
 
-.project-links {
-  display: flex;
-  gap: 15px;
-}
-
-.project-link {
-  padding: 10px 20px;
-  background: var(--accent-color);
-  color: white;
-  text-decoration: none;
-  border-radius: 25px;
-  font-weight: 600;
-  font-size: 14px;
-  transition: all 0.3s ease;
-}
-
-.project-link:hover {
-  background: var(--accent-light);
-  transform: scale(1.05);
-}
-
 .project-info {
   padding: 30px;
 }
@@ -979,15 +954,6 @@
 }
 
 /* Tech Stack Section */
-.tech-categories {
-  display: flex;
-  flex-direction: column;
-  gap: 60px;
-}
-
-.tech-category {
-  opacity: 0;
-}
 
 .tech-header {
   display: flex;
@@ -1064,13 +1030,6 @@
   transform: translateX(-50%);
 }
 
-.tech-progress-ring {
-  transform: rotate(-90deg);
-}
-
-.progress-circle {
-  transition: stroke-dashoffset 0.6s ease;
-}
 
 .tech-name {
   font-size: 16px;
