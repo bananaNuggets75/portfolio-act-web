@@ -62,20 +62,20 @@
   background: radial-gradient(circle, rgba(139, 92, 246, 0.1) 0%, rgba(139, 92, 246, 0.05) 70%, transparent 100%);
   border: 1px solid rgba(139, 92, 246, 0.1);
   border-radius: 50%;
-  animation: floatBubble 20s infinite linear;
+  animation: floatBubble 40s infinite linear;
   opacity: 0.6;
 }
 
 .bubble:nth-child(2n) {
   width: 60px;
   height: 60px;
-  animation-duration: 25s;
+  animation-duration: 50s;
 }
 
 .bubble:nth-child(3n) {
   width: 30px;
   height: 30px;
-  animation-duration: 15s;
+  animation-duration: 30s;
 }
 
 .bubble:nth-child(4n) {
