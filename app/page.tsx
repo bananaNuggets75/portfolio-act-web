@@ -326,28 +326,52 @@ const Portfolio: React.FC = () => {
   ];
 
   const techStack = [
-    { name: 'HTML5', icon: '/api/placeholder/60/60' },
-    { name: 'CSS3', icon: '/api/placeholder/60/60' },
-    { name: 'JavaScript', icon: '/api/placeholder/60/60' },
-    { name: 'TypeScript', icon: '/api/placeholder/60/60' },
-    { name: 'React', icon: '/api/placeholder/60/60' },
-    { name: 'Next.js', icon: '/api/placeholder/60/60' },
-    { name: 'Vue.js', icon: '/api/placeholder/60/60' },
-    { name: 'Tailwind CSS', icon: '/api/placeholder/60/60' },
-    { name: 'Node.js', icon: '/api/placeholder/60/60' },
-    { name: 'Express.js', icon: '/api/placeholder/60/60' },
-    { name: 'Python', icon: '/api/placeholder/60/60' },
-    { name: 'MongoDB', icon: '/api/placeholder/60/60' },
-    { name: 'PostgreSQL', icon: '/api/placeholder/60/60' },
-    { name: 'Firebase', icon: '/api/placeholder/60/60' },
-    { name: 'Git', icon: '/api/placeholder/60/60' },
-    { name: 'GitHub', icon: '/api/placeholder/60/60' },
-    { name: 'VS Code', icon: '/api/placeholder/60/60' },
-    { name: 'Docker', icon: '/api/placeholder/60/60' },
-    { name: 'AWS', icon: '/api/placeholder/60/60' },
-    { name: 'Vercel', icon: '/api/placeholder/60/60' }
+    // 🧠 Languages
+    { name: 'Python', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg' },
+    { name: 'C', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg' },
+    { name: 'C++', icon: 'https://cdn.simpleicons.org/cplusplus/00599C' },
+    { name: 'C#', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg' },
+    { name: 'Java', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg' },
+    { name: 'HTML5', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg' },
+    { name: 'CSS3', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg' },
+    { name: 'JavaScript', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg' },
+    { name: 'TypeScript', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg' },
+    { name: 'Dart', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dart/dart-original.svg' },
+  
+    // 🧰 Tools & IDEs
+    { name: 'VS Code', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg' },
+    { name: 'Visual Studio', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/visualstudio/visualstudio-plain.svg' },
+    { name: 'PyCharm', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pycharm/pycharm-original.svg' },
+    { name: 'Git', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg' },
+    { name: 'GitHub', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg' },
+  
+    // 🧱 Frameworks & Libraries
+    { name: 'React', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg' },
+    { name: 'Next.js', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg' },
+    { name: 'Flutter', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg' },
+    { name: 'Django', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg' },
+    { name: 'Bootstrap', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg' },
+    { name: 'Tailwind CSS', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg' },
+    { name: 'Node.js', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg' },
+    { name: 'TensorFlow', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg' },
+    { name: 'Flask', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original.svg' },
+    { name: 'Pandas', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg' },
+  
+    // 🛢️ Databases
+    { name: 'MySQL', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg' },
+    { name: 'SQLite', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sqlite/sqlite-original.svg' },
+    { name: 'MongoDB', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg' },
+    { name: 'Firebase', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-original.svg' },
+    { name: 'SQL Server', icon: 'https://api.iconify.design/tabler:database.svg?color=%23CC2927    ' },
+  
+    // 🔧 Platforms & Misc
+    { name: '.NET', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dot-net/dot-net-original.svg' },
+    { name: 'Android', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/android/android-plain.svg' },
+    { name: 'Arduino', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/arduino/arduino-original.svg' },
+    { name: 'Figma', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg' }
   ];
-
+  
+  
   // Scroll handler
   useEffect(() => {
     const handleScroll = () => {
@@ -678,7 +702,7 @@ const Portfolio: React.FC = () => {
                 <div className="contact-icon">📧</div>
                 <div className="contact-details">
                   <h4>Email</h4>
-                  <p>your.email@example.com</p>
+                  <p>kenanbenpolgo@gmail.com</p>
                 </div>
               </div>
               <div className="contact-item">
@@ -696,14 +720,14 @@ const Portfolio: React.FC = () => {
                 </div>
               </div>
               <div className="social-links">
-                <a href="https://www.linkedin.com/in/kenan-ben-polgo/" className="social-link">
-                  <span>💼</span> LinkedIn
+                <a href="https://www.linkedin.com/in/kenan-ben-polgo/" className="social-link" target="_blank" rel="noopener noreferrer">
+                  <img src="https://api.iconify.design/mdi:linkedin.svg?color=%230A66C2" alt="LinkedIn" width="24" height="24" /> LinkedIn
                 </a>
-                <a href="https://github.com/bananaNuggets75" className="social-link">
-                  <span>💻</span> GitHub
+                <a href="https://github.com/bananaNuggets75" className="social-link" target="_blank" rel="noopener noreferrer">
+                  <img src="https://cdn.simpleicons.org/github/181717" alt="GitHub" width="24" height="24" /> GitHub
                 </a>
-                <a href="https://www.instagram.com/keenaniganss/" className="social-link">
-                  <span>lol</span> Instagram
+                <a href="https://www.instagram.com/keenaniganss/" className="social-link" target="_blank" rel="noopener noreferrer">
+                  <img src="https://cdn.simpleicons.org/instagram/E4405F" alt="Instagram" width="24" height="24" /> Instagram
                 </a>
               </div>
             </div>
