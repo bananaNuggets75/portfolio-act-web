@@ -720,14 +720,14 @@ const Portfolio: React.FC = () => {
                 </div>
               </div>
               <div className="social-links">
-                <a href="https://www.linkedin.com/in/kenan-ben-polgo/" className="social-link">
-                  <span>💼</span> LinkedIn
+                <a href="https://www.linkedin.com/in/kenan-ben-polgo/" className="social-link" target="_blank" rel="noopener noreferrer">
+                  <img src="https://api.iconify.design/mdi:linkedin.svg?color=%230A66C2" alt="LinkedIn" width="24" height="24" /> LinkedIn
                 </a>
-                <a href="https://github.com/bananaNuggets75" className="social-link">
-                  <span>💻</span> GitHub
+                <a href="https://github.com/bananaNuggets75" className="social-link" target="_blank" rel="noopener noreferrer">
+                  <img src="https://cdn.simpleicons.org/github/181717" alt="GitHub" width="24" height="24" /> GitHub
                 </a>
-                <a href="https://www.instagram.com/keenaniganss/" className="social-link">
-                  <span>lol</span> Instagram
+                <a href="https://www.instagram.com/keenaniganss/" className="social-link" target="_blank" rel="noopener noreferrer">
+                  <img src="https://cdn.simpleicons.org/instagram/E4405F" alt="Instagram" width="24" height="24" /> Instagram
                 </a>
               </div>
             </div>
