@@ -125,7 +125,7 @@ const Portfolio: React.FC = () => {
       title: 'CPU-SHS Research Archive',
       description: 'Full-stack web system for managing research papers and academic documents',
       fullDescription: 'A comprehensive research archive system built for Central Philippine University Senior High School. This platform allows students and faculty to upload, manage, and search through academic research papers with advanced filtering and categorization features.',
-      tech: ['React', 'Node.js', 'MongoDB', 'Express', 'JWT'],
+      tech: ['React', 'Node.js', 'Cloudinary', 'Firebase', 'TypeScript', 'Next.js'],
       link: 'https://cpu-research-archive.vercel.app/',
       github: 'https://github.com/bananaNuggets75/cpu-research-archive',
       icon: '📚',
@@ -171,11 +171,11 @@ const Portfolio: React.FC = () => {
       title: 'Traffic Management System',
       description: 'React-TypeScript application for traffic flow optimization',
       fullDescription: 'An intelligent traffic management system that uses real-time data analysis to optimize traffic flow in urban areas. Features interactive dashboards and predictive analytics.',
-      tech: ['React', 'TypeScript', 'Chart.js', 'Python', 'TensorFlow'],
+      tech: ['React', 'TypeScript', 'Chart.js', 'Firebase', 'Node.js', 'Next.js'],
       link: 'https://traffic-management-system-cyan.vercel.app/',
       github: 'https://github.com/bananaNuggets75/traffic-management-system',
       icon: '🚦',
-      image: '/api/placeholder/600/400',
+      image: '/traffic.png',
       features: [
         'Real-time traffic monitoring',
         'Predictive traffic analysis',
@@ -263,53 +263,53 @@ const Portfolio: React.FC = () => {
   const certificates: Certificate[] = [
     {
       id: '1',
-      title: "Dean's List",
-      issuer: 'Central Philippine University',
-      date: 'Academic Year 2023-2024',
-      description: 'Maintained high academic standing with GPA above 3.5',
+      title: "Machine Learning with Python",
+      issuer: 'freeCodeCamp',
+      date: 'July 2025',
+      description: 'Tensorflow and Keras for machine learning projects',
       icon: '🏆',
-      image: '/api/placeholder/400/300',
-      credentialId: 'CPU-DL-2024-001'
+      image: '/www.freecodecamp.org_certification_fcc96ed4dd6-3f7e-4a9f-b64d-0edbb4430254_machine-learning-with-python-v7.png',
+      credentialId: ''
     },
     {
       id: '2',
-      title: 'DevCon Runner Up',
-      issuer: 'Regional Programming Competition',
-      date: '2024',
-      description: 'Game Development competition - Second place finish',
+      title: 'Intoduction to Data Science',
+      issuer: 'Cisco Networking Academy',
+      date: 'July 2025',
+      description: 'Basics of data science, data analysis, and visualization',
       icon: '🥈',
-      image: '/api/placeholder/400/300',
+      image: '/intro_ds_cert.png',
       credentialId: 'DEVCON-2024-RU'
     },
     {
       id: '3',
-      title: 'Google Developer Student Club',
-      issuer: 'Google Developers',
-      date: '2023 - Present',
-      description: 'Active participant in hackathons and tech events',
+      title: 'Introduction to CyberSecurity',
+      issuer: 'Cisco Networking Academy',
+      date: 'July 2025',
+      description: 'Vulnerabilities, how you protect your network, and cyber attacks',
       icon: '🌟',
-      image: '/api/placeholder/400/300',
+      image: '/_certificate_kenanben-polgo-21-cpu-edu-ph_0a42e4b9-d53d-4f9e-a44e-4a28ebdaf58b.jpg',
       credentialId: 'GDSC-2023-ACTIVE'
     },
     {
       id: '4',
-      title: 'JavaScript Fundamentals',
-      issuer: 'FreeCodeCamp',
-      date: '2023',
-      description: 'Completed comprehensive JavaScript programming course',
+      title: '[Beta] Data Science Essentials with Python',
+      issuer: 'Cisco Networking Academy',
+      date: 'July 2025',
+      description: 'Manipulation and analysis of data using Python',
       icon: '📜',
-      image: '/api/placeholder/400/300',
+      image: '/_certificate_kenanben-polgo-21-cpu-edu-ph_2597ce24-e6bf-4aef-8117-9b7010eb1443.jpg',
       credentialId: 'FCC-JS-2023-001',
       verifyLink: 'https://freecodecamp.org/certification/verify/js-cert'
     },
     {
       id: '5',
-      title: 'React Development',
-      issuer: 'Coursera',
-      date: '2023',
-      description: 'Advanced React.js development certification',
+      title: 'JavaScript Basics',
+      issuer: 'HackerRank',
+      date: 'July 2025',
+      description: 'Basic JavaScript Certificate',
       icon: '⚛️',
-      image: '/api/placeholder/400/300',
+      image: '/javascript_basic certificate.jpg',
       credentialId: 'COURSERA-REACT-2023',
       verifyLink: 'https://coursera.org/verify/react-cert'
     },
@@ -519,7 +519,7 @@ const Portfolio: React.FC = () => {
               {/* Replace emoji with image */}
               <div className="profile-avatar">
                 <img 
-                  src="/IMG_8516.JPG" 
+                  src="/IMG_8515.JPG" 
                   alt="Profile" 
                   className="profile-image"
                 />
