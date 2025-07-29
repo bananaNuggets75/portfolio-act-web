@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from 'react';
+import { Mail, Phone, MapPin } from "lucide-react"
 import { FaCode, FaCertificate, FaTools } from 'react-icons/fa';
 
 const portfolioTabs = [
@@ -702,21 +703,21 @@ const Portfolio: React.FC = () => {
           <div className="contact-info">
             <div className="contact-card">
               <div className="contact-item">
-                <div className="contact-icon">📧</div>
+              <div className="contact-icon"><Mail className="w-5 h-5 text-white" /></div>
                 <div className="contact-details">
                   <h4>Email</h4>
                   <p>kenanbenpolgo@gmail.com</p>
                 </div>
               </div>
               <div className="contact-item">
-                <div className="contact-icon">📱</div>
+              <div className="contact-icon"><Phone className="w-5 h-5 text-white" /></div>
                 <div className="contact-details">
                   <h4>Phone</h4>
                   <p>+63 917 185 8427</p>
                 </div>
               </div>
               <div className="contact-item">
-                <div className="contact-icon">📍</div>
+                <div className="contact-icon"><MapPin className="w-5 h-5 text-white" /></div>
                 <div className="contact-details">
                   <h4>Location</h4>
                   <p>Iloilo City, Philippines</p>
