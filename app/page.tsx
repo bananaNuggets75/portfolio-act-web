@@ -160,7 +160,7 @@ const Portfolio: React.FC = () => {
       link: '#',
       github: 'https://github.com/bananaNuggets75/thesis-platform',
       icon: '🗳️',
-      image: '/api/placeholder/600/400',
+      image: '/warn.png',
       features: [
         'Secure vote submission with encryption',
         'Tamper-proof voting records',
@@ -232,7 +232,7 @@ const Portfolio: React.FC = () => {
       link: '#',
       github: 'https://github.com/bananaNuggets75/task-manager',
       icon: '',
-      image: '/api/placeholder/600/400',
+      image: '/warn.png',
       features: [
         'Real-time collaboration',
         'Task assignment and tracking',
@@ -255,7 +255,7 @@ const Portfolio: React.FC = () => {
       link: '#',
       github: 'https://github.com/bananaNuggets75/quickshop',
       icon: '🏪',
-      image: '/api/placeholder/600/400',
+      image: '/warn.png',
       features: [
         'Bulk ordering system with tiered pricing',
         'Supplier and retailer role management',
