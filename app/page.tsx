@@ -1,8 +1,9 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, ReactElement } from 'react';
 import { Mail, Phone, MapPin } from "lucide-react"
-import { FaCode, FaCertificate, FaTools } from 'react-icons/fa';
+import { FaDatabase, FaShieldAlt, FaCertificate, FaCode, FaTools } from 'react-icons/fa';
+import { SiTensorflow, SiCisco, SiJavascript, SiOracle } from 'react-icons/si';
 
 const portfolioTabs = [
   { name: 'Projects', icon: <FaCode />, key: 'projects' },
@@ -31,7 +32,7 @@ interface Certificate {
   issuer: string;
   date: string;
   description: string;
-  icon: string;
+  icon?: ReactElement;
   image: string;
   credentialId?: string;
   verifyLink?: string;
@@ -160,7 +161,7 @@ const Portfolio: React.FC = () => {
       link: '#',
       github: 'https://github.com/bananaNuggets75/thesis-platform',
       icon: '🗳️',
-      image: '/api/placeholder/600/400',
+      image: '/warn.png',
       features: [
         'Secure vote submission with encryption',
         'Tamper-proof voting records',
@@ -232,7 +233,7 @@ const Portfolio: React.FC = () => {
       link: '#',
       github: 'https://github.com/bananaNuggets75/task-manager',
       icon: '',
-      image: '/api/placeholder/600/400',
+      image: '/warn.png',
       features: [
         'Real-time collaboration',
         'Task assignment and tracking',
@@ -255,7 +256,7 @@ const Portfolio: React.FC = () => {
       link: '#',
       github: 'https://github.com/bananaNuggets75/quickshop',
       icon: '🏪',
-      image: '/api/placeholder/600/400',
+      image: '/warn.png',
       features: [
         'Bulk ordering system with tiered pricing',
         'Supplier and retailer role management',
@@ -280,17 +281,17 @@ const Portfolio: React.FC = () => {
       issuer: 'freeCodeCamp',
       date: 'July 2025',
       description: 'Tensorflow and Keras for machine learning projects',
-      icon: '🏆',
+      icon: <SiTensorflow className="text-xl text-orange-500" />,
       image: '/www.freecodecamp.org_certification_fcc96ed4dd6-3f7e-4a9f-b64d-0edbb4430254_machine-learning-with-python-v7.png',
       credentialId: ''
     },
     {
       id: '2',
-      title: 'Intoduction to Data Science',
+      title: 'Introduction to Data Science',
       issuer: 'Cisco Networking Academy',
       date: 'July 2025',
       description: 'Basics of data science, data analysis, and visualization',
-      icon: '🥈',
+      icon: <SiCisco className="text-xl text-blue-500" />,
       image: '/intro_ds_cert.png',
       credentialId: 'DEVCON-2024-RU'
     },
@@ -300,7 +301,7 @@ const Portfolio: React.FC = () => {
       issuer: 'Cisco Networking Academy',
       date: 'July 2025',
       description: 'Vulnerabilities, how you protect your network, and cyber attacks',
-      icon: '🌟',
+      icon: <FaShieldAlt className="text-xl text-red-500" />,
       image: '/_certificate_kenanben-polgo-21-cpu-edu-ph_0a42e4b9-d53d-4f9e-a44e-4a28ebdaf58b.jpg',
       credentialId: 'GDSC-2023-ACTIVE'
     },
@@ -310,7 +311,7 @@ const Portfolio: React.FC = () => {
       issuer: 'Cisco Networking Academy',
       date: 'July 2025',
       description: 'Manipulation and analysis of data using Python',
-      icon: '📜',
+      icon: <FaCertificate className="text-xl text-purple-600" />,
       image: '/_certificate_kenanben-polgo-21-cpu-edu-ph_2597ce24-e6bf-4aef-8117-9b7010eb1443.jpg',
       credentialId: 'FCC-JS-2023-001',
       verifyLink: 'https://freecodecamp.org/certification/verify/js-cert'
@@ -321,7 +322,7 @@ const Portfolio: React.FC = () => {
       issuer: 'HackerRank',
       date: 'July 2025',
       description: 'Basic JavaScript Certificate',
-      icon: '⚛️',
+      icon: <SiJavascript className="text-xl text-yellow-400" />,
       image: '/javascript_basic certificate.jpg',
       credentialId: 'COURSERA-REACT-2023',
       verifyLink: 'https://coursera.org/verify/react-cert'
@@ -332,7 +333,7 @@ const Portfolio: React.FC = () => {
       issuer: 'Oracle Academy',
       date: '2024',
       description: 'Database design and SQL optimization certification',
-      icon: '🗄️',
+      icon: <FaDatabase className="text-xl text-sky-700" />,
       image: '/api/placeholder/400/300',
       credentialId: 'ORACLE-DB-2024-001'
     }
