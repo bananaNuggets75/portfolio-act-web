@@ -1,7 +1,13 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from 'react';
+import { FaCode, FaCertificate, FaTools } from 'react-icons/fa';
 
+const portfolioTabs = [
+  { name: 'Projects', icon: <FaCode />, key: 'projects' },
+  { name: 'Certificates', icon: <FaCertificate />, key: 'certificates' },
+  { name: 'Tech Stack', icon: <FaTools />, key: 'skills' },
+];
 
 // Types
 interface Project {
@@ -580,24 +586,15 @@ const Portfolio: React.FC = () => {
             My <span className="section-title-accent">Portfolio</span>
           </div>
           <div className={`portfolio-tabs ${portfolioInView ? 'animate-scaleIn' : ''}`}>
-            <button
-              className={`tab-btn ${activeTab === 'projects' ? 'active' : ''}`}
-              onClick={() => setActiveTab('projects')}
-            >
-              <span>💼</span> Projects
-            </button>
-            <button
-              className={`tab-btn ${activeTab === 'certificates' ? 'active' : ''}`}
-              onClick={() => setActiveTab('certificates')}
-            >
-              <span>🏆</span> Certificates
-            </button>
-            <button
-              className={`tab-btn ${activeTab === 'skills' ? 'active' : ''}`}
-              onClick={() => setActiveTab('skills')}
-            >
-              <span>⚡</span> Tech Stack
-            </button>
+            {portfolioTabs.map((tab) => (
+              <button
+                key={tab.key}
+                className={`tab-btn ${activeTab === tab.key ? 'active' : ''}`}
+                onClick={() => setActiveTab(tab.key)}
+              >
+                <span className="mr-1">{tab.icon}</span> {tab.name}
+              </button>
+            ))}
           </div>
 
           {/* Projects Tab */}
