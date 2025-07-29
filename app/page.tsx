@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 
+
 // Types
 interface Project {
   id: string;
@@ -123,13 +124,13 @@ const Portfolio: React.FC = () => {
     {
       id: '1',
       title: 'CPU-SHS Research Archive',
-      description: 'Full-stack web system for managing research papers and academic documents',
-      fullDescription: 'A comprehensive research archive system built for Central Philippine University Senior High School. This platform allows students and faculty to upload, manage, and search through academic research papers with advanced filtering and categorization features.',
+      description: 'Full-stack web system for managing research papers and academic documents *Note: The UI was designed based on the client\'s preferences.*',
+      fullDescription: 'A comprehensive research archive system built for Central Philippine University Senior High School. This platform allows students and faculty to upload, manage, and search through academic research papers with advanced filtering and categorization features.  *Note: The UI was designed based on the client\'s preferences.*',
       tech: ['React', 'Node.js', 'Cloudinary', 'Firebase', 'TypeScript', 'Next.js'],
       link: 'https://cpu-research-archive.vercel.app/',
       github: 'https://github.com/bananaNuggets75/cpu-research-archive',
       icon: '📚',
-      image: '/api/placeholder/600/400',
+      image: '/cpu-shs.png',
       features: [
         'Advanced search and filtering system',
         'User authentication and authorization',
@@ -138,27 +139,27 @@ const Portfolio: React.FC = () => {
         'Admin dashboard for content moderation'
       ],
       stats: [
-        { label: 'Technologies Used', value: '5' },
+        { label: 'Technologies Used', value: '6' },
         { label: 'Active Users', value: '500+' },
         { label: 'Documents Stored', value: '1000+' }
       ]
     },
     {
       id: '2',
-      title: 'E-Voting-BlockChain',
-      description: 'Django application for secure voting using blockchain',
-      fullDescription: 'A modern thesis management platform that streamlines the entire thesis process from proposal to defense. Built with Next.js for optimal performance and user experience.',
-      tech: ['Next.js', 'React Native', 'TypeScript', 'Prisma', 'PostgreSQL'],
+      title: 'E-Voting Blockchain',
+      description: 'Django-based secure e-voting platform using blockchain principles',
+      fullDescription: 'A blockchain-inspired e-voting system built with Django, designed to improve transparency and security in student council elections. Developed in response to issues encountered with previous platforms like Canvas.',
+      tech: ['Django', 'PostgreSQL', 'Python', 'CSS'],
       link: '#',
       github: 'https://github.com/bananaNuggets75/thesis-platform',
-      icon: '📝',
+      icon: '🗳️',
       image: '/api/placeholder/600/400',
       features: [
-        'Thesis proposal submission system',
-        'Progress tracking dashboard',
-        'Advisor-student communication',
-        'Document version control',
-        'Defense scheduling system'
+        'Secure vote submission with encryption',
+        'Tamper-proof voting records',
+        'Voter authentication system',
+        'Real-time results dashboard',
+        'Admin panel for election setup and management'
       ],
       stats: [
         { label: 'Technologies Used', value: '5' },
@@ -184,32 +185,35 @@ const Portfolio: React.FC = () => {
         'Historical data analysis'
       ],
       stats: [
-        { label: 'Technologies Used', value: '5' },
+        { label: 'Technologies Used', value: '6' },
         { label: 'Traffic Points', value: '50+' },
         { label: 'Data Points/Day', value: '10K+' }
       ]
     },
     {
       id: '4',
-      title: 'E-Commerce Platform',
-      description: 'Full-stack e-commerce solution with payment integration',
-      fullDescription: 'A complete e-commerce platform with modern design, secure payment processing, and comprehensive admin features. Built for scalability and performance.',
-      tech: ['Next.js', 'Stripe', 'PostgreSQL', 'Redis', 'AWS'],
-      link: 'https://online-ordering-system-ochre.vercel.app/',
-      github: 'https://github.com/bananaNuggets75/ecommerce-platform',
+      title: 'Food Delivery Web App',
+      description: 'Full-stack food delivery web app eclusive in CPU campus *Note: The UI was designed based on the client\'s preferences.*',
+      fullDescription: 'A full-stack food delivery web application designed exclusively for the CPU campus community. It features real-time order tracking, secure payment options, and a robust admin dashboard for managing menus, orders, and customer feedback. *Note: The UI was designed based on the client\'s preferences.*',
+      tech: ['Next.js', 'Firebase', 'Node.js', 'React', 'TypeScript'],
+      link: 'https://online-ordering-system-ochre.vercel.app/menu',
+      github: 'https://github.com/bananaNuggets75/online-ordering-system',
       icon: '🛍️',
-      image: '/api/placeholder/600/400',
+      image: '/food-delivery.png',
       features: [
-        'Secure payment processing',
-        'Inventory management system',
-        'Order tracking and notifications',
-        'Customer review system',
-        'Analytics dashboard'
-      ],
+        'Campus-exclusive delivery system',
+        'Real-time order tracking',
+        'Secure payment integration (GCash & Cash on Delivery)',
+        'Customizable menu and categories',
+        'Responsive admin dashboard for order management',
+        'Customer order history and nickname-based tracking',
+        'Delivery or pickup options with location input',
+        'Status updates with live notifications'
+      ],      
       stats: [
         { label: 'Technologies Used', value: '5' },
-        { label: 'Orders Processed', value: '1000+' },
-        { label: 'Revenue Generated', value: '$50K+' }
+        { label: 'Orders Processed', value: '200+' },
+        { label: 'Revenue Generated', value: '10k+' }
       ]
     },
     {
@@ -239,23 +243,25 @@ const Portfolio: React.FC = () => {
       id: '6',
       title: 'QuickShop',
       description: 'A B2B Wholesale E-Commerce Platform',
-      fullDescription: 'An advanced weather monitoring system with beautiful data visualizations, forecasting capabilities, and location-based weather tracking.',
-      tech: ['Vue.js', 'D3.js', 'Weather API', 'Node.js', 'MongoDB'],
+      fullDescription: 'QuickShop is a B2B wholesale e-commerce platform designed to streamline bulk ordering between retailers and suppliers. It features user-friendly product browsing, tiered pricing, and a secure order management system built for scalability.',
+      tech: ['Vue.js', 'Node.js', 'MongoDB', 'Express.js', 'Tailwind CSS'],
       link: '#',
-      github: 'https://github.com/bananaNuggets75/weather-dashboard',
-      icon: '🌤️',
+      github: 'https://github.com/bananaNuggets75/quickshop',
+      icon: '🏪',
       image: '/api/placeholder/600/400',
       features: [
-        'Real-time weather data',
-        'Interactive weather maps',
-        '7-day forecast system',
-        'Weather alerts and notifications',
-        'Historical weather analysis'
+        'Bulk ordering system with tiered pricing',
+        'Supplier and retailer role management',
+        'Order tracking and status updates',
+        'Inventory and stock level management',
+        'Secure checkout and invoice generation',
+        'Responsive UI with mobile support',
+        'Admin dashboard for analytics and reporting'
       ],
       stats: [
         { label: 'Technologies Used', value: '5' },
-        { label: 'Cities Covered', value: '500+' },
-        { label: 'API Calls/Day', value: '10K+' }
+        { label: 'Registered Suppliers', value: '120+' },
+        { label: 'Bulk Orders Processed', value: '5K+' }
       ]
     }
   ];
