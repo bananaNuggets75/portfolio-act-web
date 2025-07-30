@@ -697,81 +697,81 @@ const Portfolio: React.FC = () => {
 
       {/* Contact Section */}
       <section id="contact" className="section section-secondary" ref={contactRef}>
-        <div className="section-title">
-          Get In <span className="section-title-accent">Touch</span>
-        </div>
-        <div className={`contact-grid ${contactInView ? 'animate-slideInUp' : ''}`}>
-          <div className="contact-info">
-            <div className="contact-card">
-              <a href="mailto:kenanbenpolgo@gmail.com" className="contact-item-link">
-                <div className="contact-item">
-                  <div className="contact-icon"><Mail className="w-5 h-5 text-white" /></div>
-                  <div className="contact-details">
-                    <h4>Email</h4>
-                    <span className="text-white">kenanbenpolgo@gmail.com</span>
-                  </div>
-                </div>
-              </a>
-              
+      <div className="section-title">
+        Get In <span className="section-title-accent">Touch</span>
+      </div>
+      <div className={`contact-grid ${contactInView ? 'animate-slideInUp' : ''}`}>
+        <div className="contact-info">
+          <div className="contact-card">
+            <a href="mailto:kenanbenpolgo@gmail.com" className="contact-item-link">
               <div className="contact-item">
-                <div className="contact-icon"><Phone className="w-5 h-5 text-white" /></div>
+                <div className="contact-icon"><Mail className="w-5 h-5 text-white" /></div>
                 <div className="contact-details">
-                  <h4>Phone</h4>
-                  <span className="text-white">+63 917 185 8427</span>
+                  <h4>Email</h4>
+                  <span className="text-blue-500">kenanbenpolgo@gmail.com</span>
                 </div>
               </div>
-              
-              <a 
-                href="https://www.google.com/maps/place/Iloilo+City,+Philippines" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="contact-item-link"
-              >
-                <div className="contact-item">
-                  <div className="contact-icon"><MapPin className="w-5 h-5 text-white" /></div>
-                  <div className="contact-details">
-                    <h4>Location</h4>
-                    <span className="text-white">Iloilo City, Philippines</span>
-                  </div>
-                </div>
-              </a>
-              
-              <div className="social-links">
-                <a href="https://www.linkedin.com/in/kenan-ben-polgo/" className="social-link" target="_blank" rel="noopener noreferrer">
-                  <img src="https://api.iconify.design/mdi:linkedin.svg?color=%230A66C2" alt="LinkedIn" width="24" height="24" /> LinkedIn
-                </a>
-                <a href="https://github.com/bananaNuggets75" className="social-link" target="_blank" rel="noopener noreferrer">
-                  <img src="https://cdn.simpleicons.org/github/181717" alt="GitHub" width="24" height="24" /> GitHub
-                </a>
-                <a href="https://www.instagram.com/keenaniganss/" className="social-link" target="_blank" rel="noopener noreferrer">
-                  <img src="https://cdn.simpleicons.org/instagram/E4405F" alt="Instagram" width="24" height="24" /> Instagram
-                </a>
+            </a>
+            
+            <div className="contact-item">
+              <div className="contact-icon"><Phone className="w-5 h-5 text-white" /></div>
+              <div className="contact-details">
+                <h4>Phone</h4>
+                <p>+63 917 185 8427</p>
               </div>
             </div>
-          </div>
-          <div className="contact-form">
-            <form>
-              <div className="form-group">
-                <label htmlFor="name">Name</label>
-                <input type="text" id="name" name="name" required />
+            
+            <a 
+              href="https://www.google.com/maps/place/Iloilo+City,+Philippines" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="contact-item-link"
+            >
+              <div className="contact-item">
+                <div className="contact-icon"><MapPin className="w-5 h-5 text-white" /></div>
+                <div className="contact-details">
+                  <h4>Location</h4>
+                  <span className="text-white">Iloilo City, Philippines</span>
+                </div>
               </div>
-              <div className="form-group">
-                <label htmlFor="email">Email</label>
-                <input type="email" id="email" name="email" required />
-              </div>
-              <div className="form-group">
-                <label htmlFor="subject">Subject</label>
-                <input type="text" id="subject" name="subject" required />
-              </div>
-              <div className="form-group">
-                <label htmlFor="message">Message</label>
-                <textarea id="message" name="message" rows={5} required></textarea>
-              </div>
-              <button type="submit" className="cta-primary">Send Message</button>
-            </form>
+            </a>
+            
+            <div className="social-links">
+              <a href="https://www.linkedin.com/in/kenan-ben-polgo/" className="social-link" target="_blank" rel="noopener noreferrer">
+                <img src="https://api.iconify.design/mdi:linkedin.svg?color=%230A66C2" alt="LinkedIn" width="24" height="24" /> LinkedIn
+              </a>
+              <a href="https://github.com/bananaNuggets75" className="social-link" target="_blank" rel="noopener noreferrer">
+                <img src="https://cdn.simpleicons.org/github/181717" alt="GitHub" width="24" height="24" /> GitHub
+              </a>
+              <a href="https://www.instagram.com/keenaniganss/" className="social-link" target="_blank" rel="noopener noreferrer">
+                <img src="https://cdn.simpleicons.org/instagram/E4405F" alt="Instagram" width="24" height="24" /> Instagram
+              </a>
+            </div>
           </div>
         </div>
-      </section>
+        <div className="contact-form">
+          <form>
+            <div className="form-group">
+              <label htmlFor="name">Name</label>
+              <input type="text" id="name" name="name" required />
+            </div>
+            <div className="form-group">
+              <label htmlFor="email">Email</label>
+              <input type="email" id="email" name="email" required />
+            </div>
+            <div className="form-group">
+              <label htmlFor="subject">Subject</label>
+              <input type="text" id="subject" name="subject" required />
+            </div>
+            <div className="form-group">
+              <label htmlFor="message">Message</label>
+              <textarea id="message" name="message" rows={5} required></textarea>
+            </div>
+            <button type="submit" className="cta-primary">Send Message</button>
+          </form>
+        </div>
+      </div>
+    </section>
 
       {/* Project Detail Modal */}
       {selectedProject && (
