@@ -703,27 +703,39 @@ const Portfolio: React.FC = () => {
         <div className={`contact-grid ${contactInView ? 'animate-slideInUp' : ''}`}>
           <div className="contact-info">
             <div className="contact-card">
-              <div className="contact-item">
-              <div className="contact-icon"><Mail className="w-5 h-5 text-white" /></div>
-                <div className="contact-details">
-                  <h4>Email</h4>
-                  <p>kenanbenpolgo@gmail.com</p>
+              <a href="mailto:kenanbenpolgo@gmail.com" className="contact-item-link">
+                <div className="contact-item">
+                  <div className="contact-icon"><Mail className="w-5 h-5 text-white" /></div>
+                  <div className="contact-details">
+                    <h4>Email</h4>
+                    <span className="text-white">kenanbenpolgo@gmail.com</span>
+                  </div>
                 </div>
-              </div>
+              </a>
+              
               <div className="contact-item">
-              <div className="contact-icon"><Phone className="w-5 h-5 text-white" /></div>
+                <div className="contact-icon"><Phone className="w-5 h-5 text-white" /></div>
                 <div className="contact-details">
                   <h4>Phone</h4>
-                  <p>+63 917 185 8427</p>
+                  <span className="text-white">+63 917 185 8427</span>
                 </div>
               </div>
-              <div className="contact-item">
-                <div className="contact-icon"><MapPin className="w-5 h-5 text-white" /></div>
-                <div className="contact-details">
-                  <h4>Location</h4>
-                  <p>Iloilo City, Philippines</p>
+              
+              <a 
+                href="https://www.google.com/maps/place/Iloilo+City,+Philippines" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="contact-item-link"
+              >
+                <div className="contact-item">
+                  <div className="contact-icon"><MapPin className="w-5 h-5 text-white" /></div>
+                  <div className="contact-details">
+                    <h4>Location</h4>
+                    <span className="text-white">Iloilo City, Philippines</span>
+                  </div>
                 </div>
-              </div>
+              </a>
+              
               <div className="social-links">
                 <a href="https://www.linkedin.com/in/kenan-ben-polgo/" className="social-link" target="_blank" rel="noopener noreferrer">
                   <img src="https://api.iconify.design/mdi:linkedin.svg?color=%230A66C2" alt="LinkedIn" width="24" height="24" /> LinkedIn
