@@ -103,7 +103,18 @@ const Portfolio: React.FC = () => {
     }
   };
   
-  
+  const formatTimestamp = (timestamp: string) => {
+    const date = new Date(timestamp);
+    const now = new Date();
+    const diffInHours = Math.floor((now.getTime() - date.getTime()) / (1000 * 60 * 60));
+    
+    if (diffInHours < 1) return 'Just now';
+    if (diffInHours < 24) return `${diffInHours}h ago`;
+    if (diffInHours < 48) return '1 day ago';
+    if (diffInHours < 168) return `${Math.floor(diffInHours / 24)} days ago`;
+    if (diffInHours < 720) return `${Math.floor(diffInHours / 168)} weeks ago`;
+    return date.toLocaleDateString();
+  };
   
   
   
