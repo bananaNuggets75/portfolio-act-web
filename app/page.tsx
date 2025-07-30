@@ -753,6 +753,73 @@ const Portfolio: React.FC = () => {
           </a>
         </div>
 
+        
+
+          
+             
+            
+            <div>
+              <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', marginBottom: '0.5rem' }}>
+                Message <span style={{ color: '#f87171' }}>*</span>
+              </label>
+              <textarea
+                name="message"
+                value={formData.message}
+                onChange={handleInputChange}
+                placeholder="Write your message here..."
+                rows={3}
+                disabled={submitting}
+                style={{
+                  width: '100%',
+                  padding: '0.75rem',
+                  backgroundColor: 'rgba(51, 65, 85, 0.5)',
+                  border: '1px solid rgba(148, 163, 184, 0.3)',
+                  borderRadius: '0.5rem',
+                  color: 'white',
+                  fontSize: '0.875rem',
+                  resize: 'none'
+                }}
+              />
+            </div>
+
+            <button
+              onClick={handleSubmit}
+              disabled={submitting || !formData.name.trim() || !formData.message.trim()}
+              style={{
+                width: '100%',
+                padding: '0.75rem',
+                background: submitting || !formData.name.trim() || !formData.message.trim() 
+                  ? 'linear-gradient(to right, #6b7280, #6b7280)' 
+                  : 'linear-gradient(to right, #9333ea, #ec4899)',
+                border: 'none',
+                borderRadius: '0.5rem',
+                color: 'white',
+                fontWeight: '600',
+                cursor: submitting || !formData.name.trim() || !formData.message.trim() ? 'not-allowed' : 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '0.5rem',
+                transition: 'all 0.2s'
+              }}
+            >
+              {submitting ? (
+                <>
+                  <Loader2 className="w-4 h-4 animate-spin" />
+                  Posting...
+                </>
+              ) : (
+                <>
+                  <Send className="w-4 h-4" />
+                  Post Comment
+                </>
+              )}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     {/* Right side - Comments Display */}
     <div style={{ backgroundColor: 'rgba(51, 65, 85, 0.3)', borderRadius: '1rem', padding: '2rem', border: '1px solid rgba(148, 163, 184, 0.2)' }}>
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '2rem' }}>
