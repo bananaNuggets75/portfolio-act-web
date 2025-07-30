@@ -753,7 +753,25 @@ const Portfolio: React.FC = () => {
           </a>
         </div>
 
-        
+        {/* Comment Form */}
+        <div style={{ marginTop: '2rem', padding: '1.5rem', backgroundColor: 'rgba(51, 65, 85, 0.3)', borderRadius: '1rem', border: '1px solid rgba(148, 163, 184, 0.2)' }}>
+          <h3 style={{ marginBottom: '1rem', fontSize: '1.25rem', fontWeight: '600', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+            <MessageCircle className="w-5 h-5" style={{ color: '#a855f7' }} />
+            Leave a Comment
+          </h3>
+          
+          {success && (
+            <div style={{ marginBottom: '1rem', padding: '0.75rem', backgroundColor: 'rgba(34, 197, 94, 0.2)', border: '1px solid rgba(34, 197, 94, 0.3)', borderRadius: '0.5rem', fontSize: '0.875rem', color: '#4ade80' }}>
+              Comment posted successfully!
+            </div>
+          )}
+          
+          {error && (
+            <div style={{ marginBottom: '1rem', padding: '0.75rem', backgroundColor: 'rgba(239, 68, 68, 0.2)', border: '1px solid rgba(239, 68, 68, 0.3)', borderRadius: '0.5rem', fontSize: '0.875rem', color: '#f87171', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+              <AlertCircle className="w-4 h-4" />
+              {error}
+            </div>
+          )}
 
           <div style={{ display: 'grid', gap: '1rem' }}>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
