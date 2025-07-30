@@ -707,6 +707,7 @@ const Portfolio: React.FC = () => {
           </div>
         </div>
       </section>
+
       {/* Portfolio Section */}
       <section id="portfolio" className="section" ref={portfolioRef}>
         <div className="portfolio-container"> </div>
