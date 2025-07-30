@@ -15,6 +15,26 @@ const Portfolio: React.FC = () => {
   const [activeTab, setActiveTab] = useState<string>('projects');
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [selectedCertificate, setSelectedCertificate] = useState<Certificate | null>(null);
+
+  type Comment = {
+    id: string;
+    name: string;
+    message: string;
+    created_at: string;
+    is_pinned: boolean;
+  };
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   const portfolioTabs = [
@@ -762,7 +782,7 @@ const Portfolio: React.FC = () => {
           
           {success && (
             <div style={{ marginBottom: '1rem', padding: '0.75rem', backgroundColor: 'rgba(34, 197, 94, 0.2)', border: '1px solid rgba(34, 197, 94, 0.3)', borderRadius: '0.5rem', fontSize: '0.875rem', color: '#4ade80' }}>
-              Comment posted successfully!
+              ✅ Comment posted successfully!
             </div>
           )}
           
