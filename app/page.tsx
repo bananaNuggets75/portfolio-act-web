@@ -116,9 +116,25 @@ const Portfolio: React.FC = () => {
     return date.toLocaleDateString();
   };
   
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+    if (error) setError(null);
+  };
   
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!formData.name.trim() || !formData.message.trim()) {
+      setError('Please fill in all required fields.');
+      return;
+    }
   
-  
+    await postComment(formData);
+  };
   
   
   
