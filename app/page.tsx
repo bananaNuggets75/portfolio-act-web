@@ -24,7 +24,6 @@ const Portfolio: React.FC = () => {
     is_pinned: boolean;
   };
   
-  // 2. Add these state variables inside your Portfolio component (after your existing useState declarations)
   const [comments, setComments] = useState<Comment[]>([]);
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
@@ -36,7 +35,6 @@ const Portfolio: React.FC = () => {
     message: ''
   });
   
-  // 3. Add these functions inside your Portfolio component (after your existing functions)
   const fetchComments = async () => {
     try {
       setLoading(true);
@@ -136,7 +134,9 @@ const Portfolio: React.FC = () => {
     await postComment(formData);
   };
   
-  
+  useEffect(() => {
+    fetchComments();
+  }, []);
   
   const portfolioTabs = [
     { name: 'Projects', icon: <FaCode />, key: 'projects' },
@@ -883,7 +883,7 @@ const Portfolio: React.FC = () => {
           
           {success && (
             <div style={{ marginBottom: '1rem', padding: '0.75rem', backgroundColor: 'rgba(34, 197, 94, 0.2)', border: '1px solid rgba(34, 197, 94, 0.3)', borderRadius: '0.5rem', fontSize: '0.875rem', color: '#4ade80' }}>
-              ✅ Comment posted successfully!
+              Comment posted successfully!
             </div>
           )}
           
