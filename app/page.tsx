@@ -1,115 +1,13 @@
 "use client";
 
 import React, { useState, useEffect, useRef, ReactElement } from 'react';
-import { Mail, Phone, MapPin } from "lucide-react"
+import { Mail, Phone, MapPin, Send, MessageCircle, User, Calendar, Loader2, AlertCircle } from "lucide-react"
 import { FaDatabase, FaShieldAlt, FaCertificate, FaCode, FaTools } from 'react-icons/fa';
 import { SiTensorflow, SiCisco, SiJavascript, SiOracle } from 'react-icons/si';
 
-const portfolioTabs = [
-  { name: 'Projects', icon: <FaCode />, key: 'projects' },
-  { name: 'Certificates', icon: <FaCertificate />, key: 'certificates' },
-  { name: 'Tech Stack', icon: <FaTools />, key: 'skills' },
-];
+import { supabase } from '../lib/supabaseClient';
 
-// Types
-interface Project {
-  id: string;
-  title: string;
-  description: string;
-  fullDescription: string;
-  tech: string[];
-  link: string;
-  github: string;
-  icon: string;
-  image: string;
-  features: string[];
-  stats: { label: string; value: string }[];
-}
 
-interface Certificate {
-  id: string;
-  title: string;
-  issuer: string;
-  date: string;
-  description: string;
-  icon?: ReactElement;
-  image: string;
-  credentialId?: string;
-  verifyLink?: string;
-}
-
-interface TechItem {
-  name: string;
-  icon: string;
-  level: number;
-  color: string;
-}
-
-interface SkillCategory {
-  title: string;
-  icon: string;
-  techs: TechItem[];
-}
-
-// Custom hook for intersection observer with animation types
-const useInView = (threshold: number = 0.1, animationType: string = 'fadeInUp') => {
-  const [isInView, setIsInView] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsInView(true);
-        }
-      },
-      { threshold }
-    );
-
-    if (ref.current) {
-      observer.observe(ref.current);
-    }
-
-    return () => {
-      if (ref.current) {
-        observer.unobserve(ref.current);
-      }
-    };
-  }, [threshold]);
-
-  return [ref, isInView, animationType] as const;
-};
-
-// Typing animation hook
-const useTypingAnimation = (texts: string[], speed: number = 100) => {
-  const [displayText, setDisplayText] = useState('');
-  const [textIndex, setTextIndex] = useState(0);
-  const [charIndex, setCharIndex] = useState(0);
-  const [isDeleting, setIsDeleting] = useState(false);
-
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      const currentText = texts[textIndex];
-      
-      if (!isDeleting && charIndex < currentText.length) {
-        setDisplayText(currentText.slice(0, charIndex + 1));
-        setCharIndex(charIndex + 1);
-      } else if (isDeleting && charIndex > 0) {
-        setDisplayText(currentText.slice(0, charIndex - 1));
-        setCharIndex(charIndex - 1);
-      } else if (!isDeleting && charIndex === currentText.length) {
-        setTimeout(() => setIsDeleting(true), 1500);
-      } else if (isDeleting && charIndex === 0) {
-        setIsDeleting(false);
-        setTextIndex((textIndex + 1) % texts.length);
-      }
-    }, isDeleting ? speed / 2 : speed);
-
-    return () => clearTimeout(timeout);
-  }, [texts, textIndex, charIndex, isDeleting, speed]);
-
-  return displayText;
-};
 
 // Main Portfolio Component
 const Portfolio: React.FC = () => {
@@ -117,6 +15,113 @@ const Portfolio: React.FC = () => {
   const [activeTab, setActiveTab] = useState<string>('projects');
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [selectedCertificate, setSelectedCertificate] = useState<Certificate | null>(null);
+  
+  
+  const portfolioTabs = [
+    { name: 'Projects', icon: <FaCode />, key: 'projects' },
+    { name: 'Certificates', icon: <FaCertificate />, key: 'certificates' },
+    { name: 'Tech Stack', icon: <FaTools />, key: 'skills' },
+  ];
+  
+  // Types
+  interface Project {
+    id: string;
+    title: string;
+    description: string;
+    fullDescription: string;
+    tech: string[];
+    link: string;
+    github: string;
+    icon: string;
+    image: string;
+    features: string[];
+    stats: { label: string; value: string }[];
+  }
+  
+  interface Certificate {
+    id: string;
+    title: string;
+    issuer: string;
+    date: string;
+    description: string;
+    icon?: ReactElement;
+    image: string;
+    credentialId?: string;
+    verifyLink?: string;
+  }
+  
+  interface TechItem {
+    name: string;
+    icon: string;
+    level: number;
+    color: string;
+  }
+  
+  interface SkillCategory {
+    title: string;
+    icon: string;
+    techs: TechItem[];
+  }
+  
+  // Custom hook for intersection observer with animation types
+  const useInView = (threshold: number = 0.1, animationType: string = 'fadeInUp') => {
+    const [isInView, setIsInView] = useState(false);
+    const ref = useRef<HTMLDivElement>(null);
+  
+    useEffect(() => {
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            setIsInView(true);
+          }
+        },
+        { threshold }
+      );
+  
+      if (ref.current) {
+        observer.observe(ref.current);
+      }
+  
+      return () => {
+        if (ref.current) {
+          observer.unobserve(ref.current);
+        }
+      };
+    }, [threshold]);
+  
+    return [ref, isInView, animationType] as const;
+  };
+  
+  // Typing animation hook
+  const useTypingAnimation = (texts: string[], speed: number = 100) => {
+    const [displayText, setDisplayText] = useState('');
+    const [textIndex, setTextIndex] = useState(0);
+    const [charIndex, setCharIndex] = useState(0);
+    const [isDeleting, setIsDeleting] = useState(false);
+  
+    useEffect(() => {
+      const timeout = setTimeout(() => {
+        const currentText = texts[textIndex];
+        
+        if (!isDeleting && charIndex < currentText.length) {
+          setDisplayText(currentText.slice(0, charIndex + 1));
+          setCharIndex(charIndex + 1);
+        } else if (isDeleting && charIndex > 0) {
+          setDisplayText(currentText.slice(0, charIndex - 1));
+          setCharIndex(charIndex - 1);
+        } else if (!isDeleting && charIndex === currentText.length) {
+          setTimeout(() => setIsDeleting(true), 1500);
+        } else if (isDeleting && charIndex === 0) {
+          setIsDeleting(false);
+          setTextIndex((textIndex + 1) % texts.length);
+        }
+      }, isDeleting ? speed / 2 : speed);
+  
+      return () => clearTimeout(timeout);
+    }, [texts, textIndex, charIndex, isDeleting, speed]);
+  
+    return displayText;
+  };
 
   // Typing animation texts
   const typingTexts = [
@@ -695,83 +700,154 @@ const Portfolio: React.FC = () => {
           </div>
       </section>
 
-      {/* Contact Section */}
       <section id="contact" className="section section-secondary" ref={contactRef}>
-      <div className="section-title">
-        Get In <span className="section-title-accent">Touch</span>
-      </div>
-      <div className={`contact-grid ${contactInView ? 'animate-slideInUp' : ''}`}>
-        <div className="contact-info">
-          <div className="contact-card">
-            <a href="mailto:kenanbenpolgo@gmail.com" className="contact-item-link">
-              <div className="contact-item">
-                <div className="contact-icon"><Mail className="w-5 h-5 text-white" /></div>
-                <div className="contact-details">
-                  <h4>Email</h4>
-                  <span className="text-blue-500">kenanbenpolgo@gmail.com</span>
-                </div>
-              </div>
-            </a>
-            
-            <div className="contact-item">
-              <div className="contact-icon"><Phone className="w-5 h-5 text-white" /></div>
-              <div className="contact-details">
-                <h4>Phone</h4>
-                <p>+63 917 185 8427</p>
-              </div>
-            </div>
-            
-            <a 
-              href="https://www.google.com/maps/place/Iloilo+City,+Philippines" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="contact-item-link"
-            >
-              <div className="contact-item">
-                <div className="contact-icon"><MapPin className="w-5 h-5 text-white" /></div>
-                <div className="contact-details">
-                  <h4>Location</h4>
-                  <span className="text-white">Iloilo City, Philippines</span>
-                </div>
-              </div>
-            </a>
-            
-            <div className="social-links">
-              <a href="https://www.linkedin.com/in/kenan-ben-polgo/" className="social-link" target="_blank" rel="noopener noreferrer">
-                <img src="https://api.iconify.design/mdi:linkedin.svg?color=%230A66C2" alt="LinkedIn" width="24" height="24" /> LinkedIn
-              </a>
-              <a href="https://github.com/bananaNuggets75" className="social-link" target="_blank" rel="noopener noreferrer">
-                <img src="https://cdn.simpleicons.org/github/181717" alt="GitHub" width="24" height="24" /> GitHub
-              </a>
-              <a href="https://www.instagram.com/keenaniganss/" className="social-link" target="_blank" rel="noopener noreferrer">
-                <img src="https://cdn.simpleicons.org/instagram/E4405F" alt="Instagram" width="24" height="24" /> Instagram
-              </a>
+  <div className="section-title">
+    Get In <span className="section-title-accent">Touch</span>
+  </div>
+  <div className={`contact-grid ${contactInView ? 'animate-slideInUp' : ''}`}>
+    {/* Left side - Contact Info */}
+    <div className="contact-info">
+      <div className="contact-card">
+        <a href="mailto:kenanbenpolgo@gmail.com" className="contact-item-link">
+          <div className="contact-item">
+            <div className="contact-icon"><Mail className="w-5 h-5 text-white" /></div>
+            <div className="contact-details">
+              <h4>Email</h4>
+              <span className="text-blue-500">kenanbenpolgo@gmail.com</span>
             </div>
           </div>
+        </a>
+        
+        <div className="contact-item">
+          <div className="contact-icon"><Phone className="w-5 h-5 text-white" /></div>
+          <div className="contact-details">
+            <h4>Phone</h4>
+            <p>+63 917 185 8427</p>
+          </div>
         </div>
-        <div className="contact-form">
-          <form>
-            <div className="form-group">
-              <label htmlFor="name">Name</label>
-              <input type="text" id="name" name="name" required />
+        
+        <a 
+          href="https://www.google.com/maps/place/Iloilo+City,+Philippines" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="contact-item-link"
+        >
+          <div className="contact-item">
+            <div className="contact-icon"><MapPin className="w-5 h-5 text-white" /></div>
+            <div className="contact-details">
+              <h4>Location</h4>
+              <span className="text-white">Iloilo City, Philippines</span>
             </div>
-            <div className="form-group">
-              <label htmlFor="email">Email</label>
-              <input type="email" id="email" name="email" required />
-            </div>
-            <div className="form-group">
-              <label htmlFor="subject">Subject</label>
-              <input type="text" id="subject" name="subject" required />
-            </div>
-            <div className="form-group">
-              <label htmlFor="message">Message</label>
-              <textarea id="message" name="message" rows={5} required></textarea>
-            </div>
-            <button type="submit" className="cta-primary">Send Message</button>
-          </form>
+          </div>
+        </a>
+        
+        <div className="social-links">
+          <a href="https://www.linkedin.com/in/kenan-ben-polgo/" className="social-link" target="_blank" rel="noopener noreferrer">
+            <img src="https://api.iconify.design/mdi:linkedin.svg?color=%230A66C2" alt="LinkedIn" width="24" height="24" /> LinkedIn
+          </a>
+          <a href="https://github.com/bananaNuggets75" className="social-link" target="_blank" rel="noopener noreferrer">
+            <img src="https://cdn.simpleicons.org/github/181717" alt="GitHub" width="24" height="24" /> GitHub
+          </a>
+          <a href="https://www.instagram.com/keenaniganss/" className="social-link" target="_blank" rel="noopener noreferrer">
+            <img src="https://cdn.simpleicons.org/instagram/E4405F" alt="Instagram" width="24" height="24" /> Instagram
+          </a>
         </div>
+
+    {/* Right side - Comments Display */}
+    <div style={{ backgroundColor: 'rgba(51, 65, 85, 0.3)', borderRadius: '1rem', padding: '2rem', border: '1px solid rgba(148, 163, 184, 0.2)' }}>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '2rem' }}>
+        <h3 style={{ fontSize: '1.5rem', fontWeight: '700', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+          <MessageCircle className="w-6 h-6" style={{ color: '#a855f7' }} />
+          Comments ({comments.length})
+        </h3>
+        <button
+          onClick={fetchComments}
+          disabled={loading}
+          style={{
+            padding: '0.5rem 1rem',
+            backgroundColor: 'rgba(51, 65, 85, 0.5)',
+            border: '1px solid rgba(148, 163, 184, 0.3)',
+            borderRadius: '0.5rem',
+            color: 'white',
+            fontSize: '0.875rem',
+            cursor: loading ? 'not-allowed' : 'pointer',
+            opacity: loading ? 0.5 : 1
+          }}
+        >
+          {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : '↻ Refresh'}
+        </button>
       </div>
-    </section>
+
+      {loading ? (
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '3rem 0', color: '#9ca3af' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+            <Loader2 className="w-6 h-6 animate-spin" />
+            <span>Loading comments...</span>
+          </div>
+        </div>
+      ) : comments.length === 0 ? (
+        <div style={{ textAlign: 'center', padding: '3rem 0' }}>
+          <MessageCircle className="w-12 h-12" style={{ color: '#6b7280', margin: '0 auto 1rem' }} />
+          <p style={{ color: '#9ca3af' }}>No comments yet. Be the first to leave a comment!</p>
+        </div>
+      ) : (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', maxHeight: '24rem', overflowY: 'auto', paddingRight: '0.5rem' }}>
+          {comments.map((comment) => (
+            <div key={comment.id} style={{
+              padding: '1.5rem',
+              borderRadius: '0.75rem',
+              border: comment.is_pinned 
+                ? '1px solid rgba(168, 85, 247, 0.3)' 
+                : '1px solid rgba(148, 163, 184, 0.2)',
+              backgroundColor: comment.is_pinned 
+                ? 'rgba(147, 51, 234, 0.2)' 
+                : 'rgba(51, 65, 85, 0.3)',
+              transition: 'all 0.3s',
+              boxShadow: comment.is_pinned ? '0 10px 25px rgba(168, 85, 247, 0.1)' : 'none'
+            }}>
+              <div style={{ display: 'flex', alignItems: 'flex-start', gap: '1rem' }}>
+                <div style={{
+                  width: '3rem',
+                  height: '3rem',
+                  background: 'linear-gradient(to bottom right, #9333ea, #ec4899)',
+                  borderRadius: '50%',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  flexShrink: 0
+                }}>
+                  <User className="w-6 h-6 text-white" />
+                </div>
+                <div style={{ flex: 1 }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.5rem' }}>
+                    <h4 style={{ fontWeight: '600', color: 'white' }}>{comment.name}</h4>
+                    {comment.is_pinned && (
+                      <span style={{
+                        padding: '0.25rem 0.5rem',
+                        backgroundColor: 'rgba(168, 85, 247, 0.2)',
+                        color: '#c4b5fd',
+                        fontSize: '0.75rem',
+                        borderRadius: '9999px',
+                        fontWeight: '500'
+                      }}>
+                        PINNED
+                      </span>
+                    )}
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', color: '#9ca3af', fontSize: '0.875rem' }}>
+                      <Calendar className="w-3 h-3" />
+                      {formatTimestamp(comment.created_at)}
+                    </div>
+                  </div>
+                  <p style={{ color: '#d1d5db', lineHeight: '1.6' }}>{comment.message}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  </div>
+</section>
 
       {/* Project Detail Modal */}
       {selectedProject && (
