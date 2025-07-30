@@ -3,8 +3,7 @@
 import React, { useState, useEffect, useRef, ReactElement } from 'react';
 import { Mail, Phone, MapPin, Send, MessageCircle, User, Calendar, Loader2, AlertCircle } from "lucide-react"
 import { FaDatabase, FaShieldAlt, FaCertificate, FaCode, FaTools } from 'react-icons/fa';
-import { SiTensorflow, SiCisco, SiJavascript, SiOracle } from 'react-icons/si';
-
+import { SiTensorflow, SiCisco, SiJavascript, SiOracle, SiOpenai } from 'react-icons/si';
 import { supabase } from '../lib/supabaseClient';
 
 
@@ -419,7 +418,7 @@ const Portfolio: React.FC = () => {
       description: 'Basics of data science, data analysis, and visualization',
       icon: <SiCisco className="text-xl text-blue-500" />,
       image: '/intro_ds_cert.png',
-      credentialId: 'DEVCON-2024-RU'
+      credentialId: ''
     },
     {
       id: '3',
@@ -429,7 +428,7 @@ const Portfolio: React.FC = () => {
       description: 'Vulnerabilities, how you protect your network, and cyber attacks',
       icon: <FaShieldAlt className="text-xl text-red-500" />,
       image: '/_certificate_kenanben-polgo-21-cpu-edu-ph_0a42e4b9-d53d-4f9e-a44e-4a28ebdaf58b.jpg',
-      credentialId: 'GDSC-2023-ACTIVE'
+      credentialId: ''
     },
     {
       id: '4',
@@ -439,8 +438,8 @@ const Portfolio: React.FC = () => {
       description: 'Manipulation and analysis of data using Python',
       icon: <FaCertificate className="text-xl text-purple-600" />,
       image: '/_certificate_kenanben-polgo-21-cpu-edu-ph_2597ce24-e6bf-4aef-8117-9b7010eb1443.jpg',
-      credentialId: 'FCC-JS-2023-001',
-      verifyLink: 'https://freecodecamp.org/certification/verify/js-cert'
+      credentialId: '',
+      verifyLink: ''
     },
     {
       id: '5',
@@ -450,18 +449,18 @@ const Portfolio: React.FC = () => {
       description: 'Basic JavaScript Certificate',
       icon: <SiJavascript className="text-xl text-yellow-400" />,
       image: '/javascript_basic certificate.jpg',
-      credentialId: 'COURSERA-REACT-2023',
-      verifyLink: 'https://coursera.org/verify/react-cert'
+      credentialId: '',
+      verifyLink: ''
     },
     {
       id: '6',
-      title: 'Database Design',
-      issuer: 'Oracle Academy',
-      date: '2024',
-      description: 'Database design and SQL optimization certification',
-      icon: <FaDatabase className="text-xl text-sky-700" />,
+      title: 'AI Fundamentals with IBM SkillsBuild',
+      issuer: 'Cisco Networking Academy',
+      date: 'August 2025',
+      description: 'Fundamentals of artificial intelligence including machine learning, neural networks, and ethical AI practices, developed in collaboration with IBM SkillsBuild.',
+      icon: <SiOpenai className="text-xl text-sky-700" />,
       image: '/api/placeholder/400/300',
-      credentialId: 'ORACLE-DB-2024-001'
+      credentialId: ''
     }
   ];
 
@@ -707,6 +706,7 @@ const Portfolio: React.FC = () => {
           </div>
         </div>
       </section>
+
       {/* Portfolio Section */}
       <section id="portfolio" className="section" ref={portfolioRef}>
         <div className="portfolio-container"> </div>
@@ -1016,7 +1016,8 @@ const Portfolio: React.FC = () => {
                       alignItems: 'center',
                       justifyContent: 'center',
                       gap: '0.5rem',
-                      transition: 'all 0.2s'
+                      transition: 'all 0.2s',
+                      fontSize: '16px'
                     }}
                   >
                     {submitting ? (
@@ -1042,7 +1043,7 @@ const Portfolio: React.FC = () => {
               backgroundColor: 'var(--card-bg)',
               borderRadius: '1rem',
               padding: '2rem',
-              border: '1px solid var(--border-color)'
+              border: '1px solid var(--border-color)',
             }}
           >
             <div
@@ -1104,7 +1105,7 @@ const Portfolio: React.FC = () => {
               <p style={{ color: 'var(--text-muted)' }}>No comments yet. Be the first to leave a comment!</p>
             </div>
             ) : (
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', maxHeight: '24rem', overflowY: 'auto', paddingRight: '0.5rem' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', overflowY: 'auto', paddingRight: '0.5rem' }}>
                 {comments.map((comment) => (
                   <div key={comment.id} style={{
                     padding: '1.5rem',
