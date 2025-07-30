@@ -1174,6 +1174,21 @@
   transform: translateX(10px);
 }
 
+.contact-item-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.2s ease;
+}
+
+.contact-item-link:hover .contact-item {
+  transform: translateY(-2px);
+}
+
+.contact-item:not(.contact-item-link .contact-item):hover {
+  cursor: pointer;
+}
+
 .contact-icon {
   background: var(--accent-color);
   padding: 15px;

@@ -1,115 +1,13 @@
 "use client";
 
 import React, { useState, useEffect, useRef, ReactElement } from 'react';
-import { Mail, Phone, MapPin } from "lucide-react"
+import { Mail, Phone, MapPin, Send, MessageCircle, User, Calendar, Loader2, AlertCircle } from "lucide-react"
 import { FaDatabase, FaShieldAlt, FaCertificate, FaCode, FaTools } from 'react-icons/fa';
 import { SiTensorflow, SiCisco, SiJavascript, SiOracle } from 'react-icons/si';
 
-const portfolioTabs = [
-  { name: 'Projects', icon: <FaCode />, key: 'projects' },
-  { name: 'Certificates', icon: <FaCertificate />, key: 'certificates' },
-  { name: 'Tech Stack', icon: <FaTools />, key: 'skills' },
-];
+import { supabase } from '../lib/supabaseClient';
 
-// Types
-interface Project {
-  id: string;
-  title: string;
-  description: string;
-  fullDescription: string;
-  tech: string[];
-  link: string;
-  github: string;
-  icon: string;
-  image: string;
-  features: string[];
-  stats: { label: string; value: string }[];
-}
 
-interface Certificate {
-  id: string;
-  title: string;
-  issuer: string;
-  date: string;
-  description: string;
-  icon?: ReactElement;
-  image: string;
-  credentialId?: string;
-  verifyLink?: string;
-}
-
-interface TechItem {
-  name: string;
-  icon: string;
-  level: number;
-  color: string;
-}
-
-interface SkillCategory {
-  title: string;
-  icon: string;
-  techs: TechItem[];
-}
-
-// Custom hook for intersection observer with animation types
-const useInView = (threshold: number = 0.1, animationType: string = 'fadeInUp') => {
-  const [isInView, setIsInView] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsInView(true);
-        }
-      },
-      { threshold }
-    );
-
-    if (ref.current) {
-      observer.observe(ref.current);
-    }
-
-    return () => {
-      if (ref.current) {
-        observer.unobserve(ref.current);
-      }
-    };
-  }, [threshold]);
-
-  return [ref, isInView, animationType] as const;
-};
-
-// Typing animation hook
-const useTypingAnimation = (texts: string[], speed: number = 100) => {
-  const [displayText, setDisplayText] = useState('');
-  const [textIndex, setTextIndex] = useState(0);
-  const [charIndex, setCharIndex] = useState(0);
-  const [isDeleting, setIsDeleting] = useState(false);
-
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      const currentText = texts[textIndex];
-      
-      if (!isDeleting && charIndex < currentText.length) {
-        setDisplayText(currentText.slice(0, charIndex + 1));
-        setCharIndex(charIndex + 1);
-      } else if (isDeleting && charIndex > 0) {
-        setDisplayText(currentText.slice(0, charIndex - 1));
-        setCharIndex(charIndex - 1);
-      } else if (!isDeleting && charIndex === currentText.length) {
-        setTimeout(() => setIsDeleting(true), 1500);
-      } else if (isDeleting && charIndex === 0) {
-        setIsDeleting(false);
-        setTextIndex((textIndex + 1) % texts.length);
-      }
-    }, isDeleting ? speed / 2 : speed);
-
-    return () => clearTimeout(timeout);
-  }, [texts, textIndex, charIndex, isDeleting, speed]);
-
-  return displayText;
-};
 
 // Main Portfolio Component
 const Portfolio: React.FC = () => {
@@ -117,6 +15,234 @@ const Portfolio: React.FC = () => {
   const [activeTab, setActiveTab] = useState<string>('projects');
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [selectedCertificate, setSelectedCertificate] = useState<Certificate | null>(null);
+
+  type Comment = {
+    id: string;
+    name: string;
+    message: string;
+    created_at: string;
+    is_pinned: boolean;
+  };
+  
+  const [comments, setComments] = useState<Comment[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState(false);
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: ''
+  });
+  
+  const fetchComments = async () => {
+    try {
+      setLoading(true);
+      setError(null);
+      
+      const { data, error } = await supabase
+        .from('comments')
+        .select('*')
+        .order('created_at', { ascending: false });
+  
+      if (error) throw error;
+      setComments(data || []);
+    } catch (err) {
+      console.error('Error fetching comments:', err);
+      setError('Failed to load comments. Please try again later.');
+      // Demo comment for testing
+      setComments([
+        {
+          id: 'demo',
+          name: "Demo User",
+          message: "Connect your Supabase database to see real comments!",
+          created_at: new Date().toISOString(),
+          is_pinned: false
+        }
+      ]);
+    } finally {
+      setLoading(false);
+    }
+  };
+  
+  const postComment = async (commentData: { name: string; email: string; message: string }) => {
+    try {
+      setSubmitting(true);
+      setError(null);
+  
+      const { data, error } = await supabase
+        .from('comments')
+        .insert([
+          {
+            name: commentData.name.trim(),
+            email: commentData.email?.trim() || null,
+            message: commentData.message.trim(),
+          }
+        ])
+        .select();
+  
+      if (error) throw error;
+  
+      // Add new comment to the top of the list
+      setComments(prev => [data[0], ...prev]);
+      setSuccess(true);
+      setFormData({ name: '', email: '', message: '' });
+      setTimeout(() => setSuccess(false), 3000);
+      
+    } catch (err) {
+      if (err instanceof Error) {
+        console.error('Error posting comment:', err.message);
+      } else {
+        console.error('Unknown error posting comment:', JSON.stringify(err));
+      }      
+      setError('Failed to post comment. Please try again.');
+    } finally {
+      setSubmitting(false);
+    }
+  };
+  
+  const formatTimestamp = (timestamp: string) => {
+    const date = new Date(timestamp);
+    const now = new Date();
+    const diffInHours = Math.floor((now.getTime() - date.getTime()) / (1000 * 60 * 60));
+    
+    if (diffInHours < 1) return 'Just now';
+    if (diffInHours < 24) return `${diffInHours}h ago`;
+    if (diffInHours < 48) return '1 day ago';
+    if (diffInHours < 168) return `${Math.floor(diffInHours / 24)} days ago`;
+    if (diffInHours < 720) return `${Math.floor(diffInHours / 168)} weeks ago`;
+    return date.toLocaleDateString();
+  };
+  
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+    if (error) setError(null);
+  };
+  
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!formData.name.trim() || !formData.message.trim()) {
+      setError('Please fill in all required fields.');
+      return;
+    }
+  
+    await postComment(formData);
+  };
+  
+  useEffect(() => {
+    fetchComments();
+  }, []);
+  
+  const portfolioTabs = [
+    { name: 'Projects', icon: <FaCode />, key: 'projects' },
+    { name: 'Certificates', icon: <FaCertificate />, key: 'certificates' },
+    { name: 'Tech Stack', icon: <FaTools />, key: 'skills' },
+  ];
+  
+  // Types
+  interface Project {
+    id: string;
+    title: string;
+    description: string;
+    fullDescription: string;
+    tech: string[];
+    link: string;
+    github: string;
+    icon: string;
+    image: string;
+    features: string[];
+    stats: { label: string; value: string }[];
+  }
+  
+  interface Certificate {
+    id: string;
+    title: string;
+    issuer: string;
+    date: string;
+    description: string;
+    icon?: ReactElement;
+    image: string;
+    credentialId?: string;
+    verifyLink?: string;
+  }
+  
+  interface TechItem {
+    name: string;
+    icon: string;
+    level: number;
+    color: string;
+  }
+  
+  interface SkillCategory {
+    title: string;
+    icon: string;
+    techs: TechItem[];
+  }
+  
+  // Custom hook for intersection observer with animation types
+  const useInView = (threshold: number = 0.1, animationType: string = 'fadeInUp') => {
+    const [isInView, setIsInView] = useState(false);
+    const ref = useRef<HTMLDivElement>(null);
+  
+    useEffect(() => {
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            setIsInView(true);
+          }
+        },
+        { threshold }
+      );
+  
+      if (ref.current) {
+        observer.observe(ref.current);
+      }
+  
+      return () => {
+        if (ref.current) {
+          observer.unobserve(ref.current);
+        }
+      };
+    }, [threshold]);
+  
+    return [ref, isInView, animationType] as const;
+  };
+  
+  // Typing animation hook
+  const useTypingAnimation = (texts: string[], speed: number = 100) => {
+    const [displayText, setDisplayText] = useState('');
+    const [textIndex, setTextIndex] = useState(0);
+    const [charIndex, setCharIndex] = useState(0);
+    const [isDeleting, setIsDeleting] = useState(false);
+  
+    useEffect(() => {
+      const timeout = setTimeout(() => {
+        const currentText = texts[textIndex];
+        
+        if (!isDeleting && charIndex < currentText.length) {
+          setDisplayText(currentText.slice(0, charIndex + 1));
+          setCharIndex(charIndex + 1);
+        } else if (isDeleting && charIndex > 0) {
+          setDisplayText(currentText.slice(0, charIndex - 1));
+          setCharIndex(charIndex - 1);
+        } else if (!isDeleting && charIndex === currentText.length) {
+          setTimeout(() => setIsDeleting(true), 1500);
+        } else if (isDeleting && charIndex === 0) {
+          setIsDeleting(false);
+          setTextIndex((textIndex + 1) % texts.length);
+        }
+      }, isDeleting ? speed / 2 : speed);
+  
+      return () => clearTimeout(timeout);
+    }, [texts, textIndex, charIndex, isDeleting, speed]);
+  
+    return displayText;
+  };
 
   // Typing animation texts
   const typingTexts = [
@@ -695,35 +821,47 @@ const Portfolio: React.FC = () => {
           </div>
       </section>
 
-      {/* Contact Section */}
       <section id="contact" className="section section-secondary" ref={contactRef}>
         <div className="section-title">
           Get In <span className="section-title-accent">Touch</span>
         </div>
         <div className={`contact-grid ${contactInView ? 'animate-slideInUp' : ''}`}>
+          {/* Left side - Contact Info */}
           <div className="contact-info">
             <div className="contact-card">
-              <div className="contact-item">
-              <div className="contact-icon"><Mail className="w-5 h-5 text-white" /></div>
-                <div className="contact-details">
-                  <h4>Email</h4>
-                  <p>kenanbenpolgo@gmail.com</p>
+              <a href="mailto:kenanbenpolgo@gmail.com" className="contact-item-link">
+                <div className="contact-item">
+                  <div className="contact-icon"><Mail className="w-5 h-5 text-white" /></div>
+                  <div className="contact-details">
+                    <h4>Email</h4>
+                    <span className="text-blue-500">kenanbenpolgo@gmail.com</span>
+                  </div>
                 </div>
-              </div>
+              </a>
+              
               <div className="contact-item">
-              <div className="contact-icon"><Phone className="w-5 h-5 text-white" /></div>
+                <div className="contact-icon"><Phone className="w-5 h-5 text-white" /></div>
                 <div className="contact-details">
                   <h4>Phone</h4>
                   <p>+63 917 185 8427</p>
                 </div>
               </div>
-              <div className="contact-item">
-                <div className="contact-icon"><MapPin className="w-5 h-5 text-white" /></div>
-                <div className="contact-details">
-                  <h4>Location</h4>
-                  <p>Iloilo City, Philippines</p>
+              
+              <a 
+                href="https://www.google.com/maps/place/Iloilo+City,+Philippines" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="contact-item-link"
+              >
+                <div className="contact-item">
+                  <div className="contact-icon"><MapPin className="w-5 h-5 text-white" /></div>
+                  <div className="contact-details">
+                    <h4>Location</h4>
+                    <span className="text-white">Iloilo City, Philippines</span>
+                  </div>
                 </div>
-              </div>
+              </a>
+              
               <div className="social-links">
                 <a href="https://www.linkedin.com/in/kenan-ben-polgo/" className="social-link" target="_blank" rel="noopener noreferrer">
                   <img src="https://api.iconify.design/mdi:linkedin.svg?color=%230A66C2" alt="LinkedIn" width="24" height="24" /> LinkedIn
@@ -735,28 +873,289 @@ const Portfolio: React.FC = () => {
                   <img src="https://cdn.simpleicons.org/instagram/E4405F" alt="Instagram" width="24" height="24" /> Instagram
                 </a>
               </div>
+
+              {/* Comment Form */}
+              <div style={{
+                marginTop: '2rem',
+                padding: '1.5rem',
+                backgroundColor: 'var(--card-bg)',
+                borderRadius: '1rem',
+                border: '1px solid var(--border-color)'
+              }}>
+                <h3 style={{
+                  marginBottom: '1rem',
+                  fontSize: '1.25rem',
+                  fontWeight: '600',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '0.5rem',
+                  color: 'var(--accent-light)'
+                }}>
+                  <MessageCircle className="w-5 h-5" style={{ color: 'var(--accent-color)' }} />
+                  Leave a Comment
+                </h3>
+
+                {success && (
+                  <div style={{
+                    marginBottom: '1rem',
+                    padding: '0.75rem',
+                    backgroundColor: 'rgba(34, 197, 94, 0.15)',
+                    border: '1px solid rgba(34, 197, 94, 0.3)',
+                    borderRadius: '0.5rem',
+                    fontSize: '0.875rem',
+                    color: '#4ade80'
+                  }}>
+                    Comment posted successfully!
+                  </div>
+                )}
+
+                {error && (
+                  <div style={{
+                    marginBottom: '1rem',
+                    padding: '0.75rem',
+                    backgroundColor: 'rgba(239, 68, 68, 0.15)',
+                    border: '1px solid rgba(239, 68, 68, 0.3)',
+                    borderRadius: '0.5rem',
+                    fontSize: '0.875rem',
+                    color: '#f87171',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.5rem'
+                  }}>
+                    <AlertCircle className="w-4 h-4" />
+                    {error}
+                  </div>
+                )}
+                <div style={{ display: 'grid', gap: '1rem' }}>
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+                    <div>
+                      <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', marginBottom: '0.5rem' }}>
+                        Name <span style={{ color: '#f87171' }}>*</span>
+                      </label>
+                      <input
+                        type="text"
+                        name="name"
+                        value={formData.name}
+                        onChange={handleInputChange}
+                        placeholder="Enter your name"
+                        disabled={submitting}
+                        style={{
+                          width: '100%',
+                          padding: '0.75rem',
+                          backgroundColor: 'rgba(139, 92, 246, 0.1)',
+                          border: '1px solid var(--border-color)',
+                          borderRadius: '0.5rem',
+                          color: 'var(--text-light)',
+                          fontSize: '0.875rem'
+                        }}
+                      />
+                    </div>
+                    <div>
+                      <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', marginBottom: '0.5rem' }}>
+                        Email <span style={{ color: '#9ca3af' }}>(optional)</span>
+                      </label>
+                      <input
+                        type="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleInputChange}
+                        placeholder="your@email.com"
+                        disabled={submitting}
+                        style={{
+                          width: '100%',
+                          padding: '0.75rem',
+                          backgroundColor: 'rgba(139, 92, 246, 0.1)',
+                          border: '1px solid var(--border-color)',
+                          borderRadius: '0.5rem',
+                          color: 'var(--text-light)',
+                          fontSize: '0.875rem'
+                        }}
+                      />
+                    </div>
+                  </div>
+                  
+                  <div>
+                    <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', marginBottom: '0.5rem' }}>
+                      Message <span style={{ color: '#f87171' }}>*</span>
+                    </label>
+                    <textarea
+                      name="message"
+                      value={formData.message}
+                      onChange={handleInputChange}
+                      placeholder="Write your message here..."
+                      rows={3}
+                      disabled={submitting}
+                      style={{
+                        width: '100%',
+                        padding: '0.75rem',
+                        backgroundColor: 'rgba(139, 92, 246, 0.1)',
+                        border: '1px solid var(--border-color)',
+                        borderRadius: '0.5rem',
+                        color: 'var(--text-light)',
+                        fontSize: '0.875rem',
+                        resize: 'none'
+                      }}
+                    />
+                  </div>
+
+                  <button
+                    onClick={handleSubmit}
+                    disabled={submitting || !formData.name.trim() || !formData.message.trim()}
+                    style={{
+                      width: '100%',
+                      padding: '0.75rem',
+                      background: submitting || !formData.name.trim() || !formData.message.trim()
+                        ? 'linear-gradient(to right, #c084fc, #f9a8d4)'
+                        : 'linear-gradient(to right, var(--accent-dark), #ec4899)',
+                      border: 'none',
+                      borderRadius: '0.5rem',
+                      color: 'white',
+                      fontWeight: '600',
+                      cursor: submitting || !formData.name.trim() || !formData.message.trim() ? 'not-allowed' : 'pointer',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      gap: '0.5rem',
+                      transition: 'all 0.2s'
+                    }}
+                  >
+                    {submitting ? (
+                      <>
+                        <Loader2 className="w-4 h-4 animate-spin" />
+                        Posting...
+                      </>
+                    ) : (
+                      <>
+                        <Send className="w-4 h-4" />
+                        Post Comment
+                      </>
+                    )}
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
-          <div className="contact-form">
-            <form>
-              <div className="form-group">
-                <label htmlFor="name">Name</label>
-                <input type="text" id="name" name="name" required />
+
+          {/* Right side - Comments Display */}
+          <div
+            style={{
+              backgroundColor: 'var(--card-bg)',
+              borderRadius: '1rem',
+              padding: '2rem',
+              border: '1px solid var(--border-color)'
+            }}
+          >
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                marginBottom: '2rem'
+              }}
+            >
+              <h3
+                style={{
+                  fontSize: '1.5rem',
+                  fontWeight: '700',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '0.75rem'
+                }}
+              >
+                <MessageCircle className="w-6 h-6" style={{ color: 'var(--accent-color)' }} />
+                Comments ({comments.length})
+              </h3>
+              <button
+                onClick={fetchComments}
+                disabled={loading}
+                style={{
+                  padding: '0.5rem 1rem',
+                  backgroundColor: 'var(--glass-bg)',
+                  border: '1px solid var(--border-color)',
+                  borderRadius: '0.5rem',
+                  color: 'var(--text-light)',
+                  fontSize: '0.875rem',
+                  cursor: loading ? 'not-allowed' : 'pointer',
+                  opacity: loading ? 0.5 : 1
+                }}
+              >
+                {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : '↻ Refresh'}
+              </button>
+            </div>
+
+            {loading ? (
+              <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                padding: '3rem 0',
+                color: 'var(--text-muted)'
+              }}
+            >
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                <Loader2 className="w-6 h-6 animate-spin" />
+                <span>Loading comments...</span>
               </div>
-              <div className="form-group">
-                <label htmlFor="email">Email</label>
-                <input type="email" id="email" name="email" required />
+            </div>
+          ) : comments.length === 0 ? (
+            <div style={{ textAlign: 'center', padding: '3rem 0' }}>
+              <MessageCircle className="w-12 h-12" style={{ color: '#6b7280', margin: '0 auto 1rem' }} />
+              <p style={{ color: 'var(--text-muted)' }}>No comments yet. Be the first to leave a comment!</p>
+            </div>
+            ) : (
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', maxHeight: '24rem', overflowY: 'auto', paddingRight: '0.5rem' }}>
+                {comments.map((comment) => (
+                  <div key={comment.id} style={{
+                    padding: '1.5rem',
+                    borderRadius: '0.75rem',
+                    border: comment.is_pinned
+                      ? '1px solid var(--accent-color)'
+                      : '1px solid var(--border-color)',
+                    backgroundColor: comment.is_pinned ? 'rgba(139, 92, 246, 0.1)' : 'var(--card-bg)',
+                    transition: 'all 0.3s',
+                    boxShadow: comment.is_pinned ? '0 10px 25px rgba(168, 85, 247, 0.1)' : 'none'
+                  }}>
+                    <div style={{ display: 'flex', alignItems: 'flex-start', gap: '1rem' }}>
+                      <div style={{
+                        width: '3rem',
+                        height: '3rem',
+                        background: 'linear-gradient(to bottom right, var(--accent-dark), #ec4899)',
+                        borderRadius: '50%',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        flexShrink: 0
+                      }}>
+                        <User className="w-6 h-6 text-white" />
+                      </div>
+                      <div style={{ flex: 1 }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.5rem' }}>
+                          <h4 style={{ fontWeight: '600', color: 'var(--text-light)' }}>{comment.name}</h4>
+                          {comment.is_pinned && (
+                            <span style={{
+                              padding: '0.25rem 0.5rem',
+                              backgroundColor: 'rgba(168, 85, 247, 0.2)',
+                              color: 'var(--accent-light)',
+                              fontSize: '0.75rem',
+                              borderRadius: '9999px',
+                              fontWeight: '500'
+                            }}>
+                              PINNED
+                            </span>
+                          )}
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', color: 'var(--text-muted)', fontSize: '0.875rem' }}>
+                            <Calendar className="w-3 h-3" />
+                            {formatTimestamp(comment.created_at)}
+                          </div>
+                        </div>
+                        <p style={{ color: '#d1d5db', lineHeight: '1.6' }}>{comment.message}</p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
               </div>
-              <div className="form-group">
-                <label htmlFor="subject">Subject</label>
-                <input type="text" id="subject" name="subject" required />
-              </div>
-              <div className="form-group">
-                <label htmlFor="message">Message</label>
-                <textarea id="message" name="message" rows={5} required></textarea>
-              </div>
-              <button type="submit" className="cta-primary">Send Message</button>
-            </form>
+            )}
           </div>
         </div>
       </section>
