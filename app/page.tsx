@@ -1043,7 +1043,7 @@ const Portfolio: React.FC = () => {
               backgroundColor: 'var(--card-bg)',
               borderRadius: '1rem',
               padding: '2rem',
-              border: '1px solid var(--border-color)'
+              border: '1px solid var(--border-color)',
             }}
           >
             <div
@@ -1105,7 +1105,7 @@ const Portfolio: React.FC = () => {
               <p style={{ color: 'var(--text-muted)' }}>No comments yet. Be the first to leave a comment!</p>
             </div>
             ) : (
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', maxHeight: '24rem', overflowY: 'auto', paddingRight: '0.5rem' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', overflowY: 'auto', paddingRight: '0.5rem' }}>
                 {comments.map((comment) => (
                   <div key={comment.id} style={{
                     padding: '1.5rem',
