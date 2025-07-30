@@ -1878,3 +1878,13 @@
     --card-bg: rgba(139, 92, 246, 0.15);
   }
 }
+
+.footer-content{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background: var(--primary-bg);
+  color: var(--text-muted);
+  font-size: 14px;
+}

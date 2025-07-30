@@ -1264,6 +1264,11 @@ const Portfolio: React.FC = () => {
           </div>
         </div>
       )}
+      <footer>
+        <div className="footer-content">
+          <p>© {new Date().getFullYear()} Kenan Ben G. Polgo™. All rights reserved.</p>
+        </div>
+      </footer>
     </div>
     
   );
