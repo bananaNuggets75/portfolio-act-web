@@ -756,7 +756,29 @@ const Portfolio: React.FC = () => {
         
 
           
-             
+              <div>
+                <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', marginBottom: '0.5rem' }}>
+                  Email <span style={{ color: '#9ca3af' }}>(optional)</span>
+                </label>
+                <input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                  placeholder="your@email.com"
+                  disabled={submitting}
+                  style={{
+                    width: '100%',
+                    padding: '0.75rem',
+                    backgroundColor: 'rgba(51, 65, 85, 0.5)',
+                    border: '1px solid rgba(148, 163, 184, 0.3)',
+                    borderRadius: '0.5rem',
+                    color: 'white',
+                    fontSize: '0.875rem'
+                  }}
+                />
+              </div>
+            </div>
             
             <div>
               <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', marginBottom: '0.5rem' }}>
