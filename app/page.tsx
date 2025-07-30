@@ -822,283 +822,343 @@ const Portfolio: React.FC = () => {
       </section>
 
       <section id="contact" className="section section-secondary" ref={contactRef}>
-  <div className="section-title">
-    Get In <span className="section-title-accent">Touch</span>
-  </div>
-  <div className={`contact-grid ${contactInView ? 'animate-slideInUp' : ''}`}>
-    {/* Left side - Contact Info */}
-    <div className="contact-info">
-      <div className="contact-card">
-        <a href="mailto:kenanbenpolgo@gmail.com" className="contact-item-link">
-          <div className="contact-item">
-            <div className="contact-icon"><Mail className="w-5 h-5 text-white" /></div>
-            <div className="contact-details">
-              <h4>Email</h4>
-              <span className="text-blue-500">kenanbenpolgo@gmail.com</span>
-            </div>
-          </div>
-        </a>
-        
-        <div className="contact-item">
-          <div className="contact-icon"><Phone className="w-5 h-5 text-white" /></div>
-          <div className="contact-details">
-            <h4>Phone</h4>
-            <p>+63 917 185 8427</p>
-          </div>
+        <div className="section-title">
+          Get In <span className="section-title-accent">Touch</span>
         </div>
-        
-        <a 
-          href="https://www.google.com/maps/place/Iloilo+City,+Philippines" 
-          target="_blank" 
-          rel="noopener noreferrer"
-          className="contact-item-link"
-        >
-          <div className="contact-item">
-            <div className="contact-icon"><MapPin className="w-5 h-5 text-white" /></div>
-            <div className="contact-details">
-              <h4>Location</h4>
-              <span className="text-white">Iloilo City, Philippines</span>
+        <div className={`contact-grid ${contactInView ? 'animate-slideInUp' : ''}`}>
+          {/* Left side - Contact Info */}
+          <div className="contact-info">
+            <div className="contact-card">
+              <a href="mailto:kenanbenpolgo@gmail.com" className="contact-item-link">
+                <div className="contact-item">
+                  <div className="contact-icon"><Mail className="w-5 h-5 text-white" /></div>
+                  <div className="contact-details">
+                    <h4>Email</h4>
+                    <span className="text-blue-500">kenanbenpolgo@gmail.com</span>
+                  </div>
+                </div>
+              </a>
+              
+              <div className="contact-item">
+                <div className="contact-icon"><Phone className="w-5 h-5 text-white" /></div>
+                <div className="contact-details">
+                  <h4>Phone</h4>
+                  <p>+63 917 185 8427</p>
+                </div>
+              </div>
+              
+              <a 
+                href="https://www.google.com/maps/place/Iloilo+City,+Philippines" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="contact-item-link"
+              >
+                <div className="contact-item">
+                  <div className="contact-icon"><MapPin className="w-5 h-5 text-white" /></div>
+                  <div className="contact-details">
+                    <h4>Location</h4>
+                    <span className="text-white">Iloilo City, Philippines</span>
+                  </div>
+                </div>
+              </a>
+              
+              <div className="social-links">
+                <a href="https://www.linkedin.com/in/kenan-ben-polgo/" className="social-link" target="_blank" rel="noopener noreferrer">
+                  <img src="https://api.iconify.design/mdi:linkedin.svg?color=%230A66C2" alt="LinkedIn" width="24" height="24" /> LinkedIn
+                </a>
+                <a href="https://github.com/bananaNuggets75" className="social-link" target="_blank" rel="noopener noreferrer">
+                  <img src="https://cdn.simpleicons.org/github/181717" alt="GitHub" width="24" height="24" /> GitHub
+                </a>
+                <a href="https://www.instagram.com/keenaniganss/" className="social-link" target="_blank" rel="noopener noreferrer">
+                  <img src="https://cdn.simpleicons.org/instagram/E4405F" alt="Instagram" width="24" height="24" /> Instagram
+                </a>
+              </div>
+
+              {/* Comment Form */}
+              <div style={{
+                marginTop: '2rem',
+                padding: '1.5rem',
+                backgroundColor: 'var(--card-bg)',
+                borderRadius: '1rem',
+                border: '1px solid var(--border-color)'
+              }}>
+                <h3 style={{
+                  marginBottom: '1rem',
+                  fontSize: '1.25rem',
+                  fontWeight: '600',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '0.5rem',
+                  color: 'var(--accent-light)'
+                }}>
+                  <MessageCircle className="w-5 h-5" style={{ color: 'var(--accent-color)' }} />
+                  Leave a Comment
+                </h3>
+
+                {success && (
+                  <div style={{
+                    marginBottom: '1rem',
+                    padding: '0.75rem',
+                    backgroundColor: 'rgba(34, 197, 94, 0.15)',
+                    border: '1px solid rgba(34, 197, 94, 0.3)',
+                    borderRadius: '0.5rem',
+                    fontSize: '0.875rem',
+                    color: '#4ade80'
+                  }}>
+                    Comment posted successfully!
+                  </div>
+                )}
+
+                {error && (
+                  <div style={{
+                    marginBottom: '1rem',
+                    padding: '0.75rem',
+                    backgroundColor: 'rgba(239, 68, 68, 0.15)',
+                    border: '1px solid rgba(239, 68, 68, 0.3)',
+                    borderRadius: '0.5rem',
+                    fontSize: '0.875rem',
+                    color: '#f87171',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.5rem'
+                  }}>
+                    <AlertCircle className="w-4 h-4" />
+                    {error}
+                  </div>
+                )}
+                <div style={{ display: 'grid', gap: '1rem' }}>
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+                    <div>
+                      <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', marginBottom: '0.5rem' }}>
+                        Name <span style={{ color: '#f87171' }}>*</span>
+                      </label>
+                      <input
+                        type="text"
+                        name="name"
+                        value={formData.name}
+                        onChange={handleInputChange}
+                        placeholder="Enter your name"
+                        disabled={submitting}
+                        style={{
+                          width: '100%',
+                          padding: '0.75rem',
+                          backgroundColor: 'rgba(139, 92, 246, 0.1)',
+                          border: '1px solid var(--border-color)',
+                          borderRadius: '0.5rem',
+                          color: 'var(--text-light)',
+                          fontSize: '0.875rem'
+                        }}
+                      />
+                    </div>
+                    <div>
+                      <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', marginBottom: '0.5rem' }}>
+                        Email <span style={{ color: '#9ca3af' }}>(optional)</span>
+                      </label>
+                      <input
+                        type="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleInputChange}
+                        placeholder="your@email.com"
+                        disabled={submitting}
+                        style={{
+                          width: '100%',
+                          padding: '0.75rem',
+                          backgroundColor: 'rgba(139, 92, 246, 0.1)',
+                          border: '1px solid var(--border-color)',
+                          borderRadius: '0.5rem',
+                          color: 'var(--text-light)',
+                          fontSize: '0.875rem'
+                        }}
+                      />
+                    </div>
+                  </div>
+                  
+                  <div>
+                    <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', marginBottom: '0.5rem' }}>
+                      Message <span style={{ color: '#f87171' }}>*</span>
+                    </label>
+                    <textarea
+                      name="message"
+                      value={formData.message}
+                      onChange={handleInputChange}
+                      placeholder="Write your message here..."
+                      rows={3}
+                      disabled={submitting}
+                      style={{
+                        width: '100%',
+                        padding: '0.75rem',
+                        backgroundColor: 'rgba(139, 92, 246, 0.1)',
+                        border: '1px solid var(--border-color)',
+                        borderRadius: '0.5rem',
+                        color: 'var(--text-light)',
+                        fontSize: '0.875rem',
+                        resize: 'none'
+                      }}
+                    />
+                  </div>
+
+                  <button
+                    onClick={handleSubmit}
+                    disabled={submitting || !formData.name.trim() || !formData.message.trim()}
+                    style={{
+                      width: '100%',
+                      padding: '0.75rem',
+                      background: submitting || !formData.name.trim() || !formData.message.trim()
+                        ? 'linear-gradient(to right, #c084fc, #f9a8d4)'
+                        : 'linear-gradient(to right, var(--accent-dark), #ec4899)',
+                      border: 'none',
+                      borderRadius: '0.5rem',
+                      color: 'white',
+                      fontWeight: '600',
+                      cursor: submitting || !formData.name.trim() || !formData.message.trim() ? 'not-allowed' : 'pointer',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      gap: '0.5rem',
+                      transition: 'all 0.2s'
+                    }}
+                  >
+                    {submitting ? (
+                      <>
+                        <Loader2 className="w-4 h-4 animate-spin" />
+                        Posting...
+                      </>
+                    ) : (
+                      <>
+                        <Send className="w-4 h-4" />
+                        Post Comment
+                      </>
+                    )}
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
-        </a>
-        
-        <div className="social-links">
-          <a href="https://www.linkedin.com/in/kenan-ben-polgo/" className="social-link" target="_blank" rel="noopener noreferrer">
-            <img src="https://api.iconify.design/mdi:linkedin.svg?color=%230A66C2" alt="LinkedIn" width="24" height="24" /> LinkedIn
-          </a>
-          <a href="https://github.com/bananaNuggets75" className="social-link" target="_blank" rel="noopener noreferrer">
-            <img src="https://cdn.simpleicons.org/github/181717" alt="GitHub" width="24" height="24" /> GitHub
-          </a>
-          <a href="https://www.instagram.com/keenaniganss/" className="social-link" target="_blank" rel="noopener noreferrer">
-            <img src="https://cdn.simpleicons.org/instagram/E4405F" alt="Instagram" width="24" height="24" /> Instagram
-          </a>
-        </div>
 
-        {/* Comment Form */}
-        <div style={{ marginTop: '2rem', padding: '1.5rem', backgroundColor: 'rgba(51, 65, 85, 0.3)', borderRadius: '1rem', border: '1px solid rgba(148, 163, 184, 0.2)' }}>
-          <h3 style={{ marginBottom: '1rem', fontSize: '1.25rem', fontWeight: '600', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-            <MessageCircle className="w-5 h-5" style={{ color: '#a855f7' }} />
-            Leave a Comment
-          </h3>
-          
-          {success && (
-            <div style={{ marginBottom: '1rem', padding: '0.75rem', backgroundColor: 'rgba(34, 197, 94, 0.2)', border: '1px solid rgba(34, 197, 94, 0.3)', borderRadius: '0.5rem', fontSize: '0.875rem', color: '#4ade80' }}>
-              Comment posted successfully!
-            </div>
-          )}
-          
-          {error && (
-            <div style={{ marginBottom: '1rem', padding: '0.75rem', backgroundColor: 'rgba(239, 68, 68, 0.2)', border: '1px solid rgba(239, 68, 68, 0.3)', borderRadius: '0.5rem', fontSize: '0.875rem', color: '#f87171', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-              <AlertCircle className="w-4 h-4" />
-              {error}
-            </div>
-          )}
-
-          <div style={{ display: 'grid', gap: '1rem' }}>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
-              <div>
-                <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', marginBottom: '0.5rem' }}>
-                  Name <span style={{ color: '#f87171' }}>*</span>
-                </label>
-                <input
-                  type="text"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleInputChange}
-                  placeholder="Enter your name"
-                  disabled={submitting}
-                  style={{
-                    width: '100%',
-                    padding: '0.75rem',
-                    backgroundColor: 'rgba(51, 65, 85, 0.5)',
-                    border: '1px solid rgba(148, 163, 184, 0.3)',
-                    borderRadius: '0.5rem',
-                    color: 'white',
-                    fontSize: '0.875rem'
-                  }}
-                />
-              </div>
-              <div>
-                <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', marginBottom: '0.5rem' }}>
-                  Email <span style={{ color: '#9ca3af' }}>(optional)</span>
-                </label>
-                <input
-                  type="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleInputChange}
-                  placeholder="your@email.com"
-                  disabled={submitting}
-                  style={{
-                    width: '100%',
-                    padding: '0.75rem',
-                    backgroundColor: 'rgba(51, 65, 85, 0.5)',
-                    border: '1px solid rgba(148, 163, 184, 0.3)',
-                    borderRadius: '0.5rem',
-                    color: 'white',
-                    fontSize: '0.875rem'
-                  }}
-                />
-              </div>
-            </div>
-            
-            <div>
-              <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', marginBottom: '0.5rem' }}>
-                Message <span style={{ color: '#f87171' }}>*</span>
-              </label>
-              <textarea
-                name="message"
-                value={formData.message}
-                onChange={handleInputChange}
-                placeholder="Write your message here..."
-                rows={3}
-                disabled={submitting}
-                style={{
-                  width: '100%',
-                  padding: '0.75rem',
-                  backgroundColor: 'rgba(51, 65, 85, 0.5)',
-                  border: '1px solid rgba(148, 163, 184, 0.3)',
-                  borderRadius: '0.5rem',
-                  color: 'white',
-                  fontSize: '0.875rem',
-                  resize: 'none'
-                }}
-              />
-            </div>
-
-            <button
-              onClick={handleSubmit}
-              disabled={submitting || !formData.name.trim() || !formData.message.trim()}
+          {/* Right side - Comments Display */}
+          <div
+            style={{
+              backgroundColor: 'var(--card-bg)',
+              borderRadius: '1rem',
+              padding: '2rem',
+              border: '1px solid var(--border-color)'
+            }}
+          >
+            <div
               style={{
-                width: '100%',
-                padding: '0.75rem',
-                background: submitting || !formData.name.trim() || !formData.message.trim() 
-                  ? 'linear-gradient(to right, #6b7280, #6b7280)' 
-                  : 'linear-gradient(to right, #9333ea, #ec4899)',
-                border: 'none',
-                borderRadius: '0.5rem',
-                color: 'white',
-                fontWeight: '600',
-                cursor: submitting || !formData.name.trim() || !formData.message.trim() ? 'not-allowed' : 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                marginBottom: '2rem'
+              }}
+            >
+              <h3
+                style={{
+                  fontSize: '1.5rem',
+                  fontWeight: '700',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '0.75rem'
+                }}
+              >
+                <MessageCircle className="w-6 h-6" style={{ color: 'var(--accent-color)' }} />
+                Comments ({comments.length})
+              </h3>
+              <button
+                onClick={fetchComments}
+                disabled={loading}
+                style={{
+                  padding: '0.5rem 1rem',
+                  backgroundColor: 'var(--glass-bg)',
+                  border: '1px solid var(--border-color)',
+                  borderRadius: '0.5rem',
+                  color: 'var(--text-light)',
+                  fontSize: '0.875rem',
+                  cursor: loading ? 'not-allowed' : 'pointer',
+                  opacity: loading ? 0.5 : 1
+                }}
+              >
+                {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : '↻ Refresh'}
+              </button>
+            </div>
+
+            {loading ? (
+              <div
+              style={{
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                gap: '0.5rem',
-                transition: 'all 0.2s'
+                padding: '3rem 0',
+                color: 'var(--text-muted)'
               }}
             >
-              {submitting ? (
-                <>
-                  <Loader2 className="w-4 h-4 animate-spin" />
-                  Posting...
-                </>
-              ) : (
-                <>
-                  <Send className="w-4 h-4" />
-                  Post Comment
-                </>
-              )}
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    {/* Right side - Comments Display */}
-    <div style={{ backgroundColor: 'rgba(51, 65, 85, 0.3)', borderRadius: '1rem', padding: '2rem', border: '1px solid rgba(148, 163, 184, 0.2)' }}>
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '2rem' }}>
-        <h3 style={{ fontSize: '1.5rem', fontWeight: '700', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-          <MessageCircle className="w-6 h-6" style={{ color: '#a855f7' }} />
-          Comments ({comments.length})
-        </h3>
-        <button
-          onClick={fetchComments}
-          disabled={loading}
-          style={{
-            padding: '0.5rem 1rem',
-            backgroundColor: 'rgba(51, 65, 85, 0.5)',
-            border: '1px solid rgba(148, 163, 184, 0.3)',
-            borderRadius: '0.5rem',
-            color: 'white',
-            fontSize: '0.875rem',
-            cursor: loading ? 'not-allowed' : 'pointer',
-            opacity: loading ? 0.5 : 1
-          }}
-        >
-          {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : '↻ Refresh'}
-        </button>
-      </div>
-
-      {loading ? (
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '3rem 0', color: '#9ca3af' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-            <Loader2 className="w-6 h-6 animate-spin" />
-            <span>Loading comments...</span>
-          </div>
-        </div>
-      ) : comments.length === 0 ? (
-        <div style={{ textAlign: 'center', padding: '3rem 0' }}>
-          <MessageCircle className="w-12 h-12" style={{ color: '#6b7280', margin: '0 auto 1rem' }} />
-          <p style={{ color: '#9ca3af' }}>No comments yet. Be the first to leave a comment!</p>
-        </div>
-      ) : (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', maxHeight: '24rem', overflowY: 'auto', paddingRight: '0.5rem' }}>
-          {comments.map((comment) => (
-            <div key={comment.id} style={{
-              padding: '1.5rem',
-              borderRadius: '0.75rem',
-              border: comment.is_pinned 
-                ? '1px solid rgba(168, 85, 247, 0.3)' 
-                : '1px solid rgba(148, 163, 184, 0.2)',
-              backgroundColor: comment.is_pinned 
-                ? 'rgba(147, 51, 234, 0.2)' 
-                : 'rgba(51, 65, 85, 0.3)',
-              transition: 'all 0.3s',
-              boxShadow: comment.is_pinned ? '0 10px 25px rgba(168, 85, 247, 0.1)' : 'none'
-            }}>
-              <div style={{ display: 'flex', alignItems: 'flex-start', gap: '1rem' }}>
-                <div style={{
-                  width: '3rem',
-                  height: '3rem',
-                  background: 'linear-gradient(to bottom right, #9333ea, #ec4899)',
-                  borderRadius: '50%',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  flexShrink: 0
-                }}>
-                  <User className="w-6 h-6 text-white" />
-                </div>
-                <div style={{ flex: 1 }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.5rem' }}>
-                    <h4 style={{ fontWeight: '600', color: 'white' }}>{comment.name}</h4>
-                    {comment.is_pinned && (
-                      <span style={{
-                        padding: '0.25rem 0.5rem',
-                        backgroundColor: 'rgba(168, 85, 247, 0.2)',
-                        color: '#c4b5fd',
-                        fontSize: '0.75rem',
-                        borderRadius: '9999px',
-                        fontWeight: '500'
-                      }}>
-                        PINNED
-                      </span>
-                    )}
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', color: '#9ca3af', fontSize: '0.875rem' }}>
-                      <Calendar className="w-3 h-3" />
-                      {formatTimestamp(comment.created_at)}
-                    </div>
-                  </div>
-                  <p style={{ color: '#d1d5db', lineHeight: '1.6' }}>{comment.message}</p>
-                </div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                <Loader2 className="w-6 h-6 animate-spin" />
+                <span>Loading comments...</span>
               </div>
             </div>
-          ))}
+          ) : comments.length === 0 ? (
+            <div style={{ textAlign: 'center', padding: '3rem 0' }}>
+              <MessageCircle className="w-12 h-12" style={{ color: '#6b7280', margin: '0 auto 1rem' }} />
+              <p style={{ color: 'var(--text-muted)' }}>No comments yet. Be the first to leave a comment!</p>
+            </div>
+            ) : (
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', maxHeight: '24rem', overflowY: 'auto', paddingRight: '0.5rem' }}>
+                {comments.map((comment) => (
+                  <div key={comment.id} style={{
+                    padding: '1.5rem',
+                    borderRadius: '0.75rem',
+                    border: comment.is_pinned
+                      ? '1px solid var(--accent-color)'
+                      : '1px solid var(--border-color)',
+                    backgroundColor: comment.is_pinned ? 'rgba(139, 92, 246, 0.1)' : 'var(--card-bg)',
+                    transition: 'all 0.3s',
+                    boxShadow: comment.is_pinned ? '0 10px 25px rgba(168, 85, 247, 0.1)' : 'none'
+                  }}>
+                    <div style={{ display: 'flex', alignItems: 'flex-start', gap: '1rem' }}>
+                      <div style={{
+                        width: '3rem',
+                        height: '3rem',
+                        background: 'linear-gradient(to bottom right, var(--accent-dark), #ec4899)',
+                        borderRadius: '50%',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        flexShrink: 0
+                      }}>
+                        <User className="w-6 h-6 text-white" />
+                      </div>
+                      <div style={{ flex: 1 }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.5rem' }}>
+                          <h4 style={{ fontWeight: '600', color: 'var(--text-light)' }}>{comment.name}</h4>
+                          {comment.is_pinned && (
+                            <span style={{
+                              padding: '0.25rem 0.5rem',
+                              backgroundColor: 'rgba(168, 85, 247, 0.2)',
+                              color: 'var(--accent-light)',
+                              fontSize: '0.75rem',
+                              borderRadius: '9999px',
+                              fontWeight: '500'
+                            }}>
+                              PINNED
+                            </span>
+                          )}
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', color: 'var(--text-muted)', fontSize: '0.875rem' }}>
+                            <Calendar className="w-3 h-3" />
+                            {formatTimestamp(comment.created_at)}
+                          </div>
+                        </div>
+                        <p style={{ color: '#d1d5db', lineHeight: '1.6' }}>{comment.message}</p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
         </div>
-      )}
-    </div>
-  </div>
-</section>
+      </section>
 
       {/* Project Detail Modal */}
       {selectedProject && (
