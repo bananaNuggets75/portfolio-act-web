@@ -35,7 +35,35 @@ const Portfolio: React.FC = () => {
     message: ''
   });
   
+  const fetchComments = async () => {
+    try {
+      setLoading(true);
+      setError(null);
+      
+      const { data, error } = await supabase
+        .from('comments')
+        .select('*')
+        .order('created_at', { ascending: false });
   
+      if (error) throw error;
+      setComments(data || []);
+    } catch (err) {
+      console.error('Error fetching comments:', err);
+      setError('Failed to load comments. Please try again later.');
+      // Demo comment for testing
+      setComments([
+        {
+          id: 'demo',
+          name: "Demo User",
+          message: "Connect your Supabase database to see real comments!",
+          created_at: new Date().toISOString(),
+          is_pinned: false
+        }
+      ]);
+    } finally {
+      setLoading(false);
+    }
+  };
   
   
   
