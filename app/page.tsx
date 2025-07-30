@@ -24,6 +24,7 @@ const Portfolio: React.FC = () => {
     is_pinned: boolean;
   };
   
+  // 2. Add these state variables inside your Portfolio component (after your existing useState declarations)
   const [comments, setComments] = useState<Comment[]>([]);
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
@@ -35,6 +36,7 @@ const Portfolio: React.FC = () => {
     message: ''
   });
   
+  // 3. Add these functions inside your Portfolio component (after your existing functions)
   const fetchComments = async () => {
     try {
       setLoading(true);
@@ -65,7 +67,41 @@ const Portfolio: React.FC = () => {
     }
   };
   
+  const postComment = async (commentData: { name: string; email: string; message: string }) => {
+    try {
+      setSubmitting(true);
+      setError(null);
   
+      const { data, error } = await supabase
+        .from('comments')
+        .insert([
+          {
+            name: commentData.name.trim(),
+            email: commentData.email?.trim() || null,
+            message: commentData.message.trim(),
+          }
+        ])
+        .select();
+  
+      if (error) throw error;
+  
+      // Add new comment to the top of the list
+      setComments(prev => [data[0], ...prev]);
+      setSuccess(true);
+      setFormData({ name: '', email: '', message: '' });
+      setTimeout(() => setSuccess(false), 3000);
+      
+    } catch (err) {
+      if (err instanceof Error) {
+        console.error('Error posting comment:', err.message);
+      } else {
+        console.error('Unknown error posting comment:', JSON.stringify(err));
+      }      
+      setError('Failed to post comment. Please try again.');
+    } finally {
+      setSubmitting(false);
+    }
+  };
   
   
   
