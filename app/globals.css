@@ -763,9 +763,11 @@
 /* Projects Grid */
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 40px;
-  padding: 0 10px;
+  padding: 0 20px;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
 .project-card {
@@ -907,9 +909,11 @@
 /* Certificates Grid */
 .certificates-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 30px;
-  padding: 0 10px;
+  padding: 0 20px;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
 .certificate-card {
@@ -1762,12 +1766,12 @@
   }
   
   .projects-grid {
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
     gap: 35px;
   }
   
   .certificates-grid {
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
     gap: 25px;
   }
   
@@ -1802,15 +1806,15 @@
   }
   
   .projects-grid {
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
     gap: 30px;
-    padding: 0 5px;
+    padding: 0 15px;
   }
   
   .certificates-grid {
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
     gap: 25px;
-    padding: 0 5px;
+    padding: 0 15px;
   }
   
   .tech-stack-simple {
@@ -2445,7 +2449,6 @@
     --card-bg: rgba(139, 92, 246, 0.15);
   }
 }
-
 .footer-content{
   display: flex;
   justify-content: center;
