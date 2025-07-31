@@ -6,6 +6,13 @@ import { FaDatabase, FaShieldAlt, FaCertificate, FaCode, FaTools } from 'react-i
 import { SiTensorflow, SiCisco, SiJavascript, SiOracle, SiOpenai } from 'react-icons/si';
 import { supabase } from '../lib/supabaseClient';
 
+interface Bubble {
+  id: number;
+  left: string;
+  animationDelay: string;
+  animationDuration: string;
+}
+
 
 
 // Main Portfolio Component
@@ -14,6 +21,7 @@ const Portfolio: React.FC = () => {
   const [activeTab, setActiveTab] = useState<string>('projects');
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [selectedCertificate, setSelectedCertificate] = useState<Certificate | null>(null);
+  const [bubbles, setBubbles] = useState<Bubble[]>([]);
 
   type Comment = {
     id: string;
@@ -559,25 +567,34 @@ const Portfolio: React.FC = () => {
   const [contactRef, contactInView] = useInView(0.3, 'slideInUp');
 
   // Generate floating bubbles
-  const generateBubbles = (count: number) => {
-    return Array.from({ length: count }, (_, i) => (
-      <div
-        key={i}
-        className="bubble"
-        style={{
-          left: `${Math.random() * 100}%`,
-          animationDelay: `${Math.random() * 20}s`,
-          animationDuration: `${15 + Math.random() * 10}s`
-        }}
-      ></div>
-    ));
-  };
+  useEffect(() => {
+    const generateBubbles = (count: number): Bubble[] => {
+      return Array.from({ length: count }, (_, i) => ({
+        id: i,
+        left: `${Math.random() * 100}%`,
+        animationDelay: `${Math.random() * 20}s`,
+        animationDuration: `${15 + Math.random() * 10}s`
+      }));
+    };
+
+    setBubbles(generateBubbles(20));
+  }, []);
 
   return (
     <div className="portfolio">
       {/* Floating bubbles background */}
       <div className="bubbles-container">
-        {generateBubbles(20)}
+        {bubbles.map((bubble) => (
+          <div
+            key={bubble.id}
+            className="bubble"
+            style={{
+              left: bubble.left,
+              animationDelay: bubble.animationDelay,
+              animationDuration: bubble.animationDuration
+            }}
+          ></div>
+        ))}
       </div>
 
       {/* Navigation */}
@@ -709,7 +726,7 @@ const Portfolio: React.FC = () => {
 
       {/* Portfolio Section */}
       <section id="portfolio" className="section" ref={portfolioRef}>
-        <div className="portfolio-container"> </div>
+        <div className="portfolio-container"> 
           <div className="section-title">
             My <span className="section-title-accent">Portfolio</span>
           </div>
@@ -723,6 +740,7 @@ const Portfolio: React.FC = () => {
                 <span className="mr-1">{tab.icon}</span> {tab.name}
               </button>
             ))}
+            </div>
           </div>
 
           {/* Projects Tab */}
