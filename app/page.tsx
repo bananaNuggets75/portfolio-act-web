@@ -709,7 +709,7 @@ const Portfolio: React.FC = () => {
 
       {/* Portfolio Section */}
       <section id="portfolio" className="section" ref={portfolioRef}>
-        <div className="portfolio-container"> </div>
+        <div className="portfolio-container"> 
           <div className="section-title">
             My <span className="section-title-accent">Portfolio</span>
           </div>
@@ -723,6 +723,7 @@ const Portfolio: React.FC = () => {
                 <span className="mr-1">{tab.icon}</span> {tab.name}
               </button>
             ))}
+            </div>
           </div>
 
           {/* Projects Tab */}
