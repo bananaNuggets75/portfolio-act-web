@@ -2737,7 +2737,12 @@
   background: linear-gradient(135deg, #f59e0b, #d97706);
   color: #1a1205;
 }
-.card-icon svg { color: var(--accent-color); }
+.card-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.card-icon svg { color: #fff; } /* white icon on the purple box */
 
 /* ============================================================
    In-modal peek carousel + profile quick-links

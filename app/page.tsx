@@ -865,13 +865,15 @@ const Portfolio: React.FC = () => {
               </div>
               <div className="about-text">
                 <p>
-                  I'm a passionate <span className="highlight">Computer Science student</span> at Central Philippine University,
-                  dedicated to creating innovative web solutions that make a difference. My journey in technology
-                  began with curiosity and has evolved into a deep commitment to excellence in software development.
+                  I'm a <span className="highlight">Computer Science graduate</span> from Central Philippine University
+                  who builds software to <span className="highlight">solve my own problems first</span>. If something
+                  annoys me, or I'm curious how it works, I build a tool for it — that's how most of my projects start.
                 </p>
                 <p>
-                  With experience in <span className="highlight">full-stack development</span>, I enjoy tackling
-                  complex problems and turning ideas into reality through clean, efficient code.
+                  That curiosity keeps pulling me into tech I haven't touched yet, which is how I've ended up working
+                  across <span className="highlight">web, mobile, machine learning, blockchain</span>, and even a
+                  browser extension. I like turning a rough idea into something real and useful, then learning whatever
+                  it takes to ship it.
                 </p>
               </div>
             </div>
@@ -883,10 +885,10 @@ const Portfolio: React.FC = () => {
               <div className="education-item">
                 <h4 className="education-degree">Bachelor of Science in Computer Science</h4>
                 <p className="education-school">Central Philippine University</p>
-                <p className="education-period">2021 - Present</p>
+                <p className="education-period">2021 - 2026</p>
                 <p className="education-details">
-                  Currently pursuing my degree with a focus on software engineering and web development.
-                  Maintaining high academic standards while actively participating in programming competitions and tech events.
+                  Graduated in 2026 with a focus on software engineering and web development.
+                  Maintained strong academic standards while actively joining programming competitions, hackathons, and tech events.
                 </p>
               </div>
             </div>
