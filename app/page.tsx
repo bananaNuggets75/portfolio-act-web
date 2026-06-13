@@ -2,7 +2,11 @@
 
 import React, { useState, useEffect, useRef, ReactElement } from 'react';
 import { Mail, Phone, MapPin, Send, MessageCircle, User, Calendar, Loader2, AlertCircle } from "lucide-react"
-import { FaDatabase, FaShieldAlt, FaCertificate, FaCode, FaTools } from 'react-icons/fa';
+import {
+  FaDatabase, FaShieldAlt, FaCertificate, FaCode, FaTools,
+  FaTrafficLight, FaUtensils, FaBook, FaVoteYea, FaWarehouse, FaBrain, FaChartLine, FaBolt,
+  FaLock, FaGithub, FaExternalLinkAlt, FaStar, FaListUl, FaChevronLeft, FaChevronRight, FaTimes,
+} from 'react-icons/fa';
 import { SiTensorflow, SiCisco, SiJavascript, SiOracle, SiOpenai } from 'react-icons/si';
 import { supabase } from '../lib/supabaseClient';
 
