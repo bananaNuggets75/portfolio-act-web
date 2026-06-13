@@ -6,7 +6,7 @@ import {
   FaDatabase, FaShieldAlt, FaCertificate, FaCode, FaTools,
   FaTrafficLight, FaUtensils, FaBook, FaVoteYea, FaWarehouse, FaBrain, FaChartLine, FaBolt,
   FaLock, FaGithub, FaExternalLinkAlt, FaStar, FaListUl, FaChevronLeft, FaChevronRight, FaTimes,
-  FaNetworkWired, FaGamepad,
+  FaNetworkWired, FaGamepad, FaRocket, FaGraduationCap,
 } from 'react-icons/fa';
 import { SiTensorflow, SiCisco, SiJavascript, SiOracle, SiOpenai } from 'react-icons/si';
 import { supabase } from '../lib/supabaseClient';
@@ -606,7 +606,7 @@ const Portfolio: React.FC = () => {
   ];
 
   const techStack = [
-    // 🧠 Languages
+    // Languages
     { name: 'Python', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg' },
     { name: 'C', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg' },
     { name: 'C++', icon: 'https://cdn.simpleicons.org/cplusplus/00599C' },
@@ -618,14 +618,14 @@ const Portfolio: React.FC = () => {
     { name: 'TypeScript', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg' },
     { name: 'Dart', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dart/dart-original.svg' },
   
-    // 🧰 Tools & IDEs
+    // Tools & IDEs
     { name: 'VS Code', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg' },
     { name: 'Visual Studio', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/visualstudio/visualstudio-plain.svg' },
     { name: 'PyCharm', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pycharm/pycharm-original.svg' },
     { name: 'Git', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg' },
     { name: 'GitHub', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg' },
   
-    // 🧱 Frameworks & Libraries
+    // Frameworks & Libraries
     { name: 'React', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg' },
     { name: 'Next.js', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg' },
     { name: 'Flutter', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg' },
@@ -642,7 +642,7 @@ const Portfolio: React.FC = () => {
     { name: 'Express', icon: 'https://cdn.simpleicons.org/express/68A063' },
     { name: 'Chart.js', icon: 'https://cdn.simpleicons.org/chartdotjs/FF6384' },
 
-    // 🛢️ Databases
+    // Databases
     { name: 'MySQL', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg' },
     { name: 'SQLite', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sqlite/sqlite-original.svg' },
     { name: 'MongoDB', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg' },
@@ -651,7 +651,7 @@ const Portfolio: React.FC = () => {
     { name: 'Prisma', icon: 'https://cdn.simpleicons.org/prisma/5A67D8' },
     { name: 'SQL Server', icon: 'https://api.iconify.design/tabler:database.svg?color=%23CC2927    ' },
   
-    // 🔧 Platforms & Misc
+    // Platforms & Misc
     { name: '.NET', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dot-net/dot-net-original.svg' },
     { name: 'Android', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/android/android-plain.svg' },
     { name: 'Arduino', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/arduino/arduino-original.svg' },
@@ -818,11 +818,10 @@ const Portfolio: React.FC = () => {
         <div className={`about-grid ${aboutInView ? 'animate-slideInLeft' : ''}`}>
           <div className="profile-section">
             <div className="profile-card">
-              {/* Replace emoji with image */}
               <div className="profile-avatar">
-                <img 
-                  src="/IMG_8515.JPG" 
-                  alt="Profile" 
+                <img
+                  src="/profile.jpg"
+                  alt="Profile"
                   className="profile-image"
                 />
               </div>
@@ -834,7 +833,7 @@ const Portfolio: React.FC = () => {
           <div className="about-content">
             <div className="about-card">
               <div className="card-header">
-                <div className="card-icon">🚀</div>
+                <div className="card-icon"><FaRocket /></div>
                 <h3 className="card-title">My Journey</h3>
               </div>
               <div className="about-text">
@@ -851,7 +850,7 @@ const Portfolio: React.FC = () => {
             </div>
             <div className="about-card">
               <div className="card-header">
-                <div className="card-icon">🎓</div>
+                <div className="card-icon"><FaGraduationCap /></div>
                 <h3 className="card-title">Education</h3>
               </div>
               <div className="education-item">
@@ -1547,7 +1546,7 @@ const Portfolio: React.FC = () => {
                 {selectedCertificate.verifyLink && (
                   <div className="certificate-actions">
                     <a href={selectedCertificate.verifyLink} className="verify-btn" target="_blank" rel="noopener noreferrer">
-                      🔍 Verify Certificate
+                      <FaExternalLinkAlt /> Verify Certificate
                     </a>
                   </div>
                 )}

@@ -2718,3 +2718,10 @@
   color: var(--text-muted);
   opacity: 0.7;
 }
+
+/* Gold "Champion" badge + FA icons in About cards */
+.project-badge.badge-champion {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  color: #1a1205;
+}
+.card-icon svg { color: var(--accent-color); }
