@@ -26,6 +26,26 @@ const Portfolio: React.FC = () => {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [selectedCertificate, setSelectedCertificate] = useState<Certificate | null>(null);
   const [bubbles, setBubbles] = useState<Bubble[]>([]);
+  const [lightbox, setLightbox] = useState<{ images: string[]; index: number } | null>(null);
+
+  const showLightboxAt = (index: number) =>
+    setLightbox((lb) => (lb ? { ...lb, index } : lb));
+  const stepLightbox = (delta: number) =>
+    setLightbox((lb) =>
+      lb ? { ...lb, index: (lb.index + delta + lb.images.length) % lb.images.length } : lb
+    );
+
+  // Keyboard navigation for the gallery lightbox
+  useEffect(() => {
+    if (!lightbox) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setLightbox(null);
+      if (e.key === 'ArrowRight') stepLightbox(1);
+      if (e.key === 'ArrowLeft') stepLightbox(-1);
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [lightbox]);
 
   type Comment = {
     id: string;
@@ -464,6 +484,16 @@ const Portfolio: React.FC = () => {
   ];
 
   const certificates: Certificate[] = [
+    {
+      id: 'hackathon',
+      title: 'Hacking the Future of Energy — Hackathon',
+      issuer: 'New Energy Nexus Philippines',
+      date: 'May 2026',
+      description: 'Participated in "Ready, Spark, Charge 2026" with team WattWise AI — an energy-focused hackathon at Central Philippine University, in partnership with CPUGAD TBI and DOST Western Visayas iHubs.',
+      icon: <FaBolt className="text-xl text-yellow-500" />,
+      image: '/WattWise AI (2).png',
+      credentialId: ''
+    },
     {
       id: '1',
       title: "Machine Learning with Python",
