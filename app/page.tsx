@@ -488,27 +488,27 @@ const Portfolio: React.FC = () => {
     },
     {
       id: '9',
-      title: 'GameOn — Region 6 Delicacies Kitchen',
-      description: 'Hackathon 2D cooking game (Godot) celebrating Iloilo / Region 6 delicacies.',
-      fullDescription: 'A 2D cooking time-management game built in the Godot Engine that celebrates the local delicacies of Region 6 (Western Visayas), Philippines — dishes like molo soup and biscocho. Built as a hackathon project: serve customers their orders before they lose patience, through tactile drag-and-drop kitchen gameplay. Part fast-paced kitchen sim, part cultural showcase.',
-      tech: ['Godot', 'GDScript'],
+      title: 'Blockchain E-Voting System',
+      description: 'Django e-voting platform that records each vote on a tamper-evident blockchain.',
+      fullDescription: 'A web-based electronic voting platform built with Django that records every vote on a tamper-evident blockchain. Each cast vote becomes a cryptographically-linked block (SHA-256 hash, proof-of-work, previous-hash linkage), so altering any vote breaks the chain and is immediately detectable. Includes voter self-registration with admin approval, election management, and a live chain-integrity check. Educational proof of concept.',
+      tech: ['Django', 'Python', 'SQLite', 'PostgreSQL'],
       link: '#',
       github: '',
-      icon: <FaGamepad />,
-      image: '/gameon-1.jpg',
-      images: ['/gameon-1.jpg', '/gameon-2.jpg', '/gameon-3.jpg'],
-      badge: 'Hackathon',
+      icon: <FaVoteYea />,
+      image: '/warn.png',
+      badge: 'Academic',
       isPrivate: true,
       features: [
-        'Drag-and-drop kitchen gameplay',
-        'Ingredient → dish preparation (molo soup, biscocho)',
-        'Timed customer spawning + coin goal economy',
-        'Region 6 culinary cultural theme'
+        'SHA-256 hashing and proof-of-work mining',
+        'Genesis block + previous-hash chaining',
+        'One vote per voter per election (DB-enforced)',
+        'Admin-approved voter eligibility',
+        'Live blockchain integrity verification'
       ],
       stats: [
-        { label: 'Event', value: 'Hackathon' },
-        { label: 'Engine', value: 'Godot' },
-        { label: 'Theme', value: 'Region 6' }
+        { label: 'Type', value: 'Academic' },
+        { label: 'Backend', value: 'Django' },
+        { label: 'Concept', value: 'Blockchain' }
       ]
     }
   ];
