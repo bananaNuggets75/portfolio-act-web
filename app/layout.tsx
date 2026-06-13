@@ -1,5 +1,5 @@
 import type React from "react";
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 
@@ -12,11 +12,14 @@ export const metadata: Metadata = {
   keywords:
     "Kenan Ben G. Polgo, Computer Science, Central Philippine University, Portfolio, Web Developer",
   authors: [{ name: "Kenan Ben G. Polgo" }],
-  viewport: "width=device-width, initial-scale=1",
-  generator: "v0.dev",
   icons: {
     icon: "/IMG_8516.JPG",
   },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
 };
 
 export default function RootLayout({

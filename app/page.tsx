@@ -2,7 +2,12 @@
 
 import React, { useState, useEffect, useRef, ReactElement } from 'react';
 import { Mail, Phone, MapPin, Send, MessageCircle, User, Calendar, Loader2, AlertCircle } from "lucide-react"
-import { FaDatabase, FaShieldAlt, FaCertificate, FaCode, FaTools } from 'react-icons/fa';
+import {
+  FaDatabase, FaShieldAlt, FaCertificate, FaCode, FaTools,
+  FaTrafficLight, FaUtensils, FaBook, FaVoteYea, FaWarehouse, FaBrain, FaChartLine, FaBolt,
+  FaLock, FaGithub, FaExternalLinkAlt, FaStar, FaListUl, FaChevronLeft, FaChevronRight, FaTimes,
+  FaNetworkWired, FaGamepad, FaRocket, FaGraduationCap,
+} from 'react-icons/fa';
 import { SiTensorflow, SiCisco, SiJavascript, SiOracle, SiOpenai } from 'react-icons/si';
 import { supabase } from '../lib/supabaseClient';
 
@@ -22,6 +27,28 @@ const Portfolio: React.FC = () => {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [selectedCertificate, setSelectedCertificate] = useState<Certificate | null>(null);
   const [bubbles, setBubbles] = useState<Bubble[]>([]);
+  const [lightbox, setLightbox] = useState<{ images: string[]; index: number } | null>(null);
+  const [galleryIndex, setGalleryIndex] = useState(0);
+
+  const stepLightbox = (delta: number) =>
+    setLightbox((lb) =>
+      lb ? { ...lb, index: (lb.index + delta + lb.images.length) % lb.images.length } : lb
+    );
+
+  // Keyboard navigation for the gallery lightbox
+  useEffect(() => {
+    if (!lightbox) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setLightbox(null);
+      if (e.key === 'ArrowRight') stepLightbox(1);
+      if (e.key === 'ArrowLeft') stepLightbox(-1);
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [lightbox]);
+
+  // Reset the modal carousel to the first image whenever a project opens
+  useEffect(() => { setGalleryIndex(0); }, [selectedProject]);
 
   type Comment = {
     id: string;
@@ -158,10 +185,14 @@ const Portfolio: React.FC = () => {
     description: string;
     fullDescription: string;
     tech: string[];
-    link: string;
-    github: string;
-    icon: string;
-    image: string;
+    link: string;        // '#' when there is no live demo
+    github: string;      // '' when the repo is private/unavailable
+    icon: ReactElement;
+    image: string;       // cover image
+    images?: string[];   // optional gallery (defaults to [image])
+    badge?: string;      // e.g. 'Live' | 'Private' | 'Academic' | 'Hackathon'
+    badges?: string[];   // multiple badges (takes precedence over `badge`)
+    isPrivate?: boolean; // hides demo/github, shows a "demo unavailable" state
     features: string[];
     stats: { label: string; value: string }[];
   }
@@ -173,7 +204,7 @@ const Portfolio: React.FC = () => {
     date: string;
     description: string;
     icon?: ReactElement;
-    image: string;
+    image?: string;   // optional — renders a placeholder card when absent
     credentialId?: string;
     verifyLink?: string;
   }
@@ -264,150 +295,240 @@ const Portfolio: React.FC = () => {
   const projects: Project[] = [
     {
       id: '1',
-      title: 'CPU-SHS Research Archive',
-      description: 'Full-stack web system for managing research papers and academic documents *Note: The UI was designed based on the client\'s preferences.*',
-      fullDescription: 'A comprehensive research archive system built for Central Philippine University Senior High School. This platform allows students and faculty to upload, manage, and search through academic research papers with advanced filtering and categorization features.  *Note: The UI was designed based on the client\'s preferences.*',
-      tech: ['React', 'Node.js', 'Cloudinary', 'Firebase', 'TypeScript', 'Next.js'],
-      link: 'https://cpu-research-archive.vercel.app/',
-      github: 'https://github.com/bananaNuggets75/cpu-research-archive',
-      icon: '📚',
-      image: '/cpu-shs.png',
+      title: 'SafeDrive — Traffic Management System',
+      description: 'Real-time traffic violation management system for a city traffic department.',
+      fullDescription: 'A web-based platform that helps a traffic regulatory department record, manage, and monitor road traffic violations. Built around a real-time data layer with Firebase, every violation reported, paid, or updated is reflected instantly across the analytics dashboard, payment desk, and driver history. Built with a team of four.',
+      tech: ['Next.js', 'React', 'TypeScript', 'Firebase', 'Chart.js', 'Tailwind CSS'],
+      link: 'https://traffic-management-system-cyan.vercel.app/',
+      github: 'https://github.com/bananaNuggets75/traffic-management-system',
+      icon: <FaTrafficLight />,
+      image: '/traffic.png',
+      badge: 'Live',
       features: [
-        'Advanced search and filtering system',
-        'User authentication and authorization',
-        'Document upload and management',
-        'Real-time notifications',
-        'Admin dashboard for content moderation'
+        'Real-time violation sync via Firebase',
+        'Analytics dashboard with yearly and type charts',
+        'Fine management and payment tracking',
+        'Driver profiles with full violation history',
+        'Status workflow (Pending / Paid)'
       ],
       stats: [
-        { label: 'Technologies Used', value: '6' },
-        { label: 'Active Users', value: '500+' },
-        { label: 'Documents Stored', value: '1000+' }
+        { label: 'Status', value: 'Live' },
+        { label: 'Team', value: '4 devs' },
+        { label: 'Data layer', value: 'Realtime' }
       ]
     },
     {
       id: '2',
-      title: 'E-Voting Blockchain',
-      description: 'Django-based secure e-voting platform using blockchain principles',
-      fullDescription: 'A blockchain-inspired e-voting system built with Django, designed to improve transparency and security in student council elections. Developed in response to issues encountered with previous platforms like Canvas.',
-      tech: ['Django', 'PostgreSQL', 'Python', 'CSS'],
-      link: '#',
-      github: 'https://github.com/bananaNuggets75/thesis-platform',
-      icon: '🗳️',
-      image: '/warn.png',
+      title: 'Campus Food Ordering System',
+      description: 'Full-stack food ordering web app built for the CPU campus community.',
+      fullDescription: 'A full-stack online ordering platform for browsing a menu, placing orders, and tracking them in real time, with a separate admin area for managing menu items and incoming orders. Features cart persistence, an order confirmation and tracking flow, account management, and role-based admin access through Firebase Auth. Note: the UI was designed to the client\'s preferences.',
+      tech: ['Next.js', 'React', 'TypeScript', 'Firebase', 'Cloudinary'],
+      link: 'https://online-ordering-system-ochre.vercel.app/menu',
+      github: 'https://github.com/bananaNuggets75/online-ordering-system',
+      icon: <FaUtensils />,
+      image: '/food-delivery.png',
+      badge: 'Live',
       features: [
-        'Secure vote submission with encryption',
-        'Tamper-proof voting records',
-        'Voter authentication system',
-        'Real-time results dashboard',
-        'Admin panel for election setup and management'
+        'Menu browsing with sizes and flavors',
+        'Cart that persists across reloads',
+        'Checkout and real-time order tracking',
+        'Admin dashboard for menu and orders',
+        'Role-based access via Firebase Auth'
       ],
       stats: [
-        { label: 'Technologies Used', value: '5' },
-        { label: 'Students Helped', value: '200+' },
-        { label: 'Thesis Completed', value: '150+' }
+        { label: 'Status', value: 'Live' },
+        { label: 'Client', value: 'CPU SHS Students' },
+        { label: 'Role', value: 'Full-stack' }
       ]
     },
     {
       id: '3',
-      title: 'Traffic Management System',
-      description: 'React-TypeScript application for traffic flow optimization',
-      fullDescription: 'An intelligent traffic management system that uses real-time data analysis to optimize traffic flow in urban areas. Features interactive dashboards and predictive analytics.',
-      tech: ['React', 'TypeScript', 'Chart.js', 'Firebase', 'Node.js', 'Next.js'],
-      link: 'https://traffic-management-system-cyan.vercel.app/',
-      github: 'https://github.com/bananaNuggets75/traffic-management-system',
-      icon: '🚦',
-      image: '/traffic.png',
+      title: 'CPU-SHS Research Archive',
+      description: 'Research paper archive and management system for CPU Senior High School.',
+      fullDescription: 'A research archive built for Central Philippine University Senior High School, letting students and faculty upload, manage, and search academic research papers with filtering and categorization. Includes authentication, document management, and an admin dashboard for content moderation. Note: the UI was designed to the client\'s preferences.',
+      tech: ['Next.js', 'React', 'TypeScript', 'Firebase', 'Cloudinary', 'Node.js'],
+      link: 'https://cpu-research-archive.vercel.app/',
+      github: 'https://github.com/bananaNuggets75/cpu-research-archive',
+      icon: <FaBook />,
+      image: '/cpu-shs.png',
+      badge: 'Live',
       features: [
-        'Real-time traffic monitoring',
-        'Predictive traffic analysis',
-        'Interactive data visualization',
-        'Alert system for congestion',
-        'Historical data analysis'
+        'Advanced search and filtering',
+        'Document upload and management',
+        'User authentication and roles',
+        'Admin dashboard for moderation'
       ],
       stats: [
-        { label: 'Technologies Used', value: '6' },
-        { label: 'Traffic Points', value: '50+' },
-        { label: 'Data Points/Day', value: '10K+' }
+        { label: 'Status', value: 'Live' },
+        { label: 'Client', value: 'CPU SHS' },
+        { label: 'Role', value: 'Full-stack' }
       ]
     },
     {
       id: '4',
-      title: 'Food Delivery Web App',
-      description: 'Full-stack food delivery web app eclusive in CPU campus *Note: The UI was designed based on the client\'s preferences.*',
-      fullDescription: 'A full-stack food delivery web application designed exclusively for the CPU campus community. It features real-time order tracking, secure payment options, and a robust admin dashboard for managing menus, orders, and customer feedback. *Note: The UI was designed based on the client\'s preferences.*',
-      tech: ['Next.js', 'Firebase', 'Node.js', 'React', 'TypeScript'],
-      link: 'https://online-ordering-system-ochre.vercel.app/menu',
-      github: 'https://github.com/bananaNuggets75/online-ordering-system',
-      icon: '🛍️',
-      image: '/food-delivery.png',
+      title: 'WattWise AI',
+      description: 'Champion — "Hacking the Future of Energy" hackathon (CPU, 2026). AI app for smarter energy use.',
+      fullDescription: 'WattWise AI won 1st place (Champion) at "Ready, Spark, Charge 2026: Hacking the Future of Energy" — a hackathon by New Energy Nexus Philippines with CPUGAD TBI and DOST Western Visayas iHubs, held at Central Philippine University. It is a web + mobile app that helps people understand and reduce their energy usage, using OCR (Gemini) to read electricity bills/meters and Supabase as the backend. Built as a hackathon prototype — the full product is still in progress.',
+      tech: ['React', 'TypeScript', 'Expo', 'Supabase', 'Gemini OCR'],
+      link: '#',
+      github: '',
+      icon: <FaBolt />,
+      image: '/wattwise-1.jpg',
+      images: [
+        '/wattwise-1.jpg', '/wattwise-2.jpg', '/wattwise-3.jpg',
+        '/wattwise-4.jpg', '/wattwise-5.jpg', '/wattwise-6.jpg',
+        '/wattwise-cert-team.png', '/wattwise-cert-individual.png',
+      ],
+      badges: ['Champion', 'Hackathon'],
+      isPrivate: true,
       features: [
-        'Campus-exclusive delivery system',
-        'Real-time order tracking',
-        'Secure payment integration (GCash & Cash on Delivery)',
-        'Customizable menu and categories',
-        'Responsive admin dashboard for order management',
-        'Customer order history and nickname-based tracking',
-        'Delivery or pickup options with location input',
-        'Status updates with live notifications'
-      ],      
+        'Champion (1st place) — energy hackathon at CPU',
+        'Web + mobile app built with Expo',
+        'OCR bill/meter reading via Gemini',
+        'Supabase backend',
+        'Hackathon prototype — full build in progress'
+      ],
       stats: [
-        { label: 'Technologies Used', value: '5' },
-        { label: 'Orders Processed', value: '200+' },
-        { label: 'Revenue Generated', value: '10k+' }
+        { label: 'Result', value: 'Champion' },
+        { label: 'Event', value: 'Hackathon' },
+        { label: 'Platform', value: 'Web + Mobile' }
       ]
     },
     {
       id: '5',
-      title: 'Task Management App',
-      description: 'Collaborative task management tool with real-time updates',
-      fullDescription: 'A comprehensive task management application that enables teams to collaborate effectively with real-time updates, file sharing, and progress tracking.',
-      tech: ['React', 'Socket.io', 'Express', 'MongoDB', 'JWT'],
+      title: 'GameOn — Region 6 Delicacies Kitchen',
+      description: 'Hackathon 2D cooking game (Godot) celebrating Iloilo / Region 6 delicacies.',
+      fullDescription: 'A 2D cooking time-management game built in the Godot Engine that celebrates the local delicacies of Region 6 (Western Visayas), Philippines — dishes like molo soup and biscocho. Built as a hackathon project: serve customers their orders before they lose patience, through tactile drag-and-drop kitchen gameplay. Part fast-paced kitchen sim, part cultural showcase.',
+      tech: ['Godot', 'GDScript'],
       link: '#',
-      github: 'https://github.com/bananaNuggets75/task-manager',
-      icon: '',
-      image: '/warn.png',
+      github: '',
+      icon: <FaGamepad />,
+      image: '/gameon-1.jpg',
+      images: ['/gameon-1.jpg', '/gameon-2.jpg', '/gameon-3.jpg'],
+      badge: 'Hackathon',
+      isPrivate: true,
       features: [
-        'Real-time collaboration',
-        'Task assignment and tracking',
-        'File attachment system',
-        'Team chat integration',
-        'Progress analytics'
+        'Drag-and-drop kitchen gameplay',
+        'Ingredient → dish preparation (molo soup, biscocho)',
+        'Timed customer spawning + coin goal economy',
+        'Region 6 culinary cultural theme'
       ],
       stats: [
-        { label: 'Technologies Used', value: '5' },
-        { label: 'Active Teams', value: '100+' },
-        { label: 'Tasks Completed', value: '5000+' }
+        { label: 'Event', value: 'Hackathon' },
+        { label: 'Engine', value: 'Godot' },
+        { label: 'Theme', value: 'Region 6' }
       ]
     },
     {
       id: '6',
-      title: 'QuickShop',
-      description: 'A B2B Wholesale E-Commerce Platform',
-      fullDescription: 'QuickShop is a B2B wholesale e-commerce platform designed to streamline bulk ordering between retailers and suppliers. It features user-friendly product browsing, tiered pricing, and a secure order management system built for scalability.',
-      tech: ['Vue.js', 'Node.js', 'MongoDB', 'Express.js', 'Tailwind CSS'],
+      title: 'Feed Mill POS & Management',
+      description: 'Point-of-sale and operations system built for a feed mill business.',
+      fullDescription: 'A full-stack point-of-sale and management system built for a real feed mill business, covering the operational cycle from raw-material purchasing and inventory to sales recording and financial reporting. Integrates with a POS provider to sync sales receipts automatically. Built with Next.js and Prisma on PostgreSQL. Private client project — details kept high-level.',
+      tech: ['Next.js', 'TypeScript', 'Prisma', 'PostgreSQL'],
       link: '#',
-      github: 'https://github.com/bananaNuggets75/quickshop',
-      icon: '🏪',
+      github: '',
+      icon: <FaWarehouse />,
       image: '/warn.png',
+      badge: 'Private',
+      isPrivate: true,
       features: [
-        'Bulk ordering system with tiered pricing',
-        'Supplier and retailer role management',
-        'Order tracking and status updates',
-        'Inventory and stock level management',
-        'Secure checkout and invoice generation',
-        'Responsive UI with mobile support',
-        'Admin dashboard for analytics and reporting'
+        'Inventory tracking for raw materials',
+        'Sales recording with invoicing',
+        'Expense tracking and financial reports',
+        'Automatic POS receipt sync'
       ],
       stats: [
-        { label: 'Technologies Used', value: '5' },
-        { label: 'Registered Suppliers', value: '120+' },
-        { label: 'Bulk Orders Processed', value: '5K+' }
+        { label: 'Client', value: 'Real business' },
+        { label: 'Stack', value: 'Next + Prisma' },
+        { label: 'Access', value: 'Private' }
+      ]
+    },
+    {
+      id: '7',
+      title: 'Guidance Support System (Naive Bayes)',
+      description: 'Web counseling platform using Naive Bayes classification and sentiment analysis.',
+      fullDescription: 'A web-based counseling platform for a university guidance office that lets students book and attend sessions privately. Two machine-learning pipelines assist counselors: a Naive Bayes classifier predicts the likely mental-health category from a pre-session intake form, and a second model runs sentiment analysis on post-session feedback to gauge effectiveness. Built with Django and scikit-learn. Capstone / thesis project.',
+      tech: ['Django', 'Python', 'scikit-learn', 'NLTK', 'PostgreSQL'],
+      link: '#',
+      github: '',
+      icon: <FaBrain />,
+      image: '/warn.png',
+      badge: 'Academic',
+      isPrivate: true,
+      features: [
+        'Naive Bayes intake classification',
+        'Sentiment analysis on session feedback',
+        'Appointment scheduling with multiple modes',
+        'Counselor documentation and reporting'
+      ],
+      stats: [
+        { label: 'Type', value: 'Thesis' },
+        { label: 'ML', value: 'Naive Bayes' },
+        { label: 'Backend', value: 'Django' }
+      ]
+    },
+    {
+      id: '8',
+      title: 'Baccarat Analyzer',
+      description: 'Chrome extension that tracks a live baccarat shoe and runs an ML prediction model.',
+      fullDescription: 'A Chrome extension that intercepts a live baccarat WebSocket stream, tracks the shoe in real time, builds the standard roads, and runs a logistic-regression model trained on session data — blended with rule-based card counting. Feature extraction is mirrored between Python (training) and TypeScript (inference) so they match exactly. Built as an honest study of where real signal exists (card composition) versus none (road patterns).',
+      tech: ['TypeScript', 'React', 'Python', 'scikit-learn'],
+      link: '#',
+      github: '',
+      icon: <FaChartLine />,
+      image: '/warn.png',
+      badge: 'Personal',
+      isPrivate: true,
+      features: [
+        'Real-time WebSocket hand parsing',
+        'Logistic-regression inference in TypeScript',
+        'Card counting + ML blend by shoe depth',
+        'Python training pipeline with holdout evaluation'
+      ],
+      stats: [
+        { label: 'Type', value: 'ML' },
+        { label: 'Surface', value: 'Extension' },
+        { label: 'Lang', value: 'TS + Python' }
+      ]
+    },
+    {
+      id: '9',
+      title: 'Blockchain E-Voting System',
+      description: 'Django e-voting platform that records each vote on a tamper-evident blockchain.',
+      fullDescription: 'A web-based electronic voting platform built with Django that records every vote on a tamper-evident blockchain. Each cast vote becomes a cryptographically-linked block (SHA-256 hash, proof-of-work, previous-hash linkage), so altering any vote breaks the chain and is immediately detectable. Includes voter self-registration with admin approval, election management, and a live chain-integrity check. Educational proof of concept.',
+      tech: ['Django', 'Python', 'SQLite', 'PostgreSQL'],
+      link: '#',
+      github: '',
+      icon: <FaVoteYea />,
+      image: '/warn.png',
+      badge: 'Academic',
+      isPrivate: true,
+      features: [
+        'SHA-256 hashing and proof-of-work mining',
+        'Genesis block + previous-hash chaining',
+        'One vote per voter per election (DB-enforced)',
+        'Admin-approved voter eligibility',
+        'Live blockchain integrity verification'
+      ],
+      stats: [
+        { label: 'Type', value: 'Academic' },
+        { label: 'Backend', value: 'Django' },
+        { label: 'Concept', value: 'Blockchain' }
       ]
     }
   ];
 
   const certificates: Certificate[] = [
+    {
+      id: 'hackathon',
+      title: 'Hacking the Future of Energy — Hackathon',
+      issuer: 'New Energy Nexus Philippines',
+      date: 'May 2026',
+      description: 'Participated in "Ready, Spark, Charge 2026" with team WattWise AI — an energy-focused hackathon at Central Philippine University, in partnership with CPUGAD TBI and DOST Western Visayas iHubs.',
+      icon: <FaBolt className="text-xl text-yellow-500" />,
+      image: '/wattwise-cert-individual.png',
+      credentialId: ''
+    },
     {
       id: '1',
       title: "Machine Learning with Python",
@@ -467,13 +588,30 @@ const Portfolio: React.FC = () => {
       date: 'August 2025',
       description: 'Fundamentals of artificial intelligence including machine learning, neural networks, and ethical AI practices, developed in collaboration with IBM SkillsBuild.',
       icon: <SiOpenai className="text-xl text-sky-700" />,
-      image: '/api/placeholder/400/300',
+      credentialId: ''
+    },
+    {
+      id: '7',
+      title: 'CCNAv7: Introduction to Networks',
+      issuer: 'Cisco Networking Academy',
+      date: 'May 2024',
+      description: 'Networking fundamentals — protocols, IP addressing, Ethernet, and network topologies. Taken at Central Philippine University.',
+      icon: <FaNetworkWired className="text-xl text-green-600" />,
+      credentialId: ''
+    },
+    {
+      id: '8',
+      title: 'IT Essentials: PC Hardware and Software',
+      issuer: 'Cisco Networking Academy',
+      date: 'July 2024',
+      description: 'PC hardware, repair, and maintenance — assembling, troubleshooting, and supporting computer systems. Taken at Central Philippine University.',
+      icon: <FaTools className="text-xl text-blue-500" />,
       credentialId: ''
     }
   ];
 
   const techStack = [
-    // 🧠 Languages
+    // Languages
     { name: 'Python', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg' },
     { name: 'C', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg' },
     { name: 'C++', icon: 'https://cdn.simpleicons.org/cplusplus/00599C' },
@@ -485,14 +623,14 @@ const Portfolio: React.FC = () => {
     { name: 'TypeScript', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg' },
     { name: 'Dart', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dart/dart-original.svg' },
   
-    // 🧰 Tools & IDEs
+    // Tools & IDEs
     { name: 'VS Code', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg' },
     { name: 'Visual Studio', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/visualstudio/visualstudio-plain.svg' },
     { name: 'PyCharm', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pycharm/pycharm-original.svg' },
     { name: 'Git', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg' },
     { name: 'GitHub', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg' },
   
-    // 🧱 Frameworks & Libraries
+    // Frameworks & Libraries
     { name: 'React', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg' },
     { name: 'Next.js', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg' },
     { name: 'Flutter', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg' },
@@ -503,18 +641,29 @@ const Portfolio: React.FC = () => {
     { name: 'TensorFlow', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg' },
     { name: 'Flask', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original.svg' },
     { name: 'Pandas', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg' },
-  
-    // 🛢️ Databases
+    { name: 'NumPy', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/numpy/numpy-original.svg' },
+    { name: 'scikit-learn', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/scikitlearn/scikitlearn-original.svg' },
+    { name: 'NestJS', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nestjs/nestjs-original.svg' },
+    { name: 'Express', icon: 'https://cdn.simpleicons.org/express/68A063' },
+    { name: 'Chart.js', icon: 'https://cdn.simpleicons.org/chartdotjs/FF6384' },
+
+    // Databases
     { name: 'MySQL', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg' },
     { name: 'SQLite', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sqlite/sqlite-original.svg' },
     { name: 'MongoDB', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg' },
     { name: 'Firebase', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-original.svg' },
+    { name: 'PostgreSQL', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg' },
+    { name: 'Prisma', icon: 'https://cdn.simpleicons.org/prisma/5A67D8' },
     { name: 'SQL Server', icon: 'https://api.iconify.design/tabler:database.svg?color=%23CC2927    ' },
   
-    // 🔧 Platforms & Misc
+    // Platforms & Misc
     { name: '.NET', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dot-net/dot-net-original.svg' },
     { name: 'Android', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/android/android-plain.svg' },
     { name: 'Arduino', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/arduino/arduino-original.svg' },
+    { name: 'Godot', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/godot/godot-original.svg' },
+    { name: 'Expo', icon: 'https://cdn.simpleicons.org/expo/FFFFFF' },
+    { name: 'Cloudinary', icon: 'https://cdn.simpleicons.org/cloudinary/3448C5' },
+    { name: 'Vercel', icon: 'https://cdn.simpleicons.org/vercel/FFFFFF' },
     { name: 'Figma', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg' }
   ];
   
@@ -674,23 +823,44 @@ const Portfolio: React.FC = () => {
         <div className={`about-grid ${aboutInView ? 'animate-slideInLeft' : ''}`}>
           <div className="profile-section">
             <div className="profile-card">
-              {/* Replace emoji with image */}
-              <div className="profile-avatar">
-                <img 
-                  src="/IMG_8515.JPG" 
-                  alt="Profile" 
+              <button
+                type="button"
+                className="profile-avatar"
+                onClick={() => setLightbox({ images: ['/profile.jpg'], index: 0 })}
+                aria-label="View profile photo"
+              >
+                <img
+                  src="/profile.jpg"
+                  alt="Profile"
                   className="profile-image"
                 />
-              </div>
+              </button>
               <h2 className="profile-name">Kenan Ben G. Polgo</h2>
               <p className="profile-role">Full-Stack Developer</p>
               <p className="profile-university">Central Philippine University</p>
+              <div className="profile-divider" />
+              <div className="profile-links">
+                <a
+                  href="https://github.com/bananaNuggets75"
+                  className="profile-link"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <FaGithub /> GitHub
+                </a>
+                <a href="mailto:kenanbenpolgo@gmail.com" className="profile-link">
+                  <Mail className="w-4 h-4" /> Email
+                </a>
+              </div>
+              <p className="profile-location">
+                <MapPin className="w-4 h-4" /> Iloilo City, Philippines
+              </p>
             </div>
           </div>
           <div className="about-content">
             <div className="about-card">
               <div className="card-header">
-                <div className="card-icon">🚀</div>
+                <div className="card-icon"><FaRocket /></div>
                 <h3 className="card-title">My Journey</h3>
               </div>
               <div className="about-text">
@@ -707,7 +877,7 @@ const Portfolio: React.FC = () => {
             </div>
             <div className="about-card">
               <div className="card-header">
-                <div className="card-icon">🎓</div>
+                <div className="card-icon"><FaGraduationCap /></div>
                 <h3 className="card-title">Education</h3>
               </div>
               <div className="education-item">
@@ -754,19 +924,46 @@ const Portfolio: React.FC = () => {
                   onClick={() => setSelectedProject(project)}
                 >
                   <div className="project-image">
-                    <img src={project.image} alt={project.title} />
+                    {project.images && project.images.length > 1 ? (
+                      <div className={`project-collage count-${Math.min(project.images.length, 4)}`}>
+                        {project.images.slice(0, 4).map((img, i) => {
+                          const more = i === 3 && project.images!.length > 4;
+                          return (
+                            <div className="collage-tile" key={i}>
+                              <img src={img} alt={`${project.title} ${i + 1}`} />
+                              {more && (
+                                <span className="collage-more">+{project.images!.length - 4}</span>
+                              )}
+                            </div>
+                          );
+                        })}
+                      </div>
+                    ) : (
+                      <img src={project.image} alt={project.title} />
+                    )}
+                    {(project.badges ?? (project.badge ? [project.badge] : [])).length > 0 && (
+                      <div className="project-badges">
+                        {(project.badges ?? [project.badge!]).map((b) => (
+                          <span key={b} className={`project-badge badge-${b.toLowerCase()}`}>
+                            {b}
+                          </span>
+                        ))}
+                      </div>
+                    )}
                     <div className="project-overlay">
                       <div className="project-links-updated">
-                        <a 
-                          href={project.link} 
-                          className="project-link-demo"
-                          target="_blank" 
-                          rel="noopener noreferrer"
-                          onClick={(e) => e.stopPropagation()}
-                        >
-                          Demo
-                        </a>
-                        <span 
+                        {project.link && project.link !== '#' && (
+                          <a
+                            href={project.link}
+                            className="project-link-demo"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={(e) => e.stopPropagation()}
+                          >
+                            Demo
+                          </a>
+                        )}
+                        <span
                           className="project-link-details"
                           onClick={() => setSelectedProject(project)}
                         >
@@ -776,7 +973,10 @@ const Portfolio: React.FC = () => {
                     </div>
                   </div>
                   <div className="project-info">
-                    <h3 className="project-title">{project.title}</h3>
+                    <h3 className="project-title">
+                      <span className="project-card-icon">{project.icon}</span>
+                      {project.title}
+                    </h3>
                     <p className="project-description">{project.description}</p>
                     <div className="project-tags">
                       {project.tech.slice(0, 3).map((tech, index) => (
@@ -803,7 +1003,14 @@ const Portfolio: React.FC = () => {
                   onClick={() => setSelectedCertificate(cert)}
                 >
                   <div className="cert-image">
-                    <img src={cert.image} alt={cert.title} />
+                    {cert.image ? (
+                      <img src={cert.image} alt={cert.title} />
+                    ) : (
+                      <div className="cert-image-placeholder">
+                        <span className="cert-placeholder-icon">{cert.icon}</span>
+                        <span className="cert-placeholder-issuer">{cert.issuer}</span>
+                      </div>
+                    )}
                     <div className="cert-overlay">
                       <span className="cert-view-btn">View Certificate</span>
                     </div>
@@ -1200,13 +1407,71 @@ const Portfolio: React.FC = () => {
               </div>
               <div className="project-detail-content">
                 <div className="project-detail-main">
-                  <div className="project-image-large">
-                    <img src={selectedProject.image} alt={selectedProject.title} />
+                  <div className="modal-carousel">
+                    {(() => {
+                      const imgs = selectedProject.images?.length
+                        ? selectedProject.images
+                        : [selectedProject.image];
+                      const n = imgs.length;
+                      const cur = ((galleryIndex % n) + n) % n;
+                      const prevI = (cur - 1 + n) % n;
+                      const nextI = (cur + 1) % n;
+                      if (n === 1) {
+                        return (
+                          <button
+                            type="button"
+                            className="carousel-current solo"
+                            onClick={() => setLightbox({ images: imgs, index: 0 })}
+                          >
+                            <img src={imgs[0]} alt={selectedProject.title} />
+                          </button>
+                        );
+                      }
+                      return (
+                        <>
+                          <div className="carousel-stage">
+                            <button
+                              type="button"
+                              className="carousel-peek left"
+                              onClick={() => setGalleryIndex(prevI)}
+                              aria-label="Previous image"
+                            >
+                              <img src={imgs[prevI]} alt="" />
+                            </button>
+                            <button
+                              type="button"
+                              className="carousel-current"
+                              onClick={() => setLightbox({ images: imgs, index: cur })}
+                              aria-label="View full image"
+                            >
+                              <img src={imgs[cur]} alt={`${selectedProject.title} ${cur + 1}`} />
+                            </button>
+                            <button
+                              type="button"
+                              className="carousel-peek right"
+                              onClick={() => setGalleryIndex(nextI)}
+                              aria-label="Next image"
+                            >
+                              <img src={imgs[nextI]} alt="" />
+                            </button>
+                          </div>
+                          <div className="carousel-controls">
+                            <button type="button" onClick={() => setGalleryIndex(prevI)} aria-label="Previous">
+                              <FaChevronLeft />
+                            </button>
+                            <span className="carousel-counter">{cur + 1} / {n}</span>
+                            <button type="button" onClick={() => setGalleryIndex(nextI)} aria-label="Next">
+                              <FaChevronRight />
+                            </button>
+                          </div>
+                        </>
+                      );
+                    })()}
                   </div>
                   <div className="project-stats">
                     {selectedProject.stats.map((stat, index) => (
                       <div key={index} className="stat-item">
-                        <div className="stat-icon">{index === 0 ? '💻' : index === 1 ? '👥' : '📊'}</div>
+                        <div className="stat-icon"><FaStar /></div>
                         <div className="stat-content">
                           <div className="stat-value">{stat.value}</div>
                           <div className="stat-label">{stat.label}</div>
@@ -1215,17 +1480,29 @@ const Portfolio: React.FC = () => {
                     ))}
                   </div>
                   <div className="project-actions">
-                    <a href={selectedProject.link} className="action-btn primary" target="_blank" rel="noopener noreferrer">
-                      🔗 Live Demo
-                    </a>
-                    <a href={selectedProject.github} className="action-btn secondary" target="_blank" rel="noopener noreferrer">
-                      💻 GitHub
-                    </a>
+                    {selectedProject.link && selectedProject.link !== '#' ? (
+                      <a href={selectedProject.link} className="action-btn primary" target="_blank" rel="noopener noreferrer">
+                        <FaExternalLinkAlt /> Live Demo
+                      </a>
+                    ) : (
+                      <span className="action-btn disabled">
+                        <FaLock /> Demo unavailable
+                      </span>
+                    )}
+                    {selectedProject.github ? (
+                      <a href={selectedProject.github} className="action-btn secondary" target="_blank" rel="noopener noreferrer">
+                        <FaGithub /> GitHub
+                      </a>
+                    ) : (
+                      <span className="action-btn disabled">
+                        <FaLock /> Private repo
+                      </span>
+                    )}
                   </div>
                 </div>
                 <div className="project-detail-sidebar">
                   <div className="detail-section">
-                    <h3 className="detail-section-title">✨ Key Features</h3>
+                    <h3 className="detail-section-title"><FaListUl /> Key Features</h3>
                     <ul className="feature-list">
                       {selectedProject.features.map((feature, index) => (
                         <li key={index} className="feature-item">{feature}</li>
@@ -1233,7 +1510,7 @@ const Portfolio: React.FC = () => {
                     </ul>
                   </div>
                   <div className="detail-section">
-                    <h3 className="detail-section-title">🛠️ Technologies Used</h3>
+                    <h3 className="detail-section-title"><FaTools /> Technologies Used</h3>
                     <div className="tech-tags">
                       {selectedProject.tech.map((tech, index) => (
                         <span key={index} className="tech-tag">{tech}</span>
@@ -1247,6 +1524,45 @@ const Portfolio: React.FC = () => {
         </div>
       )}
 
+      {/* Image Lightbox / Gallery */}
+      {lightbox && (
+        <div className="lightbox-overlay" onClick={() => setLightbox(null)}>
+          <button className="lightbox-close" onClick={() => setLightbox(null)} aria-label="Close">
+            <FaTimes />
+          </button>
+          {lightbox.images.length > 1 && (
+            <button
+              className="lightbox-nav prev"
+              onClick={(e) => { e.stopPropagation(); stepLightbox(-1); }}
+              aria-label="Previous"
+            >
+              <FaChevronLeft />
+            </button>
+          )}
+          <div className="lightbox-content" onClick={(e) => e.stopPropagation()}>
+            <img
+              src={lightbox.images[lightbox.index]}
+              alt={`View ${lightbox.index + 1}`}
+              className="lightbox-img"
+            />
+            {lightbox.images.length > 1 && (
+              <div className="lightbox-counter">
+                {lightbox.index + 1} / {lightbox.images.length}
+              </div>
+            )}
+          </div>
+          {lightbox.images.length > 1 && (
+            <button
+              className="lightbox-nav next"
+              onClick={(e) => { e.stopPropagation(); stepLightbox(1); }}
+              aria-label="Next"
+            >
+              <FaChevronRight />
+            </button>
+          )}
+        </div>
+      )}
+
       {/* Certificate Detail Modal */}
       {selectedCertificate && (
         <div className="modal-overlay" onClick={() => setSelectedCertificate(null)}>
@@ -1254,7 +1570,15 @@ const Portfolio: React.FC = () => {
             <button className="modal-close" onClick={() => setSelectedCertificate(null)}>×</button>
             <div className="certificate-detail">
               <div className="certificate-image-container">
-                <img src={selectedCertificate.image} alt={selectedCertificate.title} className="certificate-image-large" />
+                {selectedCertificate.image ? (
+                  <img src={selectedCertificate.image} alt={selectedCertificate.title} className="certificate-image-large" />
+                ) : (
+                  <div className="cert-image-placeholder large">
+                    <span className="cert-placeholder-icon">{selectedCertificate.icon}</span>
+                    <span className="cert-placeholder-issuer">{selectedCertificate.issuer}</span>
+                    <span className="cert-placeholder-note">No certificate image available</span>
+                  </div>
+                )}
               </div>
               <div className="certificate-info-detail">
                 <div className="cert-header-detail">
@@ -1274,7 +1598,7 @@ const Portfolio: React.FC = () => {
                 {selectedCertificate.verifyLink && (
                   <div className="certificate-actions">
                     <a href={selectedCertificate.verifyLink} className="verify-btn" target="_blank" rel="noopener noreferrer">
-                      🔍 Verify Certificate
+                      <FaExternalLinkAlt /> Verify Certificate
                     </a>
                   </div>
                 )}
