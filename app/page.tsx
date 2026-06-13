@@ -841,18 +841,25 @@ const Portfolio: React.FC = () => {
                 >
                   <div className="project-image">
                     <img src={project.image} alt={project.title} />
+                    {project.badge && (
+                      <span className={`project-badge badge-${project.badge.toLowerCase()}`}>
+                        {project.badge}
+                      </span>
+                    )}
                     <div className="project-overlay">
                       <div className="project-links-updated">
-                        <a 
-                          href={project.link} 
-                          className="project-link-demo"
-                          target="_blank" 
-                          rel="noopener noreferrer"
-                          onClick={(e) => e.stopPropagation()}
-                        >
-                          Demo
-                        </a>
-                        <span 
+                        {project.link && project.link !== '#' && (
+                          <a
+                            href={project.link}
+                            className="project-link-demo"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={(e) => e.stopPropagation()}
+                          >
+                            Demo
+                          </a>
+                        )}
+                        <span
                           className="project-link-details"
                           onClick={() => setSelectedProject(project)}
                         >
@@ -862,7 +869,10 @@ const Portfolio: React.FC = () => {
                     </div>
                   </div>
                   <div className="project-info">
-                    <h3 className="project-title">{project.title}</h3>
+                    <h3 className="project-title">
+                      <span className="project-card-icon">{project.icon}</span>
+                      {project.title}
+                    </h3>
                     <p className="project-description">{project.description}</p>
                     <div className="project-tags">
                       {project.tech.slice(0, 3).map((tech, index) => (
@@ -1286,13 +1296,50 @@ const Portfolio: React.FC = () => {
               </div>
               <div className="project-detail-content">
                 <div className="project-detail-main">
-                  <div className="project-image-large">
-                    <img src={selectedProject.image} alt={selectedProject.title} />
+                  <div className="project-gallery">
+                    <button
+                      type="button"
+                      className="project-image-large"
+                      onClick={() =>
+                        setLightbox({
+                          images: selectedProject.images?.length
+                            ? selectedProject.images
+                            : [selectedProject.image],
+                          index: 0,
+                        })
+                      }
+                    >
+                      <img src={selectedProject.image} alt={selectedProject.title} />
+                    </button>
+                    {selectedProject.images && selectedProject.images.length > 1 && (
+                      <div className="gallery-thumbs">
+                        {selectedProject.images.slice(0, 4).map((img, i) => {
+                          const more = i === 3 && selectedProject.images!.length > 4;
+                          return (
+                            <button
+                              key={i}
+                              type="button"
+                              className="gallery-thumb"
+                              onClick={() =>
+                                setLightbox({ images: selectedProject.images!, index: i })
+                              }
+                            >
+                              <img src={img} alt={`${selectedProject.title} ${i + 1}`} />
+                              {more && (
+                                <span className="gallery-thumb-more">
+                                  +{selectedProject.images!.length - 4}
+                                </span>
+                              )}
+                            </button>
+                          );
+                        })}
+                      </div>
+                    )}
                   </div>
                   <div className="project-stats">
                     {selectedProject.stats.map((stat, index) => (
                       <div key={index} className="stat-item">
-                        <div className="stat-icon">{index === 0 ? '💻' : index === 1 ? '👥' : '📊'}</div>
+                        <div className="stat-icon"><FaStar /></div>
                         <div className="stat-content">
                           <div className="stat-value">{stat.value}</div>
                           <div className="stat-label">{stat.label}</div>
@@ -1301,17 +1348,29 @@ const Portfolio: React.FC = () => {
                     ))}
                   </div>
                   <div className="project-actions">
-                    <a href={selectedProject.link} className="action-btn primary" target="_blank" rel="noopener noreferrer">
-                      🔗 Live Demo
-                    </a>
-                    <a href={selectedProject.github} className="action-btn secondary" target="_blank" rel="noopener noreferrer">
-                      💻 GitHub
-                    </a>
+                    {selectedProject.link && selectedProject.link !== '#' ? (
+                      <a href={selectedProject.link} className="action-btn primary" target="_blank" rel="noopener noreferrer">
+                        <FaExternalLinkAlt /> Live Demo
+                      </a>
+                    ) : (
+                      <span className="action-btn disabled">
+                        <FaLock /> Demo unavailable
+                      </span>
+                    )}
+                    {selectedProject.github ? (
+                      <a href={selectedProject.github} className="action-btn secondary" target="_blank" rel="noopener noreferrer">
+                        <FaGithub /> GitHub
+                      </a>
+                    ) : (
+                      <span className="action-btn disabled">
+                        <FaLock /> Private repo
+                      </span>
+                    )}
                   </div>
                 </div>
                 <div className="project-detail-sidebar">
                   <div className="detail-section">
-                    <h3 className="detail-section-title">✨ Key Features</h3>
+                    <h3 className="detail-section-title"><FaListUl /> Key Features</h3>
                     <ul className="feature-list">
                       {selectedProject.features.map((feature, index) => (
                         <li key={index} className="feature-item">{feature}</li>
@@ -1319,7 +1378,7 @@ const Portfolio: React.FC = () => {
                     </ul>
                   </div>
                   <div className="detail-section">
-                    <h3 className="detail-section-title">🛠️ Technologies Used</h3>
+                    <h3 className="detail-section-title"><FaTools /> Technologies Used</h3>
                     <div className="tech-tags">
                       {selectedProject.tech.map((tech, index) => (
                         <span key={index} className="tech-tag">{tech}</span>
