@@ -793,7 +793,6 @@ const Portfolio: React.FC = () => {
           <div className="shape"></div>
         </div>
         <div className={`hero-content ${homeInView ? 'animate-fadeInUp' : ''}`}>
-          <p className="hero-subtitle">Welcome to my portfolio</p>
           <h1 className="hero-title">
             Hi, I'm <span className="hero-name-highlight">Kenan Ben G. Polgo</span>
           </h1>
@@ -802,7 +801,7 @@ const Portfolio: React.FC = () => {
             <span className="typing-cursor">|</span>
           </div>
           <p className="hero-description">
-            Passionate about creating innovative web solutions and bringing ideas to life through clean code and beautiful design.
+            Building software, exploring new tech, repeating. Based in Iloilo City, Philippines.
           </p>
           <div className="cta-buttons">
             <button className="cta-primary" onClick={() => scrollToSection('portfolio')}>
@@ -866,14 +865,15 @@ const Portfolio: React.FC = () => {
               <div className="about-text">
                 <p>
                   I'm a <span className="highlight">Computer Science graduate</span> from Central Philippine University
-                  who builds software to <span className="highlight">solve my own problems first</span>. If something
-                  annoys me, or I'm curious how it works, I build a tool for it — that's how most of my projects start.
+                  who enjoys building software, exploring new technologies, and turning ideas into projects.
+                  Most of what I create starts with curiosity—whether it's learning a new framework,
+                  experimenting with a tool, or seeing if I can build something from scratch.
                 </p>
                 <p>
-                  That curiosity keeps pulling me into tech I haven't touched yet, which is how I've ended up working
-                  across <span className="highlight">web, mobile, machine learning, blockchain</span>, and even a
-                  browser extension. I like turning a rough idea into something real and useful, then learning whatever
-                  it takes to ship it.
+                  That curiosity has led me to work across   
+                  <span className="highlight"> web development, mobile development, machine learning, blockchain</span>,
+                  and browser extensions. I enjoy experimenting, learning by building, and creating projects that
+                  challenge me to grow as a developer.
                 </p>
               </div>
             </div>
