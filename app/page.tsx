@@ -1084,7 +1084,7 @@ const Portfolio: React.FC = () => {
                   <div className="contact-icon"><MapPin className="w-5 h-5 text-white" /></div>
                   <div className="contact-details">
                     <h4>Location</h4>
-                    <span className="text-white">Iloilo City, Philippines</span>
+                    <span>Iloilo City, Philippines</span>
                   </div>
                 </div>
               </a>
@@ -1116,7 +1116,7 @@ const Portfolio: React.FC = () => {
                   display: 'flex',
                   alignItems: 'center',
                   gap: '0.5rem',
-                  color: 'var(--accent-light)'
+                  color: 'var(--accent-color)'
                 }}>
                   <MessageCircle className="w-5 h-5" style={{ color: 'var(--accent-color)' }} />
                   Leave a Comment
@@ -1130,7 +1130,7 @@ const Portfolio: React.FC = () => {
                     border: '1px solid rgba(34, 197, 94, 0.3)',
                     borderRadius: '0.5rem',
                     fontSize: '0.875rem',
-                    color: '#4ade80'
+                    color: '#15803d'
                   }}>
                     Comment posted successfully!
                   </div>
@@ -1144,7 +1144,7 @@ const Portfolio: React.FC = () => {
                     border: '1px solid rgba(239, 68, 68, 0.3)',
                     borderRadius: '0.5rem',
                     fontSize: '0.875rem',
-                    color: '#f87171',
+                    color: '#dc2626',
                     display: 'flex',
                     alignItems: 'center',
                     gap: '0.5rem'
@@ -1157,7 +1157,7 @@ const Portfolio: React.FC = () => {
                   <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
                     <div>
                       <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', marginBottom: '0.5rem' }}>
-                        Name <span style={{ color: '#f87171' }}>*</span>
+                        Name <span style={{ color: '#dc2626' }}>*</span>
                       </label>
                       <input
                         type="text"
@@ -1203,7 +1203,7 @@ const Portfolio: React.FC = () => {
                   
                   <div>
                     <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', marginBottom: '0.5rem' }}>
-                      Message <span style={{ color: '#f87171' }}>*</span>
+                      Message <span style={{ color: '#dc2626' }}>*</span>
                     </label>
                     <textarea
                       name="message"
@@ -1364,7 +1364,7 @@ const Portfolio: React.FC = () => {
                             <span style={{
                               padding: '0.25rem 0.5rem',
                               backgroundColor: 'rgba(168, 85, 247, 0.2)',
-                              color: 'var(--accent-light)',
+                              color: 'var(--accent-dark)',
                               fontSize: '0.75rem',
                               borderRadius: '9999px',
                               fontWeight: '500'
@@ -1377,7 +1377,7 @@ const Portfolio: React.FC = () => {
                             {formatTimestamp(comment.created_at)}
                           </div>
                         </div>
-                        <p style={{ color: '#d1d5db', lineHeight: '1.6' }}>{comment.message}</p>
+                        <p style={{ color: 'var(--text-light)', lineHeight: '1.6' }}>{comment.message}</p>
                       </div>
                     </div>
                   </div>
