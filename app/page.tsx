@@ -187,6 +187,7 @@ const Portfolio: React.FC = () => {
     image: string;       // cover image
     images?: string[];   // optional gallery (defaults to [image])
     badge?: string;      // e.g. 'Live' | 'Private' | 'Academic' | 'Hackathon'
+    badges?: string[];   // multiple badges (takes precedence over `badge`)
     isPrivate?: boolean; // hides demo/github, shows a "demo unavailable" state
     features: string[];
     stats: { label: string; value: string }[];
@@ -374,7 +375,7 @@ const Portfolio: React.FC = () => {
         '/wattwise-4.jpg', '/wattwise-5.jpg', '/wattwise-6.jpg',
         '/wattwise-cert-team.png', '/wattwise-cert-individual.png',
       ],
-      badge: 'Champion',
+      badges: ['Champion', 'Hackathon'],
       isPrivate: true,
       features: [
         'Champion (1st place) — energy hackathon at CPU',
@@ -914,10 +915,14 @@ const Portfolio: React.FC = () => {
                     ) : (
                       <img src={project.image} alt={project.title} />
                     )}
-                    {project.badge && (
-                      <span className={`project-badge badge-${project.badge.toLowerCase()}`}>
-                        {project.badge}
-                      </span>
+                    {(project.badges ?? (project.badge ? [project.badge] : [])).length > 0 && (
+                      <div className="project-badges">
+                        {(project.badges ?? [project.badge!]).map((b) => (
+                          <span key={b} className={`project-badge badge-${b.toLowerCase()}`}>
+                            {b}
+                          </span>
+                        ))}
+                      </div>
                     )}
                     <div className="project-overlay">
                       <div className="project-links-updated">
