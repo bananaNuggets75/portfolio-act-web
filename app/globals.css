@@ -2601,7 +2601,7 @@
 .lightbox-overlay {
   position: fixed;
   inset: 0;
-  z-index: 1000;
+  z-index: 3000; /* above the project modal (2000) so zoom sits on top */
   background: rgba(8, 5, 16, 0.92);
   display: flex;
   align-items: center;
