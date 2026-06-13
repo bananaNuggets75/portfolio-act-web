@@ -1,30 +1,65 @@
-# Kenan portfolio website
+# Kenan Ben G. Polgo — Portfolio
 
-*Automatically synced with your [v0.dev](https://v0.dev) deployments*
+A personal portfolio website showcasing my projects, certificates, and tech stack.
+Built as a single-page app with a light "lavender" theme, an image-gallery lightbox
+for project screenshots, and a live guestbook.
 
-[![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)](https://vercel.com/kenan-bens-projects/v0-kenan-portfolio-website)
-[![Built with v0](https://img.shields.io/badge/Built%20with-v0.dev-black?style=for-the-badge)](https://v0.dev/chat/projects/56xEGjzCYbF)
+> Software developer based in Iloilo City, Philippines. Building software,
+> exploring new tech, repeating.
 
-## Overview
+## Tech Stack
 
-This repository will stay in sync with your deployed chats on [v0.dev](https://v0.dev).
-Any changes you make to your deployed app will be automatically pushed to this repository from [v0.dev](https://v0.dev).
+- **Framework:** Next.js 15 (App Router) + React 19
+- **Language:** TypeScript
+- **Styling:** Tailwind CSS + custom CSS
+- **Backend:** Supabase (Postgres + Row-Level Security) for the comment guestbook
+- **Icons:** react-icons, lucide-react
+- **Deploy:** Vercel
+
+## Features
+
+- Single-page layout: Home, About, Portfolio, Contact
+- Project cards with badges, an adaptive photo collage, and a modal carousel + lightbox
+- Certificates section (with image-less placeholder support)
+- Rotating typing animation in the hero
+- Live guestbook backed by Supabase
+
+## Getting Started
+
+```bash
+# 1. Install dependencies
+npm install
+
+# 2. Add environment variables — create .env.local in the project root:
+#    (the guestbook degrades gracefully if these are absent)
+NEXT_PUBLIC_SUPABASE_URL=https://<your-project-ref>.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=<your-supabase-publishable-key>
+
+# 3. Run the dev server
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000).
+
+> The `comments` table in Supabase needs Row-Level Security enabled with public
+> `select` and `insert` policies. The publishable key is safe to expose; the
+> secret key is never used in this app.
+
+## Scripts
+
+| Command | Description |
+|---|---|
+| `npm run dev` | Start the dev server |
+| `npm run build` | Production build |
+| `npm run start` | Run the production build |
+| `npm run lint` | Lint |
 
 ## Deployment
 
-Your project is live at:
+Deployed on [Vercel](https://vercel.com). Set the two `NEXT_PUBLIC_SUPABASE_*`
+environment variables in the Vercel project settings for the guestbook to work
+in production.
 
-**[https://vercel.com/kenan-bens-projects/v0-kenan-portfolio-website](https://vercel.com/kenan-bens-projects/v0-kenan-portfolio-website)**
+## Author
 
-## Build your app
-
-Continue building your app on:
-
-**[https://v0.dev/chat/projects/56xEGjzCYbF](https://v0.dev/chat/projects/56xEGjzCYbF)**
-
-## How It Works
-
-1. Create and modify your project using [v0.dev](https://v0.dev)
-2. Deploy your chats from the v0 interface
-3. Changes are automatically pushed to this repository
-4. Vercel deploys the latest version from this repository
+**Kenan Ben G. Polgo** · [GitHub](https://github.com/bananaNuggets75) · [LinkedIn](https://www.linkedin.com/in/kenan-ben-polgo/)
