@@ -362,9 +362,9 @@ const Portfolio: React.FC = () => {
     {
       id: '4',
       title: 'WattWise AI',
-      description: 'Hackathon project from "Hacking the Future of Energy" (CPU, 2026).',
-      fullDescription: 'WattWise AI was built during "Ready, Spark, Charge 2026: Hacking the Future of Energy" — a hackathon organized by New Energy Nexus Philippines in partnership with CPUGAD TBI and DOST Western Visayas iHubs, held at Central Philippine University (May 21–23, 2026). The project explores using AI to make energy usage smarter and more accessible.',
-      tech: ['React', 'TypeScript', 'AI'],
+      description: 'Champion — "Hacking the Future of Energy" hackathon (CPU, 2026). AI app for smarter energy use.',
+      fullDescription: 'WattWise AI won 1st place (Champion) at "Ready, Spark, Charge 2026: Hacking the Future of Energy" — a hackathon by New Energy Nexus Philippines with CPUGAD TBI and DOST Western Visayas iHubs, held at Central Philippine University. It is a web + mobile app that helps people understand and reduce their energy usage, using OCR (Gemini) to read electricity bills/meters and Supabase as the backend. Built as a hackathon prototype — the full product is still in progress.',
+      tech: ['React', 'TypeScript', 'Expo', 'Supabase', 'Gemini OCR'],
       link: '#',
       github: '',
       icon: <FaBolt />,
@@ -374,42 +374,44 @@ const Portfolio: React.FC = () => {
         '/wattwise-4.jpg', '/wattwise-5.jpg', '/wattwise-6.jpg',
         '/wattwise-cert-team.png', '/wattwise-cert-individual.png',
       ],
-      badge: 'Hackathon',
+      badge: 'Champion',
       isPrivate: true,
       features: [
-        'Built in a 3-day energy hackathon',
-        'Team project — "WattWise AI"',
-        'Hosted at Central Philippine University'
+        'Champion (1st place) — energy hackathon at CPU',
+        'Web + mobile app built with Expo',
+        'OCR bill/meter reading via Gemini',
+        'Supabase backend',
+        'Hackathon prototype — full build in progress'
       ],
       stats: [
+        { label: 'Result', value: 'Champion' },
         { label: 'Event', value: 'Hackathon' },
-        { label: 'Year', value: '2026' },
-        { label: 'Host', value: 'CPU' }
+        { label: 'Platform', value: 'Web + Mobile' }
       ]
     },
     {
       id: '5',
-      title: 'Blockchain E-Voting System',
-      description: 'Django e-voting platform that records each vote on a tamper-evident blockchain.',
-      fullDescription: 'A web-based electronic voting platform built with Django that records every vote on a tamper-evident blockchain. Each cast vote becomes a cryptographically-linked block (SHA-256 hash, proof-of-work, previous-hash linkage), so altering any vote breaks the chain and is immediately detectable. Includes voter self-registration with admin approval, election management, and a live chain-integrity check. Educational proof of concept.',
-      tech: ['Django', 'Python', 'SQLite', 'PostgreSQL'],
+      title: 'GameOn — Region 6 Delicacies Kitchen',
+      description: 'Hackathon 2D cooking game (Godot) celebrating Iloilo / Region 6 delicacies.',
+      fullDescription: 'A 2D cooking time-management game built in the Godot Engine that celebrates the local delicacies of Region 6 (Western Visayas), Philippines — dishes like molo soup and biscocho. Built as a hackathon project: serve customers their orders before they lose patience, through tactile drag-and-drop kitchen gameplay. Part fast-paced kitchen sim, part cultural showcase.',
+      tech: ['Godot', 'GDScript'],
       link: '#',
       github: '',
-      icon: <FaVoteYea />,
-      image: '/warn.png',
-      badge: 'Academic',
+      icon: <FaGamepad />,
+      image: '/gameon-1.jpg',
+      images: ['/gameon-1.jpg', '/gameon-2.jpg', '/gameon-3.jpg'],
+      badge: 'Hackathon',
       isPrivate: true,
       features: [
-        'SHA-256 hashing and proof-of-work mining',
-        'Genesis block + previous-hash chaining',
-        'One vote per voter per election (DB-enforced)',
-        'Admin-approved voter eligibility',
-        'Live blockchain integrity verification'
+        'Drag-and-drop kitchen gameplay',
+        'Ingredient → dish preparation (molo soup, biscocho)',
+        'Timed customer spawning + coin goal economy',
+        'Region 6 culinary cultural theme'
       ],
       stats: [
-        { label: 'Type', value: 'Academic' },
-        { label: 'Backend', value: 'Django' },
-        { label: 'Concept', value: 'Blockchain' }
+        { label: 'Event', value: 'Hackathon' },
+        { label: 'Engine', value: 'Godot' },
+        { label: 'Theme', value: 'Region 6' }
       ]
     },
     {
