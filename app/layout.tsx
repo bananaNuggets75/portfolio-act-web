@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     "Kenan Ben G. Polgo, Computer Science, Central Philippine University, Portfolio, Web Developer",
   authors: [{ name: "Kenan Ben G. Polgo" }],
   icons: {
-    icon: "/IMG_8516.JPG",
+    icon: "/profile2.jpg",
   },
 };
 
