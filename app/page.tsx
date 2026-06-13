@@ -28,6 +28,7 @@ const Portfolio: React.FC = () => {
   const [selectedCertificate, setSelectedCertificate] = useState<Certificate | null>(null);
   const [bubbles, setBubbles] = useState<Bubble[]>([]);
   const [lightbox, setLightbox] = useState<{ images: string[]; index: number } | null>(null);
+  const [galleryIndex, setGalleryIndex] = useState(0);
 
   const stepLightbox = (delta: number) =>
     setLightbox((lb) =>
@@ -45,6 +46,9 @@ const Portfolio: React.FC = () => {
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
   }, [lightbox]);
+
+  // Reset the modal carousel to the first image whenever a project opens
+  useEffect(() => { setGalleryIndex(0); }, [selectedProject]);
 
   type Comment = {
     id: string;
@@ -819,16 +823,38 @@ const Portfolio: React.FC = () => {
         <div className={`about-grid ${aboutInView ? 'animate-slideInLeft' : ''}`}>
           <div className="profile-section">
             <div className="profile-card">
-              <div className="profile-avatar">
+              <button
+                type="button"
+                className="profile-avatar"
+                onClick={() => setLightbox({ images: ['/profile.jpg'], index: 0 })}
+                aria-label="View profile photo"
+              >
                 <img
                   src="/profile.jpg"
                   alt="Profile"
                   className="profile-image"
                 />
-              </div>
+              </button>
               <h2 className="profile-name">Kenan Ben G. Polgo</h2>
               <p className="profile-role">Full-Stack Developer</p>
               <p className="profile-university">Central Philippine University</p>
+              <div className="profile-divider" />
+              <div className="profile-links">
+                <a
+                  href="https://github.com/bananaNuggets75"
+                  className="profile-link"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <FaGithub /> GitHub
+                </a>
+                <a href="mailto:kenanbenpolgo@gmail.com" className="profile-link">
+                  <Mail className="w-4 h-4" /> Email
+                </a>
+              </div>
+              <p className="profile-location">
+                <MapPin className="w-4 h-4" /> Iloilo City, Philippines
+              </p>
             </div>
           </div>
           <div className="about-content">
@@ -1381,45 +1407,66 @@ const Portfolio: React.FC = () => {
               </div>
               <div className="project-detail-content">
                 <div className="project-detail-main">
-                  <div className="project-gallery">
-                    <button
-                      type="button"
-                      className="project-image-large"
-                      onClick={() =>
-                        setLightbox({
-                          images: selectedProject.images?.length
-                            ? selectedProject.images
-                            : [selectedProject.image],
-                          index: 0,
-                        })
+                  <div className="modal-carousel">
+                    {(() => {
+                      const imgs = selectedProject.images?.length
+                        ? selectedProject.images
+                        : [selectedProject.image];
+                      const n = imgs.length;
+                      const cur = ((galleryIndex % n) + n) % n;
+                      const prevI = (cur - 1 + n) % n;
+                      const nextI = (cur + 1) % n;
+                      if (n === 1) {
+                        return (
+                          <button
+                            type="button"
+                            className="carousel-current solo"
+                            onClick={() => setLightbox({ images: imgs, index: 0 })}
+                          >
+                            <img src={imgs[0]} alt={selectedProject.title} />
+                          </button>
+                        );
                       }
-                    >
-                      <img src={selectedProject.image} alt={selectedProject.title} />
-                    </button>
-                    {selectedProject.images && selectedProject.images.length > 1 && (
-                      <div className="gallery-thumbs">
-                        {selectedProject.images.slice(0, 4).map((img, i) => {
-                          const more = i === 3 && selectedProject.images!.length > 4;
-                          return (
+                      return (
+                        <>
+                          <div className="carousel-stage">
                             <button
-                              key={i}
                               type="button"
-                              className="gallery-thumb"
-                              onClick={() =>
-                                setLightbox({ images: selectedProject.images!, index: i })
-                              }
+                              className="carousel-peek left"
+                              onClick={() => setGalleryIndex(prevI)}
+                              aria-label="Previous image"
                             >
-                              <img src={img} alt={`${selectedProject.title} ${i + 1}`} />
-                              {more && (
-                                <span className="gallery-thumb-more">
-                                  +{selectedProject.images!.length - 4}
-                                </span>
-                              )}
+                              <img src={imgs[prevI]} alt="" />
                             </button>
-                          );
-                        })}
-                      </div>
-                    )}
+                            <button
+                              type="button"
+                              className="carousel-current"
+                              onClick={() => setLightbox({ images: imgs, index: cur })}
+                              aria-label="View full image"
+                            >
+                              <img src={imgs[cur]} alt={`${selectedProject.title} ${cur + 1}`} />
+                            </button>
+                            <button
+                              type="button"
+                              className="carousel-peek right"
+                              onClick={() => setGalleryIndex(nextI)}
+                              aria-label="Next image"
+                            >
+                              <img src={imgs[nextI]} alt="" />
+                            </button>
+                          </div>
+                          <div className="carousel-controls">
+                            <button type="button" onClick={() => setGalleryIndex(prevI)} aria-label="Previous">
+                              <FaChevronLeft />
+                            </button>
+                            <span className="carousel-counter">{cur + 1} / {n}</span>
+                            <button type="button" onClick={() => setGalleryIndex(nextI)} aria-label="Next">
+                              <FaChevronRight />
+                            </button>
+                          </div>
+                        </>
+                      );
+                    })()}
                   </div>
                   <div className="project-stats">
                     {selectedProject.stats.map((stat, index) => (

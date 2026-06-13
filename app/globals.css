@@ -587,6 +587,7 @@
 .profile-avatar {
   width: 150px;
   height: 150px;
+  padding: 0;
   border-radius: 50%;
   background: linear-gradient(135deg, var(--accent-color), var(--accent-light));
   margin: 0 auto 30px;
@@ -595,6 +596,12 @@
   justify-content: center;
   border: 4px solid rgba(139, 92, 246, 0.3);
   overflow: hidden; /* Important: hides image overflow for circle shape */
+  cursor: zoom-in;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.profile-avatar:hover {
+  transform: scale(1.04);
+  box-shadow: 0 12px 30px rgba(139, 92, 246, 0.4);
 }
 
 .profile-avatar img {
@@ -2731,3 +2738,132 @@
   color: #1a1205;
 }
 .card-icon svg { color: var(--accent-color); }
+
+/* ============================================================
+   In-modal peek carousel + profile quick-links
+   ============================================================ */
+
+/* Inline carousel inside the project modal */
+.modal-carousel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+.carousel-stage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+}
+.carousel-current,
+.carousel-peek {
+  border: none;
+  padding: 0;
+  overflow: hidden;
+  background: #0d0820;
+  border-radius: 12px;
+  cursor: pointer;
+}
+.carousel-current {
+  flex: 0 0 68%;
+  height: 340px;
+  cursor: zoom-in;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+}
+.carousel-current.solo { flex: 0 0 100%; }
+.carousel-current img,
+.carousel-peek img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* crops portrait letterboxing so photos fill cleanly */
+  display: block;
+}
+.carousel-peek {
+  flex: 0 0 14%;
+  height: 240px;
+  opacity: 0.4;
+  transition: opacity 0.2s ease;
+}
+.carousel-peek:hover { opacity: 0.7; }
+
+.carousel-controls {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+.carousel-controls button {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px solid var(--border-color);
+  background: var(--card-bg);
+  color: var(--accent-color);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  transition: all 0.2s ease;
+}
+.carousel-controls button:hover {
+  background: var(--accent-color);
+  color: #fff;
+  transform: scale(1.08);
+}
+.carousel-counter {
+  color: var(--text-muted);
+  font-weight: 600;
+  font-size: 14px;
+  min-width: 54px;
+  text-align: center;
+}
+
+@media (max-width: 640px) {
+  .carousel-current { flex-basis: 78%; height: 260px; }
+  .carousel-peek { flex-basis: 9%; height: 180px; }
+}
+
+/* Profile quick-links (fills the space under the avatar card) */
+.profile-divider {
+  height: 1px;
+  background: var(--border-color);
+  margin: 22px auto;
+  width: 80%;
+}
+.profile-links {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.profile-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: 1px solid var(--border-color);
+  background: var(--card-bg);
+  color: var(--text-muted);
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+.profile-link:hover {
+  border-color: var(--accent-color);
+  color: #fff;
+  background: rgba(139, 92, 246, 0.12);
+  transform: translateY(-2px);
+}
+.profile-location {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 16px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
