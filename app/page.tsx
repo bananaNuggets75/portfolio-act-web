@@ -162,10 +162,13 @@ const Portfolio: React.FC = () => {
     description: string;
     fullDescription: string;
     tech: string[];
-    link: string;
-    github: string;
-    icon: string;
-    image: string;
+    link: string;        // '#' when there is no live demo
+    github: string;      // '' when the repo is private/unavailable
+    icon: ReactElement;
+    image: string;       // cover image
+    images?: string[];   // optional gallery (defaults to [image])
+    badge?: string;      // e.g. 'Live' | 'Private' | 'Academic' | 'Hackathon'
+    isPrivate?: boolean; // hides demo/github, shows a "demo unavailable" state
     features: string[];
     stats: { label: string; value: string }[];
   }
@@ -268,145 +271,194 @@ const Portfolio: React.FC = () => {
   const projects: Project[] = [
     {
       id: '1',
-      title: 'CPU-SHS Research Archive',
-      description: 'Full-stack web system for managing research papers and academic documents *Note: The UI was designed based on the client\'s preferences.*',
-      fullDescription: 'A comprehensive research archive system built for Central Philippine University Senior High School. This platform allows students and faculty to upload, manage, and search through academic research papers with advanced filtering and categorization features.  *Note: The UI was designed based on the client\'s preferences.*',
-      tech: ['React', 'Node.js', 'Cloudinary', 'Firebase', 'TypeScript', 'Next.js'],
-      link: 'https://cpu-research-archive.vercel.app/',
-      github: 'https://github.com/bananaNuggets75/cpu-research-archive',
-      icon: '📚',
-      image: '/cpu-shs.png',
+      title: 'SafeDrive — Traffic Management System',
+      description: 'Real-time traffic violation management system for a city traffic department.',
+      fullDescription: 'A web-based platform that helps a traffic regulatory department record, manage, and monitor road traffic violations. Built around a real-time data layer with Firebase, every violation reported, paid, or updated is reflected instantly across the analytics dashboard, payment desk, and driver history. Built with a team of four.',
+      tech: ['Next.js', 'React', 'TypeScript', 'Firebase', 'Chart.js', 'Tailwind CSS'],
+      link: 'https://traffic-management-system-cyan.vercel.app/',
+      github: 'https://github.com/bananaNuggets75/traffic-management-system',
+      icon: <FaTrafficLight />,
+      image: '/traffic.png',
+      badge: 'Live',
       features: [
-        'Advanced search and filtering system',
-        'User authentication and authorization',
-        'Document upload and management',
-        'Real-time notifications',
-        'Admin dashboard for content moderation'
+        'Real-time violation sync via Firebase',
+        'Analytics dashboard with yearly and type charts',
+        'Fine management and payment tracking',
+        'Driver profiles with full violation history',
+        'Status workflow (Pending / Paid)'
       ],
       stats: [
-        { label: 'Technologies Used', value: '6' },
-        { label: 'Active Users', value: '500+' },
-        { label: 'Documents Stored', value: '1000+' }
+        { label: 'Status', value: 'Live' },
+        { label: 'Team', value: '4 devs' },
+        { label: 'Data layer', value: 'Realtime' }
       ]
     },
     {
       id: '2',
-      title: 'E-Voting Blockchain',
-      description: 'Django-based secure e-voting platform using blockchain principles',
-      fullDescription: 'A blockchain-inspired e-voting system built with Django, designed to improve transparency and security in student council elections. Developed in response to issues encountered with previous platforms like Canvas.',
-      tech: ['Django', 'PostgreSQL', 'Python', 'CSS'],
-      link: '#',
-      github: 'https://github.com/bananaNuggets75/thesis-platform',
-      icon: '🗳️',
-      image: '/warn.png',
+      title: 'Campus Food Ordering System',
+      description: 'Full-stack food ordering web app built for the CPU campus community.',
+      fullDescription: 'A full-stack online ordering platform for browsing a menu, placing orders, and tracking them in real time, with a separate admin area for managing menu items and incoming orders. Features cart persistence, an order confirmation and tracking flow, account management, and role-based admin access through Firebase Auth. Note: the UI was designed to the client\'s preferences.',
+      tech: ['Next.js', 'React', 'TypeScript', 'Firebase', 'Cloudinary'],
+      link: 'https://online-ordering-system-ochre.vercel.app/menu',
+      github: 'https://github.com/bananaNuggets75/online-ordering-system',
+      icon: <FaUtensils />,
+      image: '/food-delivery.png',
+      badge: 'Live',
       features: [
-        'Secure vote submission with encryption',
-        'Tamper-proof voting records',
-        'Voter authentication system',
-        'Real-time results dashboard',
-        'Admin panel for election setup and management'
+        'Menu browsing with sizes and flavors',
+        'Cart that persists across reloads',
+        'Checkout and real-time order tracking',
+        'Admin dashboard for menu and orders',
+        'Role-based access via Firebase Auth'
       ],
       stats: [
-        { label: 'Technologies Used', value: '5' },
-        { label: 'Students Helped', value: '200+' },
-        { label: 'Thesis Completed', value: '150+' }
+        { label: 'Status', value: 'Live' },
+        { label: 'Client', value: 'Real' },
+        { label: 'Role', value: 'Full-stack' }
       ]
     },
     {
       id: '3',
-      title: 'Traffic Management System',
-      description: 'React-TypeScript application for traffic flow optimization',
-      fullDescription: 'An intelligent traffic management system that uses real-time data analysis to optimize traffic flow in urban areas. Features interactive dashboards and predictive analytics.',
-      tech: ['React', 'TypeScript', 'Chart.js', 'Firebase', 'Node.js', 'Next.js'],
-      link: 'https://traffic-management-system-cyan.vercel.app/',
-      github: 'https://github.com/bananaNuggets75/traffic-management-system',
-      icon: '🚦',
-      image: '/traffic.png',
+      title: 'CPU-SHS Research Archive',
+      description: 'Research paper archive and management system for CPU Senior High School.',
+      fullDescription: 'A research archive built for Central Philippine University Senior High School, letting students and faculty upload, manage, and search academic research papers with filtering and categorization. Includes authentication, document management, and an admin dashboard for content moderation. Note: the UI was designed to the client\'s preferences.',
+      tech: ['Next.js', 'React', 'TypeScript', 'Firebase', 'Cloudinary', 'Node.js'],
+      link: 'https://cpu-research-archive.vercel.app/',
+      github: 'https://github.com/bananaNuggets75/cpu-research-archive',
+      icon: <FaBook />,
+      image: '/cpu-shs.png',
+      badge: 'Live',
       features: [
-        'Real-time traffic monitoring',
-        'Predictive traffic analysis',
-        'Interactive data visualization',
-        'Alert system for congestion',
-        'Historical data analysis'
+        'Advanced search and filtering',
+        'Document upload and management',
+        'User authentication and roles',
+        'Admin dashboard for moderation'
       ],
       stats: [
-        { label: 'Technologies Used', value: '6' },
-        { label: 'Traffic Points', value: '50+' },
-        { label: 'Data Points/Day', value: '10K+' }
+        { label: 'Status', value: 'Live' },
+        { label: 'Client', value: 'CPU SHS' },
+        { label: 'Role', value: 'Full-stack' }
       ]
     },
     {
       id: '4',
-      title: 'Food Delivery Web App',
-      description: 'Full-stack food delivery web app eclusive in CPU campus *Note: The UI was designed based on the client\'s preferences.*',
-      fullDescription: 'A full-stack food delivery web application designed exclusively for the CPU campus community. It features real-time order tracking, secure payment options, and a robust admin dashboard for managing menus, orders, and customer feedback. *Note: The UI was designed based on the client\'s preferences.*',
-      tech: ['Next.js', 'Firebase', 'Node.js', 'React', 'TypeScript'],
-      link: 'https://online-ordering-system-ochre.vercel.app/menu',
-      github: 'https://github.com/bananaNuggets75/online-ordering-system',
-      icon: '🛍️',
-      image: '/food-delivery.png',
+      title: 'WattWise AI',
+      description: 'Hackathon project from "Hacking the Future of Energy" (CPU, 2026).',
+      fullDescription: 'WattWise AI was built during "Ready, Spark, Charge 2026: Hacking the Future of Energy" — a hackathon organized by New Energy Nexus Philippines in partnership with CPUGAD TBI and DOST Western Visayas iHubs, held at Central Philippine University (May 21–23, 2026). The project explores using AI to make energy usage smarter and more accessible.',
+      tech: ['React', 'TypeScript', 'AI'],
+      link: '#',
+      github: '',
+      icon: <FaBolt />,
+      image: '/WattWise AI (6).png',
+      images: ['/WattWise AI (6).png', '/WattWise AI (2).png'],
+      badge: 'Hackathon',
+      isPrivate: true,
       features: [
-        'Campus-exclusive delivery system',
-        'Real-time order tracking',
-        'Secure payment integration (GCash & Cash on Delivery)',
-        'Customizable menu and categories',
-        'Responsive admin dashboard for order management',
-        'Customer order history and nickname-based tracking',
-        'Delivery or pickup options with location input',
-        'Status updates with live notifications'
-      ],      
+        'Built in a 3-day energy hackathon',
+        'Team project — "WattWise AI"',
+        'Hosted at Central Philippine University'
+      ],
       stats: [
-        { label: 'Technologies Used', value: '5' },
-        { label: 'Orders Processed', value: '200+' },
-        { label: 'Revenue Generated', value: '10k+' }
+        { label: 'Event', value: 'Hackathon' },
+        { label: 'Year', value: '2026' },
+        { label: 'Host', value: 'CPU' }
       ]
     },
     {
       id: '5',
-      title: 'Task Management App',
-      description: 'Collaborative task management tool with real-time updates',
-      fullDescription: 'A comprehensive task management application that enables teams to collaborate effectively with real-time updates, file sharing, and progress tracking.',
-      tech: ['React', 'Socket.io', 'Express', 'MongoDB', 'JWT'],
+      title: 'Blockchain E-Voting System',
+      description: 'Django e-voting platform that records each vote on a tamper-evident blockchain.',
+      fullDescription: 'A web-based electronic voting platform built with Django that records every vote on a tamper-evident blockchain. Each cast vote becomes a cryptographically-linked block (SHA-256 hash, proof-of-work, previous-hash linkage), so altering any vote breaks the chain and is immediately detectable. Includes voter self-registration with admin approval, election management, and a live chain-integrity check. Educational proof of concept.',
+      tech: ['Django', 'Python', 'SQLite', 'PostgreSQL'],
       link: '#',
-      github: 'https://github.com/bananaNuggets75/task-manager',
-      icon: '',
+      github: '',
+      icon: <FaVoteYea />,
       image: '/warn.png',
+      badge: 'Academic',
+      isPrivate: true,
       features: [
-        'Real-time collaboration',
-        'Task assignment and tracking',
-        'File attachment system',
-        'Team chat integration',
-        'Progress analytics'
+        'SHA-256 hashing and proof-of-work mining',
+        'Genesis block + previous-hash chaining',
+        'One vote per voter per election (DB-enforced)',
+        'Admin-approved voter eligibility',
+        'Live blockchain integrity verification'
       ],
       stats: [
-        { label: 'Technologies Used', value: '5' },
-        { label: 'Active Teams', value: '100+' },
-        { label: 'Tasks Completed', value: '5000+' }
+        { label: 'Type', value: 'Academic' },
+        { label: 'Backend', value: 'Django' },
+        { label: 'Concept', value: 'Blockchain' }
       ]
     },
     {
       id: '6',
-      title: 'QuickShop',
-      description: 'A B2B Wholesale E-Commerce Platform',
-      fullDescription: 'QuickShop is a B2B wholesale e-commerce platform designed to streamline bulk ordering between retailers and suppliers. It features user-friendly product browsing, tiered pricing, and a secure order management system built for scalability.',
-      tech: ['Vue.js', 'Node.js', 'MongoDB', 'Express.js', 'Tailwind CSS'],
+      title: 'Feed Mill POS & Management',
+      description: 'Point-of-sale and operations system built for a feed mill business.',
+      fullDescription: 'A full-stack point-of-sale and management system built for a real feed mill business, covering the operational cycle from raw-material purchasing and inventory to sales recording and financial reporting. Integrates with a POS provider to sync sales receipts automatically. Built with Next.js and Prisma on PostgreSQL. Private client project — details kept high-level.',
+      tech: ['Next.js', 'TypeScript', 'Prisma', 'PostgreSQL'],
       link: '#',
-      github: 'https://github.com/bananaNuggets75/quickshop',
-      icon: '🏪',
+      github: '',
+      icon: <FaWarehouse />,
       image: '/warn.png',
+      badge: 'Private',
+      isPrivate: true,
       features: [
-        'Bulk ordering system with tiered pricing',
-        'Supplier and retailer role management',
-        'Order tracking and status updates',
-        'Inventory and stock level management',
-        'Secure checkout and invoice generation',
-        'Responsive UI with mobile support',
-        'Admin dashboard for analytics and reporting'
+        'Inventory tracking for raw materials',
+        'Sales recording with invoicing',
+        'Expense tracking and financial reports',
+        'Automatic POS receipt sync'
       ],
       stats: [
-        { label: 'Technologies Used', value: '5' },
-        { label: 'Registered Suppliers', value: '120+' },
-        { label: 'Bulk Orders Processed', value: '5K+' }
+        { label: 'Client', value: 'Real business' },
+        { label: 'Stack', value: 'Next + Prisma' },
+        { label: 'Access', value: 'Private' }
+      ]
+    },
+    {
+      id: '7',
+      title: 'Guidance Support System (Naive Bayes)',
+      description: 'Web counseling platform using Naive Bayes classification and sentiment analysis.',
+      fullDescription: 'A web-based counseling platform for a university guidance office that lets students book and attend sessions privately. Two machine-learning pipelines assist counselors: a Naive Bayes classifier predicts the likely mental-health category from a pre-session intake form, and a second model runs sentiment analysis on post-session feedback to gauge effectiveness. Built with Django and scikit-learn. Capstone / thesis project.',
+      tech: ['Django', 'Python', 'scikit-learn', 'NLTK', 'PostgreSQL'],
+      link: '#',
+      github: '',
+      icon: <FaBrain />,
+      image: '/warn.png',
+      badge: 'Academic',
+      isPrivate: true,
+      features: [
+        'Naive Bayes intake classification',
+        'Sentiment analysis on session feedback',
+        'Appointment scheduling with multiple modes',
+        'Counselor documentation and reporting'
+      ],
+      stats: [
+        { label: 'Type', value: 'Thesis' },
+        { label: 'ML', value: 'Naive Bayes' },
+        { label: 'Backend', value: 'Django' }
+      ]
+    },
+    {
+      id: '8',
+      title: 'Baccarat Analyzer',
+      description: 'Chrome extension that tracks a live baccarat shoe and runs an ML prediction model.',
+      fullDescription: 'A Chrome extension that intercepts a live baccarat WebSocket stream, tracks the shoe in real time, builds the standard roads, and runs a logistic-regression model trained on session data — blended with rule-based card counting. Feature extraction is mirrored between Python (training) and TypeScript (inference) so they match exactly. Built as an honest study of where real signal exists (card composition) versus none (road patterns).',
+      tech: ['TypeScript', 'React', 'Python', 'scikit-learn'],
+      link: '#',
+      github: '',
+      icon: <FaChartLine />,
+      image: '/warn.png',
+      badge: 'Personal',
+      isPrivate: true,
+      features: [
+        'Real-time WebSocket hand parsing',
+        'Logistic-regression inference in TypeScript',
+        'Card counting + ML blend by shoe depth',
+        'Python training pipeline with holdout evaluation'
+      ],
+      stats: [
+        { label: 'Type', value: 'ML' },
+        { label: 'Surface', value: 'Extension' },
+        { label: 'Lang', value: 'TS + Python' }
       ]
     }
   ];
