@@ -368,8 +368,12 @@ const Portfolio: React.FC = () => {
       link: '#',
       github: '',
       icon: <FaBolt />,
-      image: '/wattwise-cert-team.png',
-      images: ['/wattwise-cert-team.png', '/wattwise-cert-individual.png'],
+      image: '/wattwise-1.jpg',
+      images: [
+        '/wattwise-1.jpg', '/wattwise-2.jpg', '/wattwise-3.jpg',
+        '/wattwise-4.jpg', '/wattwise-5.jpg', '/wattwise-6.jpg',
+        '/wattwise-cert-team.png', '/wattwise-cert-individual.png',
+      ],
       badge: 'Hackathon',
       isPrivate: true,
       features: [
@@ -489,10 +493,8 @@ const Portfolio: React.FC = () => {
       link: '#',
       github: '',
       icon: <FaGamepad />,
-      // To enable the photo gallery/collage: drop event photos in /public
-      // (e.g. gameon-1.jpg, gameon-2.jpg ...) and set `image` + `images` below.
-      image: '/warn.png',
-      // images: ['/gameon-1.jpg', '/gameon-2.jpg', '/gameon-3.jpg', '/gameon-4.jpg'],
+      image: '/gameon-1.jpg',
+      images: ['/gameon-1.jpg', '/gameon-2.jpg', '/gameon-3.jpg'],
       badge: 'Hackathon',
       isPrivate: true,
       features: [
@@ -579,7 +581,24 @@ const Portfolio: React.FC = () => {
       date: 'August 2025',
       description: 'Fundamentals of artificial intelligence including machine learning, neural networks, and ethical AI practices, developed in collaboration with IBM SkillsBuild.',
       icon: <SiOpenai className="text-xl text-sky-700" />,
-      image: '/api/placeholder/400/300',
+      credentialId: ''
+    },
+    {
+      id: '7',
+      title: 'CCNAv7: Introduction to Networks',
+      issuer: 'Cisco Networking Academy',
+      date: 'May 2024',
+      description: 'Networking fundamentals — protocols, IP addressing, Ethernet, and network topologies. Taken at Central Philippine University.',
+      icon: <FaNetworkWired className="text-xl text-green-600" />,
+      credentialId: ''
+    },
+    {
+      id: '8',
+      title: 'IT Essentials: PC Hardware and Software',
+      issuer: 'Cisco Networking Academy',
+      date: 'July 2024',
+      description: 'PC hardware, repair, and maintenance — assembling, troubleshooting, and supporting computer systems. Taken at Central Philippine University.',
+      icon: <FaTools className="text-xl text-blue-500" />,
       credentialId: ''
     }
   ];
@@ -615,18 +634,29 @@ const Portfolio: React.FC = () => {
     { name: 'TensorFlow', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg' },
     { name: 'Flask', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original.svg' },
     { name: 'Pandas', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg' },
-  
+    { name: 'NumPy', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/numpy/numpy-original.svg' },
+    { name: 'scikit-learn', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/scikitlearn/scikitlearn-original.svg' },
+    { name: 'NestJS', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nestjs/nestjs-original.svg' },
+    { name: 'Express', icon: 'https://cdn.simpleicons.org/express/68A063' },
+    { name: 'Chart.js', icon: 'https://cdn.simpleicons.org/chartdotjs/FF6384' },
+
     // 🛢️ Databases
     { name: 'MySQL', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg' },
     { name: 'SQLite', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sqlite/sqlite-original.svg' },
     { name: 'MongoDB', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg' },
     { name: 'Firebase', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-original.svg' },
+    { name: 'PostgreSQL', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg' },
+    { name: 'Prisma', icon: 'https://cdn.simpleicons.org/prisma/5A67D8' },
     { name: 'SQL Server', icon: 'https://api.iconify.design/tabler:database.svg?color=%23CC2927    ' },
   
     // 🔧 Platforms & Misc
     { name: '.NET', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dot-net/dot-net-original.svg' },
     { name: 'Android', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/android/android-plain.svg' },
     { name: 'Arduino', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/arduino/arduino-original.svg' },
+    { name: 'Godot', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/godot/godot-original.svg' },
+    { name: 'Expo', icon: 'https://cdn.simpleicons.org/expo/FFFFFF' },
+    { name: 'Cloudinary', icon: 'https://cdn.simpleicons.org/cloudinary/3448C5' },
+    { name: 'Vercel', icon: 'https://cdn.simpleicons.org/vercel/FFFFFF' },
     { name: 'Figma', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg' }
   ];
   
@@ -866,7 +896,23 @@ const Portfolio: React.FC = () => {
                   onClick={() => setSelectedProject(project)}
                 >
                   <div className="project-image">
-                    <img src={project.image} alt={project.title} />
+                    {project.images && project.images.length > 1 ? (
+                      <div className={`project-collage count-${Math.min(project.images.length, 4)}`}>
+                        {project.images.slice(0, 4).map((img, i) => {
+                          const more = i === 3 && project.images!.length > 4;
+                          return (
+                            <div className="collage-tile" key={i}>
+                              <img src={img} alt={`${project.title} ${i + 1}`} />
+                              {more && (
+                                <span className="collage-more">+{project.images!.length - 4}</span>
+                              )}
+                            </div>
+                          );
+                        })}
+                      </div>
+                    ) : (
+                      <img src={project.image} alt={project.title} />
+                    )}
                     {project.badge && (
                       <span className={`project-badge badge-${project.badge.toLowerCase()}`}>
                         {project.badge}
@@ -925,7 +971,14 @@ const Portfolio: React.FC = () => {
                   onClick={() => setSelectedCertificate(cert)}
                 >
                   <div className="cert-image">
-                    <img src={cert.image} alt={cert.title} />
+                    {cert.image ? (
+                      <img src={cert.image} alt={cert.title} />
+                    ) : (
+                      <div className="cert-image-placeholder">
+                        <span className="cert-placeholder-icon">{cert.icon}</span>
+                        <span className="cert-placeholder-issuer">{cert.issuer}</span>
+                      </div>
+                    )}
                     <div className="cert-overlay">
                       <span className="cert-view-btn">View Certificate</span>
                     </div>
@@ -1464,7 +1517,15 @@ const Portfolio: React.FC = () => {
             <button className="modal-close" onClick={() => setSelectedCertificate(null)}>×</button>
             <div className="certificate-detail">
               <div className="certificate-image-container">
-                <img src={selectedCertificate.image} alt={selectedCertificate.title} className="certificate-image-large" />
+                {selectedCertificate.image ? (
+                  <img src={selectedCertificate.image} alt={selectedCertificate.title} className="certificate-image-large" />
+                ) : (
+                  <div className="cert-image-placeholder large">
+                    <span className="cert-placeholder-icon">{selectedCertificate.icon}</span>
+                    <span className="cert-placeholder-issuer">{selectedCertificate.issuer}</span>
+                    <span className="cert-placeholder-note">No certificate image available</span>
+                  </div>
+                )}
               </div>
               <div className="certificate-info-detail">
                 <div className="cert-header-detail">
