@@ -6,6 +6,7 @@ import {
   FaDatabase, FaShieldAlt, FaCertificate, FaCode, FaTools,
   FaTrafficLight, FaUtensils, FaBook, FaVoteYea, FaWarehouse, FaBrain, FaChartLine, FaBolt,
   FaLock, FaGithub, FaExternalLinkAlt, FaStar, FaListUl, FaChevronLeft, FaChevronRight, FaTimes,
+  FaNetworkWired, FaGamepad,
 } from 'react-icons/fa';
 import { SiTensorflow, SiCisco, SiJavascript, SiOracle, SiOpenai } from 'react-icons/si';
 import { supabase } from '../lib/supabaseClient';
@@ -28,8 +29,6 @@ const Portfolio: React.FC = () => {
   const [bubbles, setBubbles] = useState<Bubble[]>([]);
   const [lightbox, setLightbox] = useState<{ images: string[]; index: number } | null>(null);
 
-  const showLightboxAt = (index: number) =>
-    setLightbox((lb) => (lb ? { ...lb, index } : lb));
   const stepLightbox = (delta: number) =>
     setLightbox((lb) =>
       lb ? { ...lb, index: (lb.index + delta + lb.images.length) % lb.images.length } : lb
@@ -200,7 +199,7 @@ const Portfolio: React.FC = () => {
     date: string;
     description: string;
     icon?: ReactElement;
-    image: string;
+    image?: string;   // optional — renders a placeholder card when absent
     credentialId?: string;
     verifyLink?: string;
   }
@@ -333,7 +332,7 @@ const Portfolio: React.FC = () => {
       ],
       stats: [
         { label: 'Status', value: 'Live' },
-        { label: 'Client', value: 'Real' },
+        { label: 'Client', value: 'CPU SHS Students' },
         { label: 'Role', value: 'Full-stack' }
       ]
     },
@@ -369,8 +368,8 @@ const Portfolio: React.FC = () => {
       link: '#',
       github: '',
       icon: <FaBolt />,
-      image: '/WattWise AI (6).png',
-      images: ['/WattWise AI (6).png', '/WattWise AI (2).png'],
+      image: '/wattwise-cert-team.png',
+      images: ['/wattwise-cert-team.png', '/wattwise-cert-individual.png'],
       badge: 'Hackathon',
       isPrivate: true,
       features: [
@@ -480,6 +479,33 @@ const Portfolio: React.FC = () => {
         { label: 'Surface', value: 'Extension' },
         { label: 'Lang', value: 'TS + Python' }
       ]
+    },
+    {
+      id: '9',
+      title: 'GameOn — Region 6 Delicacies Kitchen',
+      description: 'Hackathon 2D cooking game (Godot) celebrating Iloilo / Region 6 delicacies.',
+      fullDescription: 'A 2D cooking time-management game built in the Godot Engine that celebrates the local delicacies of Region 6 (Western Visayas), Philippines — dishes like molo soup and biscocho. Built as a hackathon project: serve customers their orders before they lose patience, through tactile drag-and-drop kitchen gameplay. Part fast-paced kitchen sim, part cultural showcase.',
+      tech: ['Godot', 'GDScript'],
+      link: '#',
+      github: '',
+      icon: <FaGamepad />,
+      // To enable the photo gallery/collage: drop event photos in /public
+      // (e.g. gameon-1.jpg, gameon-2.jpg ...) and set `image` + `images` below.
+      image: '/warn.png',
+      // images: ['/gameon-1.jpg', '/gameon-2.jpg', '/gameon-3.jpg', '/gameon-4.jpg'],
+      badge: 'Hackathon',
+      isPrivate: true,
+      features: [
+        'Drag-and-drop kitchen gameplay',
+        'Ingredient → dish preparation (molo soup, biscocho)',
+        'Timed customer spawning + coin goal economy',
+        'Region 6 culinary cultural theme'
+      ],
+      stats: [
+        { label: 'Event', value: 'Hackathon' },
+        { label: 'Engine', value: 'Godot' },
+        { label: 'Theme', value: 'Region 6' }
+      ]
     }
   ];
 
@@ -491,7 +517,7 @@ const Portfolio: React.FC = () => {
       date: 'May 2026',
       description: 'Participated in "Ready, Spark, Charge 2026" with team WattWise AI — an energy-focused hackathon at Central Philippine University, in partnership with CPUGAD TBI and DOST Western Visayas iHubs.',
       icon: <FaBolt className="text-xl text-yellow-500" />,
-      image: '/WattWise AI (2).png',
+      image: '/wattwise-cert-individual.png',
       credentialId: ''
     },
     {
@@ -1389,6 +1415,45 @@ const Portfolio: React.FC = () => {
               </div>
             </div>
           </div>
+        </div>
+      )}
+
+      {/* Image Lightbox / Gallery */}
+      {lightbox && (
+        <div className="lightbox-overlay" onClick={() => setLightbox(null)}>
+          <button className="lightbox-close" onClick={() => setLightbox(null)} aria-label="Close">
+            <FaTimes />
+          </button>
+          {lightbox.images.length > 1 && (
+            <button
+              className="lightbox-nav prev"
+              onClick={(e) => { e.stopPropagation(); stepLightbox(-1); }}
+              aria-label="Previous"
+            >
+              <FaChevronLeft />
+            </button>
+          )}
+          <div className="lightbox-content" onClick={(e) => e.stopPropagation()}>
+            <img
+              src={lightbox.images[lightbox.index]}
+              alt={`View ${lightbox.index + 1}`}
+              className="lightbox-img"
+            />
+            {lightbox.images.length > 1 && (
+              <div className="lightbox-counter">
+                {lightbox.index + 1} / {lightbox.images.length}
+              </div>
+            )}
+          </div>
+          {lightbox.images.length > 1 && (
+            <button
+              className="lightbox-nav next"
+              onClick={(e) => { e.stopPropagation(); stepLightbox(1); }}
+              aria-label="Next"
+            >
+              <FaChevronRight />
+            </button>
+          )}
         </div>
       )}
 
